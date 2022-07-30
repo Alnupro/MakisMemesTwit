@@ -32,7 +32,6 @@ let listener = app.listen( process.env.PORT, function(){
     /* The example below tweets out "Hello world 👋" and the current date. */
 
     const date = new Date().toLocaleString();
-
     T.post( 'statuses/update', { status: 'Hello world 👋 ' + date }, function( err, data, response ) {
       if ( err ){
         console.log( 'error!', err );
