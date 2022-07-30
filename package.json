@@ -1,28 +1,28 @@
 {
-  "name": "glitch-hello-node",
-  "version": "0.1.0",
-  "description": "A simple Node app built on fastify, instantly up and running. Built to be remixed on Glitch.com.",
+  "name": "glitch-twitterbot",
+  "version": "0.0.1",
+  "description": "Beep beep tweet!",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "fastify": "^4.2.1",
-    "handlebars": "^4.7.7",
-    "@fastify/formbody": "^7.0.1",
-    "@fastify/static": "^6.4.1",
-    "@fastify/view": "^7.0.0"
+    "twit": "^2.2.11",
+    "express": "^4.18.1",
+    "cron": "^2.1.0"
   },
   "engines": {
-    "node": "14.x"
+    "node": "12.x"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/glitch-hello-node"
+    "url": ""
   },
-  "license": "MIT",
   "keywords": [
     "node",
     "glitch",
-    "express"
-  ]
+    "twitter",
+    "twitterbot",
+    "bot"
+  ],
+  "license": "MIT"
 }
