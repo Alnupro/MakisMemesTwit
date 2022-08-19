@@ -43,11 +43,11 @@ let listener = app.listen( process.env.PORT, function(){
     } );
   } ) ).start();
 
-  ( new CronJob( '0 19 * * *', function() {
+  ( new CronJob( '*/10 * * * * *', function() {
     
     /*Send cat*/
 
-var b64content = fs.readFileSync(__dirname + '/assets/cat.jpg', { encoding: 'base64' })
+var b64content = fs.readFileSync(__dirname + '/assets/2.jpg', { encoding: 'base64' })
  
 // first we must post the media to Twitter
 T.post('media/upload', { media_data: b64content }, function (err, data, response) {
