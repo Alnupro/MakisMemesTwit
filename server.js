@@ -26,19 +26,16 @@ let listener = app.listen( process.env.PORT, function(){
     For a few examples, see https://glitch.com/edit/#!/creative-bots?path=helpers%2Fcron-schedules.js
 
   */
-
-  ( new CronJob( '0 */2 * * *', function() {
     
     /* The example below tweets out "Hello world 👋" and the current date. */
 
     const date = new Date().toLocaleString();
-    T.post( 'statuses/update', { status: 'Hello world 👋 ' + date }, function( err, data, response ) {
-      if ( err ){
+    T.post('statuses/update', { status: 'Hello world 👋 ' + date }, function( err, data, response ) {
+      if (err ){
         console.log( 'error!', err );
       }
       else {
         console.log( 'tweeted', `https://twitter.com/${ data.user.screen_name }/status/${ data.id_str }` );
       }
     } );
-  } ) ).start();
 } );
