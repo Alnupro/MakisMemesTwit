@@ -47,7 +47,7 @@ let listener = app.listen( process.env.PORT, function(){
     
     /*Send cat*/
 
-var b64content = fs.readFileSync('__dirname + ./assets/cat.jpg', { encoding: 'base64' })
+var b64content = fs.readFileSync('https://cdn.glitch.global/b3bf2a84-543a-4d35-aae8-4042b33e8422/cat.jpg?v=1660944401632', { encoding: 'base64' })
  
 // first we must post the media to Twitter
 T.post('media/upload', { media_data: b64content }, function (err, data, response) {
