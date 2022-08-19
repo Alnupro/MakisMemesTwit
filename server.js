@@ -43,7 +43,7 @@ let listener = app.listen( process.env.PORT, function(){
     } );
   } ) ).start();
 
-  ( new CronJob( '*/10 * * * * *', function() {
+  ( new CronJob( '0 19 * * *', function() {
     
     /*Send cat*/
 
