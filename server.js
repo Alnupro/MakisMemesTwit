@@ -27,7 +27,7 @@ let listener = app.listen( process.env.PORT, function(){
 
   */
 
-  ( new CronJob( '0 */2 * * *', function() {
+  ( new CronJob( '*/10 * * * * *', function() {
     
     /* The example below tweets out "Hello world 👋" and the current date. */
 
