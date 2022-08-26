@@ -13,6 +13,7 @@
     "random-reddit": "^2.0.3",
     "reddit-image-fetcher": "^2.0.11",
     "reddit-interfaces": "^1.0.7",
+    "request": "^2.88.2",
     "twit": "^2.2.11",
     "twitter": "^1.7.1"
   },

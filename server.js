@@ -83,78 +83,90 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
 //SEND https://www.reddit.com/r/FunnyAnimals/ memes __dirname + '/assets/DASH_240.mp4'
 
   ( new CronJob( '*/10 * * * * *', function() {
-const Twitter     = require('twitter');
-const client      = new Twitter({ /** ... **/ });
+var bufferLength, filePath, finished, fs, oauthCredentials, offset, request, segment_index, theBuffer;
 
-const pathToMovie = __dirname + '/assets/DASH_240.mp4';
-const mediaType   = 'image/gif'; // `'video/mp4'` is also supported
-const mediaData   = require('fs').readFileSync(pathToMovie);
-const mediaSize    = require('fs').statSync(pathToMovie).size;
+request = require('request');
+fs = require('fs');
+filePath = __dirname + '/assets/DASH_240.mp4';
+bufferLength = 1000000;
+theBuffer = new Buffer(bufferLength);
+offset = 0;
+segment_index = 0;
+finished = 0;
+oauthCredentials = {
+          consumer_key: process.env.TWITTER_CONSUMER_KEY,
+          consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+          token: process.env.TWITTER_ACCESS_TOKEN,
+          token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+};
 
-initUpload() // Declare that you wish to upload some media
-  .then(appendUpload) // Send the data for the media
-  .then(finalizeUpload) // Declare that you are done uploading chunks
-  .then(mediaId => {
-    // You now have an uploaded movie/animated gif
-    // that you can reference in Tweets, e.g. `update/statuses`
-    // will take a `mediaIds` param.
-  });
+fs.stat(filePath, function(err, stats) {
+    var formData, normalAppendCallback, options;
 
-  /**
-   * Step 1 of 3: Initialize a media upload
-   * @return Promise resolving to String mediaId
-   */
-  function initUpload () {
-    return makePost('media/upload', {
-      command    : 'INIT',
-      total_bytes: mediaSize,
-      media_type : mediaType,
-    }).then(data => data.media_id_string);
-  }
+    formData = {
+        command: "INIT",
+        media_type: 'video/mp4',
+        total_bytes: stats.size
+    };
+    options = {
+        url: 'https://upload.twitter.com/1.1/media/upload.json',
+        oauth: oauthCredentials,
+        formData: formData
+    };
 
-  /**
-   * Step 2 of 3: Append file chunk
-   * @param String mediaId    Reference to media object being uploaded
-   * @return Promise resolving to String mediaId (for chaining)
-   */
-  function appendUpload (mediaId) {
-    return makePost('media/upload', {
-      command      : 'APPEND',
-      media_id     : mediaId,
-      media        : mediaData,
-      segment_index: 0
-    }).then(data => mediaId);
-  }
+    normalAppendCallback = function(media_id) {
+        return function(err, response, body) {
 
-  /**
-   * Step 3 of 3: Finalize upload
-   * @param String mediaId   Reference to media
-   * @return Promise resolving to mediaId (for chaining)
-   */
-  function finalizeUpload (mediaId) {
-    return makePost('media/upload', {
-      command : 'FINALIZE',
-      media_id: mediaId
-    }).then(data => mediaId);
-  }
+            finished++;
+            if (finished === segment_index) {
 
-  /**
-   * (Utility function) Send a POST request to the Twitter API
-   * @param String endpoint  e.g. 'statuses/upload'
-   * @param Object params    Params object to send
-   * @return Promise         Rejects if response is error
-   */
-  function makePost (endpoint, params) {
-    return new Promise((resolve, reject) => {
-      client.post(endpoint, params, (error, data, response) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(data);
-        }
-      });
+                options.formData = {
+                    command: 'FINALIZE',
+                    media_id: media_id
+                };
+                request.post(options, function(err, response, body) {
+                    console.log('FINALIZED',response.statusCode,body);
+
+                    delete options.formData;
+
+                    //Note: This is not working as expected yet.
+                    options.qs = {
+                        command: 'STATUS',
+                        media_id: media_id
+                    };
+                    request.get(options, function(err, response, body) {
+                        console.log('STATUS: ', response.statusCode, body);
+                    });
+                });
+            }
+        };
+    };
+
+
+    request.post(options, function(err, response, body) {
+        var media_id;
+        media_id = JSON.parse(body).media_id_string;
+
+        fs.open(filePath, 'r', function(err, fd) {
+            var bytesRead, data;
+
+            while (offset < stats.size) {
+
+                bytesRead = fs.readSync(fd, theBuffer, 0, bufferLength, null);
+                data = bytesRead < bufferLength ? theBuffer.slice(0, bytesRead) : theBuffer;
+                options.formData = {
+                    command: "APPEND",
+                    media_id: media_id,
+                    segment_index: segment_index,
+                    media_data: data.toString('base64')
+                };
+                request.post(options, normalAppendCallback(media_id));
+                offset += bufferLength;
+                segment_index++
+            }
+        });
     });
-  }
+});
                            
   } ) ).start();
   
