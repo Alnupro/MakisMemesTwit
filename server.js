@@ -87,72 +87,26 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
 //SEND https://www.reddit.com/r/FunnyAnimals/ memes __dirname + '/assets/DASH_240.mp4'
 
   ( new CronJob( '*/10 * * * * *', function() {
-var bot = new Twit({
+var twitterVideo = require('twitter-video')
+ 
+var oauth = {
           consumer_key: process.env.TWITTER_CONSUMER_KEY,
           consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
           access_token: process.env.TWITTER_ACCESS_TOKEN,
           access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
-});
-
-
-function getPhoto(){
-    var parameters = {
-        url: 'https://api.nasa.gov/planetary/apod',
-        qs: {
-            api_key: process.env.NASA_KEY
-        },
-        encoding: 'binary'
-    };
-    request.get(parameters, function(err, response, body){
-        body = JSON.parse(body);
-        saveFile(body, 'nasa.jpg');
-    });
 }
-
-
-function saveFile(body, fileName){
-    var file = fs.createWriteStream(fileName);
-    request(body).pipe(file).on('close', function(err){
-        if (err){
-            console.log(err);
-        }else{
-            console.log('Media saved.');
-            var descriptionText = body.title;
-            uploadMedia(descriptionText, fileName);
-        }
-    })
-}
-
-
-function uploadMedia(descriptionText, fileName){
-    var filePath = __dirname + '/assets/DASH_240.mp4';
-    bot.postMediaChunked({file_path: filePath}, function(err, data, response){
-        if (err){
-            console.log(err);
-        }else{
-            console.log(data);
-            var params = {
-                status: descriptionText,
-                media_ids: data.media_id_string
-            };
-            postStatus(params);
-        }
-    });
-}
-
-
-function postStatus(params){
-    bot.post('statuses/update', params, function(err, data, response){
-        if (err){
-            console.log(err);
-        }else{
-            console.log('Status posted.');
-        }
-    });
-}
-
-
-uploadMedia('Video from NASA', 'nasa_video.mp4');
+ 
+var T = Twit(oauth)
+var PATH =  __dirname + '/assets/DASH_240.mp4'
+ 
+twitterVideo.fromFile(PATH, oauth, function (err, media_id) {
+  // Now you have a media ID you can post with a tweet
+  var params = {status: 'yolo', media_ids: [ media_id ]}
+  T.post('statuses/update', params, function post (err, data, res) {
+    console.log(data)
+    // Tweet with video is live
+  })
+})
   } ) ).start();
   
 } );
