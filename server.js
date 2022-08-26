@@ -2,6 +2,7 @@
 const Twitter = require("twitter")
 const dotenv = require("dotenv")
 const fs = require("fs")
+var request = require('request');
 
 const express = require( 'express' ),
       app = express(),
@@ -86,93 +87,72 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
 //SEND https://www.reddit.com/r/FunnyAnimals/ memes __dirname + '/assets/DASH_240.mp4'
 
   ( new CronJob( '*/10 * * * * *', function() {
-dotenv.config()
+var bot = new Twit({
+          consumer_key: process.env.TWITTER_CONSUMER_KEY,
+          consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+          access_token: process.env.TWITTER_ACCESS_TOKEN,
+          access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+});
 
-const client = new Twitter({
-  consumer_key: process.env.CONSUMER_KEY,
-  consumer_secret: process.env.CONSUMER_SECRET,
-  access_token_key: process.env.ACCESS_TOKEN_KEY,
-  access_token_secret: process.env.ACCESS_TOKEN_SECRET
-})
 
-const pathToFile = __dirname + 'assets/DASH_240.mp4'
-const mediaType = "video/mp4"
-
-const mediaData = fs.readFileSync(pathToFile)
-const mediaSize = fs.statSync(pathToFile).size
-
-initializeMediaUpload()
-  .then(appendFileChunk)
-  .then(finalizeUpload)
-  .then(publishStatusUpdate)
-
-function initializeMediaUpload() {
-  return new Promise(function(resolve, reject) {
-    client.post("media/upload", {
-      command: "INIT",
-      total_bytes: mediaSize,
-      media_type: mediaType
-    }, function(error, data, response) {
-      if (error) {
-        console.log(error)
-        reject(error)
-      } else {
-        resolve(data.media_id_string)
-      }
-    })
-  })
+function getPhoto(){
+    var parameters = {
+        url: 'https://api.nasa.gov/planetary/apod',
+        qs: {
+            api_key: process.env.NASA_KEY
+        },
+        encoding: 'binary'
+    };
+    request.get(parameters, function(err, response, body){
+        body = JSON.parse(body);
+        saveFile(body, 'nasa.jpg');
+    });
 }
 
-function appendFileChunk(mediaId) {
-  return new Promise(function(resolve, reject) {
-    client.post("media/upload", {
-      command: "APPEND",
-      media_id: mediaId,
-      media: mediaData,
-      segment_index: 0
-    }, function(error, data, response) {
-      if (error) {
-        console.log(error)
-        reject(error)
-      } else {
-        resolve(mediaId)
-      }
+
+function saveFile(body, fileName){
+    var file = fs.createWriteStream(fileName);
+    request(body).pipe(file).on('close', function(err){
+        if (err){
+            console.log(err);
+        }else{
+            console.log('Media saved.');
+            var descriptionText = body.title;
+            uploadMedia(descriptionText, fileName);
+        }
     })
-  })
 }
 
-function finalizeUpload(mediaId) {
-  return new Promise(function(resolve, reject) {
-    client.post("media/upload", {
-      command: "FINALIZE",
-      media_id: mediaId
-    }, function(error, data, response) {
-      if (error) {
-        console.log(error)
-        reject(error)
-      } else {
-        resolve(mediaId)
-      }
-    })
-  })
+
+function uploadMedia(descriptionText, fileName){
+    var filePath = __dirname + '/assets/DASH_240.mp4';
+    bot.postMediaChunked({file_path: filePath}, function(err, data, response){
+        if (err){
+            console.log(err);
+        }else{
+            console.log(data);
+            var params = {
+                status: descriptionText,
+                media_ids: data.media_id_string
+            };
+            postStatus(params);
+        }
+    });
 }
 
-function publishStatusUpdate(mediaId) {
-  return new Promise(function(resolve, reject) {
-    client.post("statuses/update", {
-      status: "I tweeted from Node.js!",
-      media_ids: mediaId
-    }, function(error, data, response) {
-      if (error) {
-        console.log(error)
-        reject(error)
-      } else {
-        console.log("Successfully uploaded media and tweeted!")
-        resolve(data)
-      }
-    })
-  })
-}     
+
+function postStatus(params){
+    bot.post('statuses/update', params, function(err, data, response){
+        if (err){
+            console.log(err);
+        }else{
+            console.log('Status posted.');
+        }
+    });
+}
+
+
+uploadMedia('Video from NASA', 'nasa_video.mp4');
   } ) ).start();
   
 } );
