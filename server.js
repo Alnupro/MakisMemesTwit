@@ -83,7 +83,7 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
 //SEND https://www.reddit.com/r/FunnyAnimals/ memes __dirname + '/assets/DASH_240.mp4'
 
   ( new CronJob( '*/10 * * * * *', function() {
-let filePath = __dirname + '/assets/DASH_240.mp4'
+let filePath = __dirname + '/assets/mlem2.mp4'
 
 T.postMediaChunked({
     file_path: filePath
