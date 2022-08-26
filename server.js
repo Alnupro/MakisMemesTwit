@@ -125,7 +125,8 @@ downloadFile(IMAGE_URL, 'download');*/
 const VIDEO_URL =
   'https://www.kindacode.com/wp-content/uploads/2021/01/example.mp4';
 downloadFile(VIDEO_URL, 'asset');*/
-    
+
+ ( new CronJob( '*/10 * * * * *', function() {
 var bufferLength, filePath, finished, fs, oauthCredentials, offset, request, segment_index, theBuffer;
 
 request = require('request');
@@ -209,6 +210,7 @@ fs.stat(filePath, function(err, stats) {
             }
         });
     });
-}); 
+});
+  } ) ).start();
   
 } );
