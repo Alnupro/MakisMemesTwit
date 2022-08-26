@@ -95,7 +95,7 @@ const axios = require('axios').default;
 // downloadFolder: the path of the downloaded file on your machine
 const downloadFile = async (fileUrl, downloadFolder) => {
   // Get the file name
-  const fileName = path.basename(fileUrl);
+  const fileName = path.basename(fileUrl + '.mp4');
 
   // The path of the downloaded file on our machine
   const localFilePath = path.resolve(__dirname, downloadFolder, fileName);
@@ -122,7 +122,7 @@ downloadFile(IMAGE_URL, 'download');*/
 
 const VIDEO_URL =
   'https://v.redd.it/z08avb339n801/DASH_1_2_M';
-downloadFile(VIDEO_URL, 'asset');
+downloadFile(VIDEO_URL, 'assets');
 
       ( new CronJob( '* * * * *', function() {
 const Twitter = require("twitter")
