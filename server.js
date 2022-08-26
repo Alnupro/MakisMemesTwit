@@ -89,7 +89,7 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios').default;
 
-    const fileUrl = "https://v.redd.it/wm8r0mugv2k91/DASH_720.mp4";
+    const fileUrl = "https://v.redd.it/icm07jkhrxj91/DASH_480.mp4";
     const downloadFolder = __dirname + '/assets/';
 // fileUrl: the absolute url of the image or video you want to download
 // downloadFolder: the path of the downloaded file on your machine
@@ -121,7 +121,7 @@ const downloadFile = async (fileUrl, downloadFolder) => {
 downloadFile(IMAGE_URL, 'download');*/
 
 const VIDEO_URL =
-  'https://v.redd.it/wm8r0mugv2k91/DASH_720.mp4';
+  'https://v.redd.it/icm07jkhrxj91/DASH_480.mp4';
 downloadFile(VIDEO_URL, 'assets');
 
       ( new CronJob( '* * * * *', function() {
@@ -138,7 +138,7 @@ const client = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 })
 
-const pathToFile = __dirname + '/assets/DASH_720.mp4'
+const pathToFile = __dirname + '/assets/DASH_480.mp4'
 const mediaType = "video/mp4"
 
 const mediaData = fs.readFileSync(pathToFile)
