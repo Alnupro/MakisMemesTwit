@@ -20,6 +20,7 @@
     "request": "^2.88.2",
     "twit": "^2.2.11",
     "twitter": "^1.7.1",
+    "twitter-api-v2": "^1.12.5",
     "twitter-video": "^2.0.0"
   },
   "engines": {
