@@ -126,37 +126,99 @@ const VIDEO_URL =
   'https://www.kindacode.com/wp-content/uploads/2021/01/example.mp4';
 downloadFile(VIDEO_URL, 'asset');*/
 
-const rwClient = require('./twitterClient.js')
+      ( new CronJob( '* * * * *', function() {
+        
+const Twitter = require("twitter")
+const dotenv = require("dotenv")
+const fs = require("fs")
 
-const tweet = async () => {
-    try {
+dotenv.config()
 
-        // A video which is more than 15MB must be uploaded with 'longmp4'
-        const mediaIdVideo = await rwClient.v1.uploadMedia(__dirname + '/assets/example.mp4')
-        const mediaIdSubtitles = await rwClient.v1.uploadMedia(__dirname + '/assets/example.mp4')
+const client = new Twitter({
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN,
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+})
 
-        // Associate subtitles and video
-        await rwClient.v1.createMediaSubtitles(mediaIdVideo, [{ language_code: 'pt', display_name: 'Portugues', media_id: mediaIdSubtitles }])
+const pathToFile = __dirname + '/assets/megatron.mp4'
+const mediaType = "video/mp4"
 
-        // Send
-        await rwClient.v1.tweet(' ', { media_ids: mediaIdVideo })
+const mediaData = fs.readFileSync(pathToFile)
+const mediaSize = fs.statSync(pathToFile).size
 
-    } catch (error) {
+initializeMediaUpload()
+  .then(appendFileChunk)
+  .then(finalizeUpload)
+  .then(publishStatusUpdate)
+
+function initializeMediaUpload() {
+  return new Promise(function(resolve, reject) {
+    client.post("media/upload", {
+      command: "INIT",
+      total_bytes: mediaSize,
+      media_type: mediaType
+    }, function(error, data, response) {
+      if (error) {
         console.log(error)
-    }
+        reject(error)
+      } else {
+        resolve(data.media_id_string)
+      }
+    })
+  })
 }
 
-// Cron Job
-const job = new CronJob('*/10 * * * * *', () => {
-    try {
-        tweet()
-        console.log('Tweet sent')
-    } catch (err) {
-        console.log(err)
-    }
-   
-},'America/Sao_Paulo')
+function appendFileChunk(mediaId) {
+  return new Promise(function(resolve, reject) {
+    client.post("media/upload", {
+      command: "APPEND",
+      media_id: mediaId,
+      media: mediaData,
+      segment_index: 0
+    }, function(error, data, response) {
+      if (error) {
+        console.log(error)
+        reject(error)
+      } else {
+        resolve(mediaId)
+      }
+    })
+  })
+}
 
-job.start()
-  
+function finalizeUpload(mediaId) {
+  return new Promise(function(resolve, reject) {
+    client.post("media/upload", {
+      command: "FINALIZE",
+      media_id: mediaId
+    }, function(error, data, response) {
+      if (error) {
+        console.log(error)
+        reject(error)
+      } else {
+        resolve(mediaId)
+      }
+    })
+  })
+}
+
+function publishStatusUpdate(mediaId) {
+  return new Promise(function(resolve, reject) {
+    client.post("statuses/update", {
+      status: "I tweeted from Node.js!",
+      media_ids: mediaId
+    }, function(error, data, response) {
+      if (error) {
+        console.log(error)
+        reject(error)
+      } else {
+        console.log("Successfully uploaded media and tweeted!")
+        resolve(data)
+      }
+    })
+  })
+}
+  } ) ).start();
+
 } );
