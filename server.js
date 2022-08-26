@@ -81,7 +81,7 @@ RedditImageFetcher.fetch({
     total: 50, 
     subreddit: ['cats', 'Catswhoyell', 'sleepingcats']
 }).then(result => {
-    console.log(result.O.);
+    console.log(result.O.imageLink);
 });
     
                                            
