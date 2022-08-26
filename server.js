@@ -85,7 +85,6 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
   
 //SEND https://www.reddit.com/r/FunnyAnimals/ memes __dirname + '/assets/example.mp4'
 
-    /*
 const fs = require('fs');
 const path = require('path');
 const axios = require('axios').default;
@@ -121,19 +120,17 @@ const downloadFile = async (fileUrl, downloadFolder) => {
   'https://www.kindacode.com/wp-content/uploads/2021/01/test.jpg';
 downloadFile(IMAGE_URL, 'download');*/
 
-/*
 const VIDEO_URL =
-  'https://www.kindacode.com/wp-content/uploads/2021/01/example.mp4';
-downloadFile(VIDEO_URL, 'asset');*/
+  'https://v.redd.it/z08avb339n801/DASH_1_2_M';
+downloadFile(VIDEO_URL, 'asset');
 
       ( new CronJob( '* * * * *', function() {
-        
 const Twitter = require("twitter")
 const dotenv = require("dotenv")
 const fs = require("fs")
 
 dotenv.config()
-
+        
 const client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
@@ -141,7 +138,7 @@ const client = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 })
 
-const pathToFile = __dirname + '/assets/megatron.mp4'
+const pathToFile = __dirname + '/assets/DASH_1_2_M.mp4'
 const mediaType = "video/mp4"
 
 const mediaData = fs.readFileSync(pathToFile)
@@ -206,7 +203,7 @@ function finalizeUpload(mediaId) {
 function publishStatusUpdate(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: "I tweeted from Node.js!",
+      status: "", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
