@@ -1,6 +1,5 @@
 /* Setting things up. */
 const Twitter = require("twitter")
-const dotenv = require("dotenv")
 const fs = require("fs")
 var request = require('request');
 
@@ -84,9 +83,8 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
   
   
   
-//SEND https://www.reddit.com/r/FunnyAnimals/ memes __dirname + '/assets/DASH_240.mp4'
+//SEND https://www.reddit.com/r/FunnyAnimals/ memes __dirname + '/assets/example.mp4'
 
-  ( new CronJob( '*/10 * * * * *', function() {
     /*
 const fs = require('fs');
 const path = require('path');
@@ -128,97 +126,89 @@ const VIDEO_URL =
   'https://www.kindacode.com/wp-content/uploads/2021/01/example.mp4';
 downloadFile(VIDEO_URL, 'asset');*/
     
-const Twitter = require("twitter")
-const dotenv = require("dotenv")
-const fs = require("fs")
+var bufferLength, filePath, finished, fs, oauthCredentials, offset, request, segment_index, theBuffer;
 
-dotenv.config()
+request = require('request');
+fs = require('fs');
+filePath = __dirname + '/assets/example.mp4';
+bufferLength = 1000000;
+theBuffer = new Buffer(bufferLength);
+offset = 0;
+segment_index = 0;
+finished = 0;
+oauthCredentials = {
+    consumer_key: process.env.TWITTER_CONSUMER_KEY,
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+    token: process.env.TWITTER_ACCESS_TOKEN,
+    token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+};
 
-const client = new Twitter({
-  consumer_key: process.env.CONSUMER_KEY,
-  consumer_secret: process.env.CONSUMER_SECRET,
-  access_token_key: process.env.ACCESS_TOKEN_KEY,
-  access_token_secret: process.env.ACCESS_TOKEN_SECRET
-})
+fs.stat(filePath, function(err, stats) {
+    var formData, normalAppendCallback, options;
 
-const pathToFile = "./media/test.mp4"
-const mediaType = "video/mp4"
+    formData = {
+        command: "INIT",
+        media_type: 'video/mp4',
+        total_bytes: stats.size
+    };
+    options = {
+        url: 'https://upload.twitter.com/1.1/media/upload.json',
+        oauth: oauthCredentials,
+        formData: formData
+    };
 
-const mediaData = fs.readFileSync(pathToFile)
-const mediaSize = fs.statSync(pathToFile).size
+    normalAppendCallback = function(media_id) {
+        return function(err, response, body) {
 
-initializeMediaUpload()
-  .then(appendFileChunk)
-  .then(finalizeUpload)
-  .then(publishStatusUpdate)
+            finished++;
+            if (finished === segment_index) {
 
-function initializeMediaUpload() {
-  return new Promise(function(resolve, reject) {
-    client.post("media/upload", {
-      command: "INIT",
-      total_bytes: mediaSize,
-      media_type: mediaType
-    }, function(error, data, response) {
-      if (error) {
-        console.log(error)
-        reject(error)
-      } else {
-        resolve(data.media_id_string)
-      }
-    })
-  })
-}
+                options.formData = {
+                    command: 'FINALIZE',
+                    media_id: media_id
+                };
+                request.post(options, function(err, response, body) {
+                    console.log('FINALIZED',response.statusCode,body);
 
-function appendFileChunk(mediaId) {
-  return new Promise(function(resolve, reject) {
-    client.post("media/upload", {
-      command: "APPEND",
-      media_id: mediaId,
-      media: mediaData,
-      segment_index: 0
-    }, function(error, data, response) {
-      if (error) {
-        console.log(error)
-        reject(error)
-      } else {
-        resolve(mediaId)
-      }
-    })
-  })
-}
+                    delete options.formData;
 
-function finalizeUpload(mediaId) {
-  return new Promise(function(resolve, reject) {
-    client.post("media/upload", {
-      command: "FINALIZE",
-      media_id: mediaId
-    }, function(error, data, response) {
-      if (error) {
-        console.log(error)
-        reject(error)
-      } else {
-        resolve(mediaId)
-      }
-    })
-  })
-}
+                    //Note: This is not working as expected yet.
+                    options.qs = {
+                        command: 'STATUS',
+                        media_id: media_id
+                    };
+                    request.get(options, function(err, response, body) {
+                        console.log('STATUS: ', response.statusCode, body);
+                    });
+                });
+            }
+        };
+    };
 
-function publishStatusUpdate(mediaId) {
-  return new Promise(function(resolve, reject) {
-    client.post("statuses/update", {
-      status: "I tweeted from Node.js!",
-      media_ids: mediaId
-    }, function(error, data, response) {
-      if (error) {
-        console.log(error)
-        reject(error)
-      } else {
-        console.log("Successfully uploaded media and tweeted!")
-        resolve(data)
-      }
-    })
-  })
-}
-  } ) ).start();
+
+    request.post(options, function(err, response, body) {
+        var media_id;
+        media_id = JSON.parse(body).media_id_string;
+
+        fs.open(filePath, 'r', function(err, fd) {
+            var bytesRead, data;
+
+            while (offset < stats.size) {
+
+                bytesRead = fs.readSync(fd, theBuffer, 0, bufferLength, null);
+                data = bytesRead < bufferLength ? theBuffer.slice(0, bytesRead) : theBuffer;
+                options.formData = {
+                    command: "APPEND",
+                    media_id: media_id,
+                    segment_index: segment_index,
+                    media_data: data.toString('base64')
+                };
+                request.post(options, normalAppendCallback(media_id));
+                offset += bufferLength;
+                segment_index++
+            }
+        });
+    });
+}); 
   
 } );
