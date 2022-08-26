@@ -87,26 +87,44 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
 //SEND https://www.reddit.com/r/FunnyAnimals/ memes __dirname + '/assets/DASH_240.mp4'
 
   ( new CronJob( '*/10 * * * * *', function() {
-var twitterVideo = require('twitter-video')
- 
-var oauth = {
-          consumer_key: process.env.TWITTER_CONSUMER_KEY,
-          consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-          access_token: process.env.TWITTER_ACCESS_TOKEN,
-          access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
-}
- 
-var T = Twit(oauth)
-var PATH =  __dirname + '/assets/DASH_240.mp4'
- 
-twitterVideo.fromFile(PATH, oauth, function (err, media_id) {
-  // Now you have a media ID you can post with a tweet
-  var params = {status: 'yolo', media_ids: [ media_id ]}
-  T.post('statuses/update', params, function post (err, data, res) {
-    console.log(data)
-    // Tweet with video is live
-  })
-})
+const fs = require('fs');
+const path = require('path');
+const axios = require('axios').default;
+
+    const fileUrl = __dirname + '/assets/DASH_240.mp4';
+    const downloadFolder = ;
+// fileUrl: the absolute url of the image or video you want to download
+// downloadFolder: the path of the downloaded file on your machine
+const downloadFile = async (fileUrl, downloadFolder) => {
+  // Get the file name
+  const fileName = path.basename(fileUrl);
+
+  // The path of the downloaded file on our machine
+  const localFilePath = path.resolve(__dirname, downloadFolder, fileName);
+  try {
+    const response = await axios({
+      method: 'GET',
+      url: fileUrl,
+      responseType: 'stream',
+    });
+
+    const w = response.data.pipe(fs.createWriteStream(localFilePath));
+    w.on('finish', () => {
+      console.log('Successfully downloaded file!');
+    });
+  } catch (err) { 
+    throw new Error(err);
+  }
+}; 
+
+// Testing
+const IMAGE_URL =
+  'https://www.kindacode.com/wp-content/uploads/2021/01/test.jpg';
+downloadFile(IMAGE_URL, 'download');
+
+const VIDEO_URL =
+  'https://www.kindacode.com/wp-content/uploads/2021/01/example.mp4';
+downloadFile(VIDEO_URL, 'download');
   } ) ).start();
   
 } );
