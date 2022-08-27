@@ -127,38 +127,27 @@ downloadFile(VIDEO_URL, 'assets');
 */
 
 
-const cheerio = require("cheerio");
-const mainUrl = `https://reddit.com/r/dankmemes`;
-axios
-    .get(mainUrl)
-    .then((response) => {
-        //console.log(response.data);
-    })
-    .catch((err) => {
-        //console.log(err);
-    });
-  
-const dealWithData = (html) => {
-    const $ = cheerio.load(html);
-    const urlMeme = $("._2_tDEnGMLxpM6uOa2kaDB3.ImageBox-image.media-element._1XWObl-3b9tPy64oaG6fax");
-    const indexValue = 0;
-    console.log(`Source is:\n${urlMeme[indexValue].attribs.src}`);
-  const randNo = (limit) => {
-    const thatNo = Math.floor(Math.random() * limit);
-    const indexValue = randNo(urlMeme.length);
-    return thatNo;
-  
-};
+const randomReddit = require('@elchologamer/random-reddit');
+
+// Create options
+let options = {
+  imageOnly: true,
+  allowNSFW: false,
 };
 
-axios
-    .get(mainUrl)
-    .then((response) => {
-        dealWithData(response.data);
-    })
-    .catch((err) => {
-        //console.log(err);
-    });
+/*
+Get a random post from r/memes, 
+returning only an image, and not
+allowing NSFW posts
+*/
+randomReddit('memes', options)
+  .then((post) => {
+    console.log(`Post found: ${post.title}`);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
 
 
 
