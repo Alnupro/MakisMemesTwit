@@ -127,6 +127,7 @@ downloadFile(VIDEO_URL, 'assets');
 */
 
       ( new CronJob( '* * * * *', function() {
+console.log("start")
 const Twitter = require("twitter")
 const dotenv = require("dotenv")
 const fs = require("fs")
@@ -151,7 +152,19 @@ const randomPuppy = require('random-puppy');
 const event = randomPuppy.all('funnyvideos');
         const urlfunny = null;
 event.on('data', url => urlfunny = url);
+        
+function wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
+}
 
+console.log('Start wait 5s');
+wait(5000);
+console.log('Waited 5s');
+        
 console.log("urlfunny found : ");
 console.log(urlfunny);
 
@@ -188,13 +201,19 @@ const downloadFile = async (fileUrl, downloadFolder) => {
 downloadFile(VIDEO_URL, 'assets');       
         
 /////////////////////////////
-//Wait 15sec to dl
         console.log("Time to wait 30sec, dl ?");
-const delay = ms => new Promise(res => setTimeout(res, ms));
-const yourFunction = async () => {
-  await delay(30000);
-  console.log("Waited 30s");
-};        
+
+function wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
+}
+
+console.log('Start wait 30s');
+wait(30000);
+console.log('Waited 30s');
     
 const client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
