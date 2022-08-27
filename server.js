@@ -150,7 +150,17 @@ dotenv.config()
 const randomPuppy = require('random-puppy');
   
 const event = randomPuppy('funnyvideos')
+const promise1 = Promise.resolve(event);
+promise1.then((value) => {
+  console.log(value);
+  // expected output: 123
+});
 console.log(event);
+        while(event == "Promise { <pending> }")
+          {
+            console.log("No");
+          }
+        console.log("Got url");
 /*        
 console.log("urlfunny found : ");
 console.log(urlfunny);
