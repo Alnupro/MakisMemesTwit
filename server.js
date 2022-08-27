@@ -85,7 +85,7 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
   
 //SEND https://www.reddit.com/r/FunnyAnimals/ memes __dirname + '/assets/example.mp4'
 
-const fs = require('fs');
+/*const fs = require('fs');
 const path = require('path');
 const axios = require('axios').default;
 
@@ -113,7 +113,7 @@ const downloadFile = async (fileUrl, downloadFolder) => {
   } catch (err) { 
     throw new Error(err);
   }
-}; 
+};  */
 
 // Testing
 /*const IMAGE_URL =
@@ -126,8 +126,10 @@ const VIDEO_URL =
 downloadFile(VIDEO_URL, 'assets');
 */
 
-const snekfetch = require('snekfetch');
-
+const randomPuppy = require('random-puppy');
+  
+const event = randomPuppy.all('funnyvideos');
+event.on('data', url => console.log(url));
 
       ( new CronJob( '* * * * *', function() {
 const Twitter = require("twitter")

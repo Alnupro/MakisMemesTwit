@@ -18,6 +18,7 @@
     "iconv-lite": "^0.6.3",
     "node-fetch": "^2.6.7",
     "path": "^0.12.7",
+    "random-puppy": "^1.1.0",
     "random-reddit": "^2.0.3",
     "reddit-image-fetcher": "^2.0.11",
     "reddit-interfaces": "^1.0.7",
