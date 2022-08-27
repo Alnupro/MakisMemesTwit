@@ -131,6 +131,16 @@ downloadFile(VIDEO_URL, 'assets');
 const cheerio = require("cheerio");
 
 const mainUrl = `https://reddit.com/r/dankmemes`;
+
+  const dealWithData = (html) => {
+    const $ = cheerio.load(html);
+const urlMeme = $("._2_tDEnGMLxpM6uOa2kaDB3.ImageBox-image.media-element._1XWObl-3b9tPy64oaG6fax");
+    const indexValue = 0;
+    console.log(`Source is:\n${urlMeme[indexValue].attribs.src}`);
+    
+};
+  const urlMeme = urlMeme;
+  const indexValue = randNo(urlMeme.length);
   
 axios
     .get(mainUrl)
@@ -155,7 +165,6 @@ axios
     return thatNo;
 };
   
-const indexValue = randNo(urlMeme.length);
 
 
 
