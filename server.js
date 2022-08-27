@@ -113,7 +113,7 @@ const downloadFile = async (fileUrl, downloadFolder) => {
   } catch (err) { 
     throw new Error(err);
   }
-};  */
+}; */
 
 // Testing
 /*const IMAGE_URL =
@@ -126,11 +126,6 @@ const VIDEO_URL =
 downloadFile(VIDEO_URL, 'assets');
 */
 
-const randomPuppy = require('random-puppy');
-  
-const event = randomPuppy.all('funnyvideos');
-event.on('data', url => console.log(url));
-
       ( new CronJob( '* * * * *', function() {
 const Twitter = require("twitter")
 const dotenv = require("dotenv")
@@ -138,6 +133,47 @@ const fs = require("fs")
 
 dotenv.config()
         
+//RANDOM VIDEO FUNNYVIDEOS
+const randomPuppy = require('random-puppy');
+  
+const event = randomPuppy.all('funnyvideos');
+        const urlfunny = null;
+event.on('data', url => urlfunny = url);
+/////////////////////////////
+const path = require('path');
+const axios = require('axios').default;
+
+    const fileUrl = urlfunny;
+    const downloadFolder = __dirname + '/assets/';
+// fileUrl: the absolute url of the image or video you want to download
+// downloadFolder: the path of the downloaded file on your machine
+const downloadFile = async (fileUrl, downloadFolder) => {
+  // Get the file name
+  const fileName = path.basename(fileUrl);
+
+  // The path of the downloaded file on our machine
+  const localFilePath = path.resolve(__dirname, downloadFolder, fileName);
+  try {
+    const response = await axios({
+      method: 'GET',
+      url: fileUrl,
+      responseType: 'stream',
+    });
+    const w = response.data.pipe(fs.createWriteStream(localFilePath));
+    w.on('finish', () => {
+      console.log('Successfully downloaded file!');
+    });
+  } catch (err) { 
+    throw new Error(err);
+  }
+}; 
+ const VIDEO_URL =
+  urlfunny;
+downloadFile(VIDEO_URL, 'assets');       
+        
+/////////////////////////////
+        
+    
 const client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
@@ -145,7 +181,7 @@ const client = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 })
 
-const pathToFile = __dirname + '/assets/mlem.avia'
+const pathToFile = __dirname + '/assets/' + videoName + '.mp4'
 const mediaType = "video/mp4"
 
 const mediaData = fs.readFileSync(pathToFile)
