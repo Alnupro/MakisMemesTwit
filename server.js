@@ -126,28 +126,20 @@ const VIDEO_URL =
 downloadFile(VIDEO_URL, 'assets');
 */
 
+  var iconv = require('iconv-lite');
+const { getPost, getImage } = require('random-reddit')
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
-const randomReddit = require('@elchologamer/random-reddit');
+function async getPost() {
+  const post = await getPost('memes')
+  console.log(post) // returns the reddit post object
+  // ...
+}
 
-// Create options
-let options = {
-  imageOnly: true,
-  allowNSFW: false,
-};
-
-/*
-Get a random post from r/memes, 
-returning only an image, and not
-allowing NSFW posts
-*/
-randomReddit('memes', options)
-  .then((post) => {
-    console.log(`Post found: ${post.title}`);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-
+function async getImage() {
+  const image = await getImage('memes')
+  console.log(image) // e.g. https://i.redd.it/sri113wns9351.png
+}
 
 
 
