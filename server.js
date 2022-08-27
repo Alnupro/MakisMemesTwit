@@ -151,21 +151,17 @@ const randomPuppy = require('random-puppy');
   
 const event = randomPuppy('funnyvideos')
 const promise1 = Promise.resolve(event);
-promise1.then((value) => {
-  console.log(value);
-  // expected output: 123
-});
-console.log(event);
-        while(event == "Promise { <pending> }")
-          {
-            console.log("No");
-          }
-        console.log("Got url");
-/*        
-console.log("urlfunny found : ");
+        var urlfunny = null;
+promise1.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
 console.log(urlfunny);
+       
 
 /////////////////////////////
+
 const path = require('path');
 const axios = require('axios').default;
 
@@ -193,9 +189,8 @@ const downloadFile = async (fileUrl, downloadFolder) => {
     throw new Error(err);
   }
 }; 
- const VIDEO_URL =
-  urlfunny;
-downloadFile(VIDEO_URL, 'assets');       
+ const VIDEO_URL = urlfunny;
+downloadFile(VIDEO_URL, 'assets').then((a) => {      
         
 /////////////////////////////
         console.log("Time to wait 30sec, dl ?");
@@ -297,7 +292,8 @@ function publishStatusUpdate(mediaId) {
     })
   })
 }
-*/
+})
+});
   } ) ).start();
 
 } );
