@@ -131,6 +131,16 @@ const Twitter = require("twitter")
 const dotenv = require("dotenv")
 const fs = require("fs")
 
+const pathDelete = __dirname + '/assets/video.mp4';
+
+try {
+  fs.unlinkSync(pathDelete)
+  console.log("video.mp4 deleted");
+  //file removed
+} catch(err) {
+  console.error(err)
+}
+
 dotenv.config()
         
 //RANDOM VIDEO FUNNYVIDEOS
@@ -143,13 +153,12 @@ event.on('data', url => urlfunny = url);
 const path = require('path');
 const axios = require('axios').default;
 
-    const fileUrl = urlfunny;
     const downloadFolder = __dirname + '/assets/';
 // fileUrl: the absolute url of the image or video you want to download
 // downloadFolder: the path of the downloaded file on your machine
 const downloadFile = async (fileUrl, downloadFolder) => {
   // Get the file name
-  const fileName = path.basename(fileUrl);
+  const fileName = 'video.mp4'; //Save as video.mp4
 
   // The path of the downloaded file on our machine
   const localFilePath = path.resolve(__dirname, downloadFolder, fileName);
@@ -172,7 +181,13 @@ const downloadFile = async (fileUrl, downloadFolder) => {
 downloadFile(VIDEO_URL, 'assets');       
         
 /////////////////////////////
-        
+//Wait 15sec to dl
+        console.log("Time to wait 15sec, dl ?");
+const delay = ms => new Promise(res => setTimeout(res, ms));
+const yourFunction = async () => {
+  await delay(15000);
+  console.log("Waited 5s");
+};        
     
 const client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -181,7 +196,7 @@ const client = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 })
 
-const pathToFile = __dirname + '/assets/' + videoName + '.mp4'
+const pathToFile = __dirname + '/assets/video.mp4'
 const mediaType = "video/mp4"
 
 const mediaData = fs.readFileSync(pathToFile)
