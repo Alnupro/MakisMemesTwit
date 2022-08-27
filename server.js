@@ -131,6 +131,7 @@ const Twitter = require("twitter")
 const dotenv = require("dotenv")
 const fs = require("fs")
 
+/*
 const pathDelete = __dirname + '/assets/video.mp4';
 
 try {
@@ -138,8 +139,9 @@ try {
   console.log("video.mp4 deleted");
   //file removed
 } catch(err) {
-  console.error(err)
+  console.log("No file /assets/video.mp4 to delete");
 }
+        */
 
 dotenv.config()
         
@@ -149,10 +151,15 @@ const randomPuppy = require('random-puppy');
 const event = randomPuppy.all('funnyvideos');
         const urlfunny = null;
 event.on('data', url => urlfunny = url);
+
+console.log("urlfunny found : ");
+console.log(urlfunny);
+
 /////////////////////////////
 const path = require('path');
 const axios = require('axios').default;
 
+    const fileUrl = urlfunny;
     const downloadFolder = __dirname + '/assets/';
 // fileUrl: the absolute url of the image or video you want to download
 // downloadFolder: the path of the downloaded file on your machine
@@ -182,11 +189,11 @@ downloadFile(VIDEO_URL, 'assets');
         
 /////////////////////////////
 //Wait 15sec to dl
-        console.log("Time to wait 15sec, dl ?");
+        console.log("Time to wait 30sec, dl ?");
 const delay = ms => new Promise(res => setTimeout(res, ms));
 const yourFunction = async () => {
-  await delay(15000);
-  console.log("Waited 5s");
+  await delay(30000);
+  console.log("Waited 30s");
 };        
     
 const client = new Twitter({
