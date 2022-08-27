@@ -126,6 +126,39 @@ const VIDEO_URL =
 downloadFile(VIDEO_URL, 'assets');
 */
 
+
+
+const cheerio = require("cheerio");
+
+const mainUrl = `https://reddit.com/r/dankmemes`;
+  
+axios
+    .get(mainUrl)
+    .then((response) => {
+        console.log(response.data);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+axios
+    .get(mainUrl)
+    .then((response) => {
+        dealWithData(response.data);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+  const randNo = (limit) => {
+    const thatNo = Math.floor(Math.random() * limit);
+    return thatNo;
+};
+  
+const indexValue = randNo(urlMeme.length);
+
+
+
       ( new CronJob( '* * * * *', function() {
 const Twitter = require("twitter")
 const dotenv = require("dotenv")
