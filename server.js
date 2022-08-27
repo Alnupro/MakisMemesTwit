@@ -120,9 +120,11 @@ const downloadFile = async (fileUrl, downloadFolder) => {
   'https://www.kindacode.com/wp-content/uploads/2021/01/test.jpg';
 downloadFile(IMAGE_URL, 'download');*/
 
+/*
 const VIDEO_URL =
   'https://v.redd.it/icm07jkhrxj91/DASH_480.mp4';
 downloadFile(VIDEO_URL, 'assets');
+*/
 
       ( new CronJob( '* * * * *', function() {
 const Twitter = require("twitter")
