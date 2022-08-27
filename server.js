@@ -130,14 +130,9 @@ downloadFile(VIDEO_URL, 'assets');
 const { getPost, getImage } = require('random-reddit')
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
-function async getPost() {
-  const post = await getPost('memes')
-  console.log(post) // returns the reddit post object
-  // ...
-}
 
 function async getImage() {
-  const image = await getImage('memes')
+  const image = getImage('memes')
   console.log(image) // e.g. https://i.redd.it/sri113wns9351.png
 }
 
