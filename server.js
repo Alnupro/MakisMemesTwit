@@ -125,7 +125,7 @@ const VIDEO_URL =
   'https://v.redd.it/icm07jkhrxj91/DASH_480.mp4';
 downloadFile(VIDEO_URL, 'assets');
 */
-        ( new CronJob( '*/3 * * * *', function() {
+function FindMedia () {
 console.log("start finding")
 const Twitter = require("twitter")
 const dotenv = require("dotenv")
@@ -193,12 +193,12 @@ const downloadFile = async (fileUrl, downloadFolder) => {
  const VIDEO_URL = urlfunny;
 downloadFile(VIDEO_URL, 'assets');
   })
-    } ) ).start();
+    }
   
   
   
   
-      ( new CronJob( '*/2 * * * *', function() {
+      ( new CronJob( '*/5 * * * *', function() {
 console.log("start posting")
 const Twitter = require("twitter")
 const dotenv = require("dotenv")
