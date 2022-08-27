@@ -140,7 +140,7 @@ const client = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 })
 
-const pathToFile = __dirname + '/assets/mlem.mp4'
+const pathToFile = __dirname + '/assets/mlem.avia'
 const mediaType = "video/mp4"
 
 const mediaData = fs.readFileSync(pathToFile)
