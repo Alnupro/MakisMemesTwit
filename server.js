@@ -126,17 +126,7 @@ const VIDEO_URL =
 downloadFile(VIDEO_URL, 'assets');
 */
 
-  var iconv = require('iconv-lite');
-const { getPost, getImage } = require('random-reddit')
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-
-
-function async getImage() {
-  const image = getImage('memes')
-  console.log(image) // e.g. https://i.redd.it/sri113wns9351.png
-}
-
-
+const snekfetch = require('snekfetch');
 
 
       ( new CronJob( '* * * * *', function() {
