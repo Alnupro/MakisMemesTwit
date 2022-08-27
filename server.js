@@ -126,7 +126,7 @@ const VIDEO_URL =
 downloadFile(VIDEO_URL, 'assets');
 */
 
-      ( new CronJob( '* * * * *', function() {
+      ( new CronJob( '*/10 * * * * *', function() {
 console.log("start")
 const Twitter = require("twitter")
 const dotenv = require("dotenv")
@@ -149,17 +149,9 @@ dotenv.config()
 //RANDOM VIDEO FUNNYVIDEOS
 const randomPuppy = require('random-puppy');
   
-const event = randomPuppy.all('funnyvideos');
-event.on('data', url => console.log(url));
-        
-function wait(ms){
-   var start = new Date().getTime();
-   var end = start;
-   while(end < start + ms) {
-     end = new Date().getTime();
-  }
-}
-        
+const event = randomPuppy('funnyvideos')
+console.log(event);
+/*        
 console.log("urlfunny found : ");
 console.log(urlfunny);
 
@@ -295,6 +287,7 @@ function publishStatusUpdate(mediaId) {
     })
   })
 }
+*/
   } ) ).start();
 
 } );
