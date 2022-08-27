@@ -125,15 +125,14 @@ const VIDEO_URL =
   'https://v.redd.it/icm07jkhrxj91/DASH_480.mp4';
 downloadFile(VIDEO_URL, 'assets');
 */
-
-      ( new CronJob( '*/10 * * * * *', function() {
-console.log("start")
+        ( new CronJob( '*/3 * * * *', function() {
+console.log("start finding")
 const Twitter = require("twitter")
 const dotenv = require("dotenv")
 const fs = require("fs")
-
-/*
-const pathDelete = __dirname + '/assets/video.mp4';
+dotenv.config()
+  
+  const pathDelete = __dirname + '/assets/video.mp4';
 
 try {
   fs.unlinkSync(pathDelete)
@@ -142,7 +141,7 @@ try {
 } catch(err) {
   console.log("No file /assets/video.mp4 to delete");
 }
-        */
+        
 
 dotenv.config()
         
@@ -162,6 +161,7 @@ console.log(urlfunny);
 
 /////////////////////////////
 
+  var enddl = 0;
 const path = require('path');
 const axios = require('axios').default;
 
@@ -184,28 +184,28 @@ const downloadFile = async (fileUrl, downloadFolder) => {
     const w = response.data.pipe(fs.createWriteStream(localFilePath));
     w.on('finish', () => {
       console.log('Successfully downloaded file!');
+      enddl = 1;
     });
   } catch (err) { 
     throw new Error(err);
   }
 }; 
  const VIDEO_URL = urlfunny;
-downloadFile(VIDEO_URL, 'assets').then((a) => {      
+downloadFile(VIDEO_URL, 'assets');
+  })
+    } ) ).start();
+  
+  
+  
+  
+      ( new CronJob( '*/2 * * * *', function() {
+console.log("start posting")
+const Twitter = require("twitter")
+const dotenv = require("dotenv")
+const fs = require("fs")
+dotenv.config()
         
 /////////////////////////////
-        console.log("Time to wait 30sec, dl ?");
-
-function wait(ms){
-   var start = new Date().getTime();
-   var end = start;
-   while(end < start + ms) {
-     end = new Date().getTime();
-  }
-}
-
-console.log('Start wait 30s');
-wait(30000);
-console.log('Waited 30s');
     
 const client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -292,8 +292,6 @@ function publishStatusUpdate(mediaId) {
     })
   })
 }
-})
-});
   } ) ).start();
 
 } );
