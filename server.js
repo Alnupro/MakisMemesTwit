@@ -288,7 +288,7 @@ function finalizeUpload(mediaId) {
 function publishStatusUpdate(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: "", //Message
+      status: "⏱️ Hourly funny video", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
