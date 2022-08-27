@@ -126,6 +126,15 @@ const VIDEO_URL =
 downloadFile(VIDEO_URL, 'assets');
 */
 function FindMedia () {
+  console.log("Wait before Finding")
+  function wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
+}
+  wait(10000);
 console.log("start finding")
 const Twitter = require("twitter")
 const dotenv = require("dotenv")
@@ -198,7 +207,7 @@ downloadFile(VIDEO_URL, 'assets');
   
   
   
-      ( new CronJob( '*/5 * * * *', function() {
+      ( new CronJob( '0 * * * *', function() {
 console.log("start posting")
 const Twitter = require("twitter")
 const dotenv = require("dotenv")
@@ -292,6 +301,9 @@ function publishStatusUpdate(mediaId) {
     })
   })
 }
+        FindMedia();
+        FindMedia();
+        FindMedia();
   } ) ).start();
 
 } );
