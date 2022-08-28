@@ -125,6 +125,14 @@ const VIDEO_URL =
   'https://v.redd.it/icm07jkhrxj91/DASH_480.mp4';
 downloadFile(VIDEO_URL, 'assets');
 */
+  
+var http = require('http');
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.write('Hello World!');
+  res.end();
+}).listen(8080);
+
 function FindMedia () {
   console.log("Wait before Finding")
   function wait(ms){
@@ -301,8 +309,6 @@ function publishStatusUpdate(mediaId) {
     })
   })
 }
-        FindMedia();
-        FindMedia();
         FindMedia();
   } ) ).start();
 
