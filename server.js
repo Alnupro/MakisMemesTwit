@@ -215,7 +215,7 @@ downloadFile(VIDEO_URL, 'assets');
   
   
   
-      ( new CronJob( '0 * * * *', function() {
+      ( new CronJob( '*/10 * * * *', function() {
 console.log("start posting")
 const Twitter = require("twitter")
 const dotenv = require("dotenv")
