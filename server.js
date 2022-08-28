@@ -10,10 +10,10 @@ const express = require( 'express' ),
       config = {
       /* Be sure to update the .env file with your API keys. See how to get them: https://botwiki.org/tutorials/how-to-create-a-twitter-app */      
         twitter: {
-          consumer_key: process.env.TWITTER_CONSUMER_KEY,
-          consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-          access_token: process.env.TWITTER_ACCESS_TOKEN,
-          access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+          consumer_key: "sDBvVdGjUd6offcP7BL8u6GSO",
+          consumer_secret: "1560584458130038784-9YfPRFW0cIByc8PmeoLIlqVQhbY2nj",
+          access_token: "aP2zOE4mmr0MhTsqBJYpBtrPfjkJnmkef9zdDYbO1wilP",
+          access_token_secret: "AeAy6OaxfAkTAd1oWJzS82AyUWkEZxnMRZ56H6Tpdt1PRCYhsx"
         }
       },
       T = new Twit( config.twitter );
@@ -225,10 +225,10 @@ dotenv.config()
 /////////////////////////////
     
 const client = new Twitter({
-  consumer_key: process.env.TWITTER_CONSUMER_KEY,
-  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-  access_token_key: process.env.TWITTER_ACCESS_TOKEN,
-  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+          consumer_key: "sDBvVdGjUd6offcP7BL8u6GSO",
+          consumer_secret: "1560584458130038784-9YfPRFW0cIByc8PmeoLIlqVQhbY2nj",
+          access_token: "aP2zOE4mmr0MhTsqBJYpBtrPfjkJnmkef9zdDYbO1wilP",
+          access_token_secret: "AeAy6OaxfAkTAd1oWJzS82AyUWkEZxnMRZ56H6Tpdt1PRCYhsx"
 })
 
 const pathToFile = __dirname + '/assets/video.mp4'
