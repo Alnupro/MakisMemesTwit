@@ -165,7 +165,7 @@ dotenv.config()
 //RANDOM VIDEO FUNNYVIDEOS
 const randomPuppy = require('random-puppy');
   
-const event = randomPuppy('funnyvideos')
+const event = randomPuppy('Unexpected')
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
 promise1.then((funny) => {
