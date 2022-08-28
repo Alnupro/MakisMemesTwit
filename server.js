@@ -28,7 +28,6 @@ let listener = app.listen( process.env.PORT, function(){
     Check out https://www.npmjs.com/package/cron#available-cron-patterns to learn more about cron scheduling patterns.
     
     For a few examples, see https://glitch.com/edit/#!/creative-bots?path=helpers%2Fcron-schedules.js
-
   */
 
   ( new CronJob( '0 19 * * *', function() {
@@ -78,7 +77,7 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
   
   
   
-  
+
   
   
   
@@ -88,7 +87,6 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
 /*const fs = require('fs');
 const path = require('path');
 const axios = require('axios').default;
-
     const fileUrl = "https://v.redd.it/icm07jkhrxj91/DASH_480.mp4";
     const downloadFolder = __dirname + '/assets/';
 // fileUrl: the absolute url of the image or video you want to download
@@ -96,7 +94,6 @@ const axios = require('axios').default;
 const downloadFile = async (fileUrl, downloadFolder) => {
   // Get the file name
   const fileName = path.basename(fileUrl);
-
   // The path of the downloaded file on our machine
   const localFilePath = path.resolve(__dirname, downloadFolder, fileName);
   try {
@@ -105,7 +102,6 @@ const downloadFile = async (fileUrl, downloadFolder) => {
       url: fileUrl,
       responseType: 'stream',
     });
-
     const w = response.data.pipe(fs.createWriteStream(localFilePath));
     w.on('finish', () => {
       console.log('Successfully downloaded file!');
@@ -133,6 +129,8 @@ http.createServer(function (req, res) {
   res.end();
 }).listen(8080);
 
+  var already_vids = [];
+  
 function FindMedia () {
   console.log("Wait before Finding")
   function wait(ms){
@@ -162,10 +160,28 @@ try {
 
 dotenv.config()
         
-//RANDOM VIDEO FUNNYVIDEOS
+//RANDOM VIDEO
 const randomPuppy = require('random-puppy');
+
+//RANDOM SUBREDDIT
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+const random_number = getRandomInt(3);
+
+  if(random_number == 0)
+    {
+var event = randomPuppy('Unexpected')
+}
+  else if(random_number == 1)
+    {
+      var event = randomPuppy('ContagiousLaughter')
+    }
+  else if(random_number == 2)
+    {
+      var event = randomPuppy('ThereWasAnAttempt')
+    }
   
-const event = randomPuppy('Unexpected')
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
 promise1.then((funny) => {
@@ -174,8 +190,55 @@ promise1.then((funny) => {
   urlfunny = funny;
   console.log("urlfunny found : ");
 console.log(urlfunny);
+  
+  while(already_vids.includes(urlfunny) == true)
+    {
+const promise1 = Promise.resolve(event);
+        var urlfunny = null;
+promise1.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+    })
+    const { getVideoDurationInSeconds } = require('get-video-duration');
+getVideoDurationInSeconds(urlfunny).then((duration) => {
+      if(duration > 30)
+        {
+    console.log("> 30 sec, find another...")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+  
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another...")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+})}
+  })
+})
+        }
+})
+    }
+  
+  if(already_vids.includes(urlfunny) == false)
+    {
+      already_vids.push(urlfunny);
+    }
        
-
+  
 /////////////////////////////
 
   var enddl = 0;
@@ -212,9 +275,6 @@ downloadFile(VIDEO_URL, 'assets');
   })
     }
   
-  
-  
-  
       ( new CronJob( '*/10 * * * *', function() {
 console.log("start posting")
 const Twitter = require("twitter")
@@ -225,10 +285,10 @@ dotenv.config()
 /////////////////////////////
     
 const client = new Twitter({
-          consumer_key: process.env.TWITTER_CONSUMER_KEY,
-          consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-          access_token: process.env.TWITTER_ACCESS_TOKEN,
-          access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN,
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 })
 
 const pathToFile = __dirname + '/assets/video.mp4'
@@ -296,7 +356,7 @@ function finalizeUpload(mediaId) {
 function publishStatusUpdate(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: "⏱️ Hourly funny video", //Message
+      status: "", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
