@@ -131,6 +131,7 @@ http.createServer(function (req, res) {
 
   var already_vids = [];
   
+  var save_random_number = null;
 function FindMedia () {
   console.log("Wait before Finding")
   function wait(ms){
@@ -167,8 +168,8 @@ const randomPuppy = require('random-puppy');
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
-const random_number = getRandomInt(3);
-
+const random_number = getRandomInt(4);
+save_random_number = random_number;
   if(random_number == 0)
     {
 var event = randomPuppy('Unexpected')
@@ -180,6 +181,10 @@ var event = randomPuppy('Unexpected')
   else if(random_number == 2)
     {
       var event = randomPuppy('ThereWasAnAttempt')
+    }
+  else if(random_number == 3)
+    {
+      var event = randomPuppy('UnusualVideos')
     }
   
 const promise1 = Promise.resolve(event);
@@ -297,10 +302,41 @@ const mediaType = "video/mp4"
 const mediaData = fs.readFileSync(pathToFile)
 const mediaSize = fs.statSync(pathToFile).size
 
+if(save_random_number == 0)
+  {
 initializeMediaUpload()
   .then(appendFileChunk)
   .then(finalizeUpload)
+  .then(publishStatusUpdate0)
+  }
+        else if(save_random_number == 1)
+          {
+initializeMediaUpload()
+  .then(appendFileChunk)
+  .then(finalizeUpload)
+  .then(publishStatusUpdate1)
+          }
+        else if(save_random_number == 2)
+          {
+initializeMediaUpload()
+  .then(appendFileChunk)
+  .then(finalizeUpload)
+  .then(publishStatusUpdate2)
+          }
+        else if(save_random_number == 3)
+          {
+initializeMediaUpload()
+  .then(appendFileChunk)
+  .then(finalizeUpload)
+  .then(publishStatusUpdate3)
+          }
+        else
+          {
+            initializeMediaUpload()
+  .then(appendFileChunk)
+  .then(finalizeUpload)
   .then(publishStatusUpdate)
+          }
 
 function initializeMediaUpload() {
   return new Promise(function(resolve, reject) {
@@ -357,6 +393,75 @@ function publishStatusUpdate(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
       status: "", //Message
+      media_ids: mediaId
+    }, function(error, data, response) {
+      if (error) {
+        console.log(error)
+        reject(error)
+      } else {
+        console.log("Successfully uploaded media and tweeted!")
+        resolve(data)
+      }
+    })
+  })
+}
+        
+function publishStatusUpdate0(mediaId) {
+  return new Promise(function(resolve, reject) {
+    client.post("statuses/update", {
+      status: "😲 Unexpected video", //Message
+      media_ids: mediaId
+    }, function(error, data, response) {
+      if (error) {
+        console.log(error)
+        reject(error)
+      } else {
+        console.log("Successfully uploaded media and tweeted!")
+        resolve(data)
+      }
+    })
+  })
+}
+
+function publishStatusUpdate1(mediaId) {
+  return new Promise(function(resolve, reject) {
+    client.post("statuses/update", {
+      status: "🤣 Funny video", //Message
+      media_ids: mediaId
+    }, function(error, data, response) {
+      if (error) {
+        console.log(error)
+        reject(error)
+      } else {
+        console.log("Successfully uploaded media and tweeted!")
+        resolve(data)
+      }
+    })
+  })
+}
+
+function publishStatusUpdate2(mediaId) {
+  return new Promise(function(resolve, reject) {
+    client.post("statuses/update", {
+      status: "🙄 There was an attempt", //Message
+      media_ids: mediaId
+    }, function(error, data, response) {
+      if (error) {
+        console.log(error)
+        reject(error)
+      } else {
+        console.log("Successfully uploaded media and tweeted!")
+        resolve(data)
+      }
+    })
+  })
+}
+
+
+function publishStatusUpdate3(mediaId) {
+  return new Promise(function(resolve, reject) {
+    client.post("statuses/update", {
+      status: "👽 Unusual video", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
