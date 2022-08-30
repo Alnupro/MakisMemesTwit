@@ -223,7 +223,7 @@ console.log(urlfunny);
   getVideoDurationInSeconds(urlfunny).then((duration) => {
           if(duration > 30)
         {
-    console.log("> 30 sec, find another...")
+    console.log("> 30 sec, find another... (2)")
 const promise2 = Promise.resolve(event);
 promise2.then((funny) => {
   //console.log(funny)
@@ -232,6 +232,147 @@ promise2.then((funny) => {
   console.log("urlfunny found : ");
 console.log(urlfunny);
 })}
+    
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (3)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+})}
+  })
+    
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (4)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+})}
+  })
+
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (4)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+})}
+  })
+
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (4)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+})}
+  })
+
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (5)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+})}
+  })
+    
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (6)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+})}
+  })
+
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (7)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+})}
+  })
+    
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (8)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+})}
+  })
+    
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (9)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+})}
+  })
+    
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (10)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+})}
+  })
+    
   })
 })
         }
