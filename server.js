@@ -29,11 +29,11 @@ let listener = app.listen( process.env.PORT, function(){
     
     For a few examples, see https://glitch.com/edit/#!/creative-bots?path=helpers%2Fcron-schedules.js
   */
-
+/*
   ( new CronJob( '0 19 * * *', function() {
     
     /* The example below tweets out "Hello world 👋" and the current date. */
-
+/*
     const date = new Date().toLocaleString();
     T.post( 'statuses/update', { status: 'Hello world 👋 ' + date }, function( err, data, response ) {
       if ( err ){
@@ -45,10 +45,10 @@ let listener = app.listen( process.env.PORT, function(){
     } );
   } ) ).start();
 
-  ( new CronJob( '0 19 * * *', function() {
+ ( new CronJob( '0 19 * * *', function() { */
     
     /*Send cat*/
-
+/*
 var b64content = fs.readFileSync(__dirname + '/assets/2.jpg', { encoding: 'base64' })
  
 // first we must post the media to Twitter
@@ -72,6 +72,8 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
 })
                                            
   } ) ).start();
+
+*/
   
   
   
@@ -121,16 +123,16 @@ const VIDEO_URL =
   'https://v.redd.it/icm07jkhrxj91/DASH_480.mp4';
 downloadFile(VIDEO_URL, 'assets');
 */
+  function wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
+}
   
-var http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.write('Hello World!');
-  res.end();
-}).listen(8080);
-
   var already_vids = [];
-  
+  var next_post_url = null
   var save_random_number = null;
 function FindMedia () {
   console.log("Wait before Finding")
@@ -141,7 +143,7 @@ function FindMedia () {
      end = new Date().getTime();
   }
 }
-  wait(10000);
+  wait(20000);
 console.log("start finding")
 const Twitter = require("twitter")
 const dotenv = require("dotenv")
@@ -158,9 +160,9 @@ try {
   console.log("No file /assets/video.mp4 to delete");
 }
         
-
+try{
 dotenv.config()
-        
+  
 //RANDOM VIDEO
 const randomPuppy = require('random-puppy');
 
@@ -168,7 +170,7 @@ const randomPuppy = require('random-puppy');
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
-const random_number = getRandomInt(4);
+const random_number = getRandomInt(5);
 save_random_number = random_number;
   if(random_number == 0)
     {
@@ -186,6 +188,10 @@ var event = randomPuppy('Unexpected')
     {
       var event = randomPuppy('UnusualVideos')
     }
+  else
+  {
+      var event = randomPuppy('UnusualVideos')
+  }
   
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
@@ -377,6 +383,7 @@ console.log(urlfunny);
 })
         }
 })
+      next_post_url = urlfunny;
     }
   
   if(already_vids.includes(urlfunny) == false)
@@ -413,15 +420,23 @@ const downloadFile = async (fileUrl, downloadFolder) => {
       enddl = 1;
     });
   } catch (err) { 
-    throw new Error(err);
+    FindMedia();
   }
 }; 
  const VIDEO_URL = urlfunny;
+  next_post_url = urlfunny;
 downloadFile(VIDEO_URL, 'assets');
   })
+  
+} catch(error){
+  FindMedia();
+}
     }
   
-      ( new CronJob( '0 * * * *', function() {
+  function SendMedia()
+  {
+        try
+          {
 console.log("start posting")
 const Twitter = require("twitter")
 const dotenv = require("dotenv")
@@ -464,7 +479,7 @@ initializeMediaUpload()
   .then(finalizeUpload)
   .then(publishStatusUpdate2)
           }
-        else if(save_random_number == 3)
+        else if(save_random_number == 3 || save_random_number == 4)
           {
 initializeMediaUpload()
   .then(appendFileChunk)
@@ -615,7 +630,49 @@ function publishStatusUpdate3(mediaId) {
     })
   })
 }
+        wait(10000);
         FindMedia();
+          }catch(error)
+            {
+              wait(10000);
+              FindMedia();
+            }
+  }
+  
+      ( new CronJob( '0 * * * *', function() {
+SendMedia();
   } ) ).start();
+  
+  ( new CronJob( '*/3 * * * *', function() {
 
-} );
+var ok = false;
+var next_post_time;
+  if(next_post_url != undefined)
+    {
+const { getVideoDurationInSeconds } = require('get-video-duration');
+getVideoDurationInSeconds(next_post_url).then((duration) => {
+      if(duration < 30 && duration >= 1)
+        {
+         if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
+           {
+             ok = true;
+             console.log("Its ok !");
+           }
+        }
+    if(ok == false)
+      {
+        console.log("Wasnt good, find another media")
+        FindMedia();
+      }
+      else
+        {
+        console.log("Seems good, next post will be :")
+        console.log(next_post_url)
+        console.log(next_post_time)
+        }
+  })
+          }
+
+} ) ).start();
+  
+})
