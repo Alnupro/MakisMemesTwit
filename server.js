@@ -130,7 +130,7 @@ downloadFile(VIDEO_URL, 'assets');
      end = new Date().getTime();
   }
 }
-  var old_date;
+  var old_date = new Date();
   var already_vids = [];
   var next_post_url = null
   var save_random_number = null;
