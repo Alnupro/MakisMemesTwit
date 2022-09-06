@@ -17,6 +17,7 @@ const express = require( 'express' ),
         }
       },
       T = new Twit( config.twitter );
+var old_date = new Date();
 
 app.use( express.static( 'public' ) );
 
@@ -130,7 +131,6 @@ downloadFile(VIDEO_URL, 'assets');
      end = new Date().getTime();
   }
 }
-  var old_date;
   var already_vids = [];
   var next_post_url = null
   var save_random_number = null;
