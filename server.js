@@ -130,7 +130,7 @@ downloadFile(VIDEO_URL, 'assets');
      end = new Date().getTime();
   }
 }
-  
+  var old_date;
   var already_vids = [];
   var next_post_url = null
   var save_random_number = null;
@@ -555,6 +555,7 @@ function publishStatusUpdate(mediaId) {
         console.log(error)
         reject(error)
       } else {
+        old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
       }
@@ -572,6 +573,7 @@ function publishStatusUpdate0(mediaId) {
         console.log(error)
         reject(error)
       } else {
+        old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
       }
@@ -589,6 +591,7 @@ function publishStatusUpdate1(mediaId) {
         console.log(error)
         reject(error)
       } else {
+        old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
       }
@@ -606,6 +609,7 @@ function publishStatusUpdate2(mediaId) {
         console.log(error)
         reject(error)
       } else {
+        old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
       }
@@ -624,6 +628,7 @@ function publishStatusUpdate3(mediaId) {
         console.log(error)
         reject(error)
       } else {
+        old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
       }
@@ -644,7 +649,14 @@ SendMedia();
   } ) ).start();
   
   ( new CronJob( '*/3 * * * *', function() {
-
+  var new_date = new Date();
+        if(old_date != null)
+        {
+    if(new_date.getHours() - old_date.getHours() != 1)
+      {
+        SendMedia();
+      }
+        }
 var ok = false;
 var next_post_time;
   if(next_post_url != undefined)
