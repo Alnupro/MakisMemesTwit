@@ -170,7 +170,7 @@ const randomPuppy = require('random-puppy');
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
-const random_number = getRandomInt(5);
+const random_number = getRandomInt(6);
 save_random_number = random_number;
   if(random_number == 0)
     {
@@ -184,7 +184,7 @@ var event = randomPuppy('Unexpected')
     {
       var event = randomPuppy('ThereWasAnAttempt')
     }
-  else if(random_number == 3)
+  else if(random_number == 3 || random_number == 4 || random_number == 5)
     {
       var event = randomPuppy('UnusualVideos')
     }
@@ -479,7 +479,7 @@ initializeMediaUpload()
   .then(finalizeUpload)
   .then(publishStatusUpdate2)
           }
-        else if(save_random_number == 3 || save_random_number == 4)
+        else if(save_random_number == 3 || save_random_number == 4 || save_random_number == 5)
           {
 initializeMediaUpload()
   .then(appendFileChunk)
