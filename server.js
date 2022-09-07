@@ -170,8 +170,7 @@ const randomPuppy = require('random-puppy');
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
-const random_number = getRandomInt(6);
-save_random_number = random_number;
+const random_number = getRandomInt(7);
   if(random_number == 0)
     {
 var event = randomPuppy('Unexpected')
@@ -184,14 +183,27 @@ var event = randomPuppy('Unexpected')
     {
       var event = randomPuppy('ThereWasAnAttempt')
     }
-  else if(random_number == 3 || random_number == 4 || random_number == 5)
+      else if(random_number == 3)
+      {
+      var event = randomPuppy('dankvideos')
+      }
+      else if(random_number == 4)
+      {
+      var event = randomPuppy('shitposting')
+      }
+  else if(random_number == 5)
     {
       var event = randomPuppy('UnusualVideos')
+    }
+   else if(random_number == 6)
+    {
+      var event = randomPuppy('Whatcouldgowrong')
     }
   else
   {
       var event = randomPuppy('UnusualVideos')
   }
+      save_random_number = random_number;
   
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
@@ -479,19 +491,40 @@ initializeMediaUpload()
   .then(finalizeUpload)
   .then(publishStatusUpdate2)
           }
-        else if(save_random_number == 3 || save_random_number == 4 || save_random_number == 5)
+        else if(save_random_number == 3)
           {
 initializeMediaUpload()
   .then(appendFileChunk)
   .then(finalizeUpload)
   .then(publishStatusUpdate3)
           }
+        else if(save_random_number == 4)
+          {
+initializeMediaUpload()
+  .then(appendFileChunk)
+  .then(finalizeUpload)
+  .then(publishStatusUpdate4)
+          }
+        else if(save_random_number == 5)
+          {
+initializeMediaUpload()
+  .then(appendFileChunk)
+  .then(finalizeUpload)
+  .then(publishStatusUpdate5)
+          }
+        else if(save_random_number == 6)
+          {
+initializeMediaUpload()
+  .then(appendFileChunk)
+  .then(finalizeUpload)
+  .then(publishStatusUpdate6)
+          }
         else
           {
             initializeMediaUpload()
   .then(appendFileChunk)
   .then(finalizeUpload)
-  .then(publishStatusUpdate)
+  .then(publishStatusUpdate5)
           }
 
 function initializeMediaUpload() {
@@ -617,11 +650,65 @@ function publishStatusUpdate2(mediaId) {
   })
 }
 
-
 function publishStatusUpdate3(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
+      status: "⚡ Dank Video", //Message
+      media_ids: mediaId
+    }, function(error, data, response) {
+      if (error) {
+        console.log(error)
+        reject(error)
+      } else {
+        old_date = new Date();
+        console.log("Successfully uploaded media and tweeted!")
+        resolve(data)
+      }
+    })
+  })
+}
+                
+function publishStatusUpdate4(mediaId) {
+  return new Promise(function(resolve, reject) {
+    client.post("statuses/update", {
+      status: "💩 Shit Posting", //Message
+      media_ids: mediaId
+    }, function(error, data, response) {
+      if (error) {
+        console.log(error)
+        reject(error)
+      } else {
+        old_date = new Date();
+        console.log("Successfully uploaded media and tweeted!")
+        resolve(data)
+      }
+    })
+  })
+}
+                
+
+function publishStatusUpdate5(mediaId) {
+  return new Promise(function(resolve, reject) {
+    client.post("statuses/update", {
       status: "👽 Unusual video", //Message
+      media_ids: mediaId
+    }, function(error, data, response) {
+      if (error) {
+        console.log(error)
+        reject(error)
+      } else {
+        old_date = new Date();
+        console.log("Successfully uploaded media and tweeted!")
+        resolve(data)
+      }
+    })
+  })
+}
+                
+function publishStatusUpdate6(mediaId) {
+  return new Promise(function(resolve, reject) {
+    client.post("statuses/update", {
+      status: "🚫 What Could Go Wrong", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
