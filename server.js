@@ -655,7 +655,7 @@ SendMedia();
               console.log(new_date.getHours())
               console.log(old_date.getHours())
               console.log(new_date.getHours() - old_date.getHours())
-    if(new_date.getHours() - old_date.getHours() != 1)
+    if((new_date.getHours() - old_date.getHours() + 0.1) > 1)
       {
         SendMedia();
       }
