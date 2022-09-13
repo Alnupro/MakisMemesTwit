@@ -78,10 +78,83 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
   
   
   
-  
+        ( new CronJob( '0 12 * * *', function() {
+var params = {
+    id: '1'
+    // count: 3
+}
+T.get('trends/place', params, gotData);
+
+    function gotData(err, data, response) {
+        var tweets = data;
+        var hash1 = tweets[0]['trends'][0]['name'];
+        var hash2 = tweets[0]['trends'][1]['name'];
+        var hash3 = tweets[0]['trends'][2]['name'];
+        var hash4 = tweets[0]['trends'][3]['name'];
+        var hash5 = tweets[0]['trends'][4]['name'];
+        var hash6 = tweets[0]['trends'][5]['name'];
+        var hash7 = tweets[0]['trends'][6]['name'];
+        var hash8 = tweets[0]['trends'][7]['name'];
+        var hash9 = tweets[0]['trends'][8]['name'];
+        var hash10 = tweets[0]['trends'][9]['name'];
+      
+      if(hash1.includes('#') == false)
+        {
+          hash1 = '#' + tweets[0]['trends'][0]['name'];
+        }
+      if(hash2.includes('#') == false)
+        {
+          hash2 = '#' + tweets[0]['trends'][1]['name'];
+        }
+      if(hash3.includes('#') == false)
+        {
+          hash3 = '#' + tweets[0]['trends'][2]['name'];
+        }
+      if(hash4.includes('#') == false)
+        {
+          hash4 = '#' + tweets[0]['trends'][3]['name'];
+        }
+      if(hash5.includes('#') == false)
+        {
+          hash5 = '#' + tweets[0]['trends'][4]['name'];
+        }
+      if(hash6.includes('#') == false)
+        {
+          hash6 = '#' + tweets[0]['trends'][5]['name'];
+        }
+      if(hash7.includes('#') == false)
+        {
+          hash7 = '#' + tweets[0]['trends'][6]['name'];
+        }
+      if(hash8.includes('#') == false)
+        {
+          hash8 = '#' + tweets[0]['trends'][7]['name'];
+        }
+      if(hash9.includes('#') == false)
+        {
+          hash9 = '#' + tweets[0]['trends'][8]['name'];
+        }
+      if(hash10.includes('#') == false)
+        {
+          hash10 = '#' + tweets[0]['trends'][9]['name'];
+        }
+          
+    T.post( 'statuses/update', { status: "Hello world 👋 A new day begins !\n\nTop 10 # in the World today:\n" + hash1 + "\n" + hash2 + "\n" + hash3 + "\n" + hash4 + "\n" + hash5 + "\n" + hash6 + "\n" + hash7 + "\n" + hash8 + "\n" + hash9 + "\n" + hash10}, function( err, data, response ) {
+      if ( err ){
+        console.log( 'error!', err );
+      }
+      else {
+        console.log( 'tweeted (new day !)', `https://twitter.com/${ data.user.screen_name }/status/${ data.id_str }` );
+      }
+    } );
+    }
+          fs.readFile('already.txt', 'utf8', function (err, data) {
+            console.log("New Day !\nalready.txt content :\n\n")
+            console.log(data);
+          })
+  } ) ).start();
   
 
-  
   
   
   
@@ -131,6 +204,8 @@ downloadFile(VIDEO_URL, 'assets');
      end = new Date().getTime();
   }
 }
+  console.log(old_date)
+  
   var already_vids = [];
   var next_post_url = null
   var save_random_number = null;
@@ -171,6 +246,7 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 const random_number = getRandomInt(7);
+save_random_number = random_number;
   if(random_number == 0)
     {
 var event = randomPuppy('Unexpected')
@@ -203,8 +279,7 @@ var event = randomPuppy('Unexpected')
   {
       var event = randomPuppy('UnusualVideos')
   }
-      save_random_number = random_number;
-  
+
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
 promise1.then((funny) => {
@@ -214,8 +289,14 @@ promise1.then((funny) => {
   console.log("urlfunny found : ");
 console.log(urlfunny);
   
-  while(already_vids.includes(urlfunny) == true)
-    {
+  
+  
+//CHECK IF ALREADY IN already.txt
+   var fs = require('fs');
+ fs.readFile('already.txt', 'utf8', function (err, data) {
+   const content = data;
+   while(content.includes(urlfunny) == true || urlfunny.substr(urlfunny.length-3, 3) != "mp4")
+     {
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
 promise1.then((funny) => {
@@ -227,7 +308,7 @@ console.log(urlfunny);
     })
     const { getVideoDurationInSeconds } = require('get-video-duration');
 getVideoDurationInSeconds(urlfunny).then((duration) => {
-      if(duration > 30)
+      if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another...")
 const promise2 = Promise.resolve(event);
@@ -239,7 +320,7 @@ promise2.then((funny) => {
 console.log(urlfunny);
   
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30)
+          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (2)")
 const promise2 = Promise.resolve(event);
@@ -252,7 +333,7 @@ console.log(urlfunny);
 })}
     
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30)
+          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (3)")
 const promise2 = Promise.resolve(event);
@@ -266,7 +347,7 @@ console.log(urlfunny);
   })
     
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30)
+          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (4)")
 const promise2 = Promise.resolve(event);
@@ -280,7 +361,7 @@ console.log(urlfunny);
   })
 
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30)
+          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (4)")
 const promise2 = Promise.resolve(event);
@@ -294,7 +375,7 @@ console.log(urlfunny);
   })
 
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30)
+          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (4)")
 const promise2 = Promise.resolve(event);
@@ -308,7 +389,7 @@ console.log(urlfunny);
   })
 
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30)
+          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (5)")
 const promise2 = Promise.resolve(event);
@@ -322,7 +403,7 @@ console.log(urlfunny);
   })
     
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30)
+          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (6)")
 const promise2 = Promise.resolve(event);
@@ -336,7 +417,7 @@ console.log(urlfunny);
   })
 
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30)
+          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (7)")
 const promise2 = Promise.resolve(event);
@@ -350,7 +431,7 @@ console.log(urlfunny);
   })
     
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30)
+          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (8)")
 const promise2 = Promise.resolve(event);
@@ -364,7 +445,7 @@ console.log(urlfunny);
   })
     
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30)
+          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (9)")
 const promise2 = Promise.resolve(event);
@@ -378,7 +459,7 @@ console.log(urlfunny);
   })
     
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30)
+          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (10)")
 const promise2 = Promise.resolve(event);
@@ -395,13 +476,18 @@ console.log(urlfunny);
 })
         }
 })
-      next_post_url = urlfunny;
-    }
-  
-  if(already_vids.includes(urlfunny) == false)
+       next_post_url = urlfunny;
+     }
+
+  if(content.includes(urlfunny) == false)
     {
-      already_vids.push(urlfunny);
+  fs.appendFile('already.txt', urlfunny + "\n", function(err, result) {
+     if(err) console.log('error', err);
+    console.log("Url added in already.txt = " + urlfunny)
+    
+   });
     }
+ });
        
   
 /////////////////////////////
@@ -731,7 +817,7 @@ function publishStatusUpdate6(mediaId) {
             }
   }
   
-      ( new CronJob( '*/5 * * * *', function() {
+      ( new CronJob( '0 * * * *', function() {
 SendMedia();
   } ) ).start();
   
