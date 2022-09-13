@@ -78,10 +78,80 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
   
   
   
-  
+        ( new CronJob( '0 12 * * *', function() {
+var params = {
+    id: '1'
+    // count: 3
+}
+T.get('trends/place', params, gotData);
+
+    function gotData(err, data, response) {
+        var tweets = data;
+        var hash1 = tweets[0]['trends'][0]['name'];
+        var hash2 = tweets[0]['trends'][1]['name'];
+        var hash3 = tweets[0]['trends'][2]['name'];
+        var hash4 = tweets[0]['trends'][3]['name'];
+        var hash5 = tweets[0]['trends'][4]['name'];
+        var hash6 = tweets[0]['trends'][5]['name'];
+        var hash7 = tweets[0]['trends'][6]['name'];
+        var hash8 = tweets[0]['trends'][7]['name'];
+        var hash9 = tweets[0]['trends'][8]['name'];
+        var hash10 = tweets[0]['trends'][9]['name'];
+      
+      if(hash1.includes('#') == false)
+        {
+          hash1 = '#' + tweets[0]['trends'][0]['name'];
+        }
+      if(hash2.includes('#') == false)
+        {
+          hash2 = '#' + tweets[0]['trends'][1]['name'];
+        }
+      if(hash3.includes('#') == false)
+        {
+          hash3 = '#' + tweets[0]['trends'][2]['name'];
+        }
+      if(hash4.includes('#') == false)
+        {
+          hash4 = '#' + tweets[0]['trends'][3]['name'];
+        }
+      if(hash5.includes('#') == false)
+        {
+          hash5 = '#' + tweets[0]['trends'][4]['name'];
+        }
+      if(hash6.includes('#') == false)
+        {
+          hash6 = '#' + tweets[0]['trends'][5]['name'];
+        }
+      if(hash7.includes('#') == false)
+        {
+          hash7 = '#' + tweets[0]['trends'][6]['name'];
+        }
+      if(hash8.includes('#') == false)
+        {
+          hash8 = '#' + tweets[0]['trends'][7]['name'];
+        }
+      if(hash9.includes('#') == false)
+        {
+          hash9 = '#' + tweets[0]['trends'][8]['name'];
+        }
+      if(hash10.includes('#') == false)
+        {
+          hash10 = '#' + tweets[0]['trends'][9]['name'];
+        }
+          
+    T.post( 'statuses/update', { status: "Hello world 👋 A new day begins !\n\nTop 10 # in the World today:\n" + hash1 + "\n" + hash2 + "\n" + hash3 + "\n" + hash4 + "\n" + hash5 + "\n" + hash6 + "\n" + hash7 + "\n" + hash8 + "\n" + hash9 + "\n" + hash10}, function( err, data, response ) {
+      if ( err ){
+        console.log( 'error!', err );
+      }
+      else {
+        console.log( 'tweeted (new day !)', `https://twitter.com/${ data.user.screen_name }/status/${ data.id_str }` );
+      }
+    } );
+    }
+          
+  } ) ).start();
   
 
-  
   
   
   
@@ -131,6 +201,8 @@ downloadFile(VIDEO_URL, 'assets');
      end = new Date().getTime();
   }
 }
+  console.log(old_date)
+  
   var already_vids = [];
   var next_post_url = null
   var save_random_number = null;
@@ -170,7 +242,8 @@ const randomPuppy = require('random-puppy');
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
-const random_number = getRandomInt(7);
+const random_number = getRandomInt(4);
+save_random_number = random_number;
   if(random_number == 0)
     {
 var event = randomPuppy('Unexpected')
@@ -183,27 +256,10 @@ var event = randomPuppy('Unexpected')
     {
       var event = randomPuppy('ThereWasAnAttempt')
     }
-      else if(random_number == 3)
-      {
-      var event = randomPuppy('dankvideos')
-      }
-      else if(random_number == 4)
-      {
-      var event = randomPuppy('shitposting')
-      }
-  else if(random_number == 5)
+  else if(random_number == 3)
     {
       var event = randomPuppy('UnusualVideos')
     }
-   else if(random_number == 6)
-    {
-      var event = randomPuppy('Whatcouldgowrong')
-    }
-  else
-  {
-      var event = randomPuppy('UnusualVideos')
-  }
-      save_random_number = random_number;
   
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
@@ -214,8 +270,14 @@ promise1.then((funny) => {
   console.log("urlfunny found : ");
 console.log(urlfunny);
   
-  while(already_vids.includes(urlfunny) == true)
-    {
+  
+  
+//CHECK IF ALREADY IN already.txt
+   var fs = require('fs');
+ fs.readFile('already.txt', 'utf8', function (err, data) {
+   const content = data;
+   while(content.includes(urlfunny) == true)
+     {
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
 promise1.then((funny) => {
@@ -396,12 +458,17 @@ console.log(urlfunny);
         }
 })
       next_post_url = urlfunny;
-    }
-  
-  if(already_vids.includes(urlfunny) == false)
+     }
+
+  if(content.includes(urlfunny) == false)
     {
-      already_vids.push(urlfunny);
+  fs.appendFile('already.txt', urlfunny + "\n", function(err, result) {
+     if(err) console.log('error', err);
+    console.log("Url added in already.txt =" + urlfunny)
+    
+   });
     }
+ });
        
   
 /////////////////////////////
