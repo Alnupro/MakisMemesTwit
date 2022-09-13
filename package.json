@@ -29,10 +29,14 @@
     "reddit-interfaces": "^1.0.7",
     "reddit-random-image": "^1.0.2",
     "request": "^2.88.2",
+    "simple-mem-cache": "^0.2.0",
     "twit": "^2.2.11",
     "twitter": "^1.7.1",
+    "twitter-api-client": "^1.6.1",
     "twitter-api-v2": "^1.12.5",
+    "twitter-trends-scraper": "^1.0.0",
     "twitter-video": "^2.0.0",
+    "twittertrendsapi.js": "^1.0.0",
     "unique-random-array": "^3.0.0"
   },
   "engines": {
