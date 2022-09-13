@@ -148,7 +148,10 @@ T.get('trends/place', params, gotData);
       }
     } );
     }
-          
+          fs.readFile('already.txt', 'utf8', function (err, data) {
+            console.log("New Day !\nalready.txt content :\n\n")
+            console.log(data);
+          })
   } ) ).start();
   
 
