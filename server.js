@@ -295,7 +295,7 @@ console.log(urlfunny);
    var fs = require('fs');
  fs.readFile('already.txt', 'utf8', function (err, data) {
    const content = data;
-   while(content.includes(urlfunny) == true)
+   while(content.includes(urlfunny) == true || urlfunny.substr(urlfunny.length-3, 3) != "mp4")
      {
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
@@ -476,14 +476,14 @@ console.log(urlfunny);
 })
         }
 })
-     }
        next_post_url = urlfunny;
+     }
 
   if(content.includes(urlfunny) == false)
     {
   fs.appendFile('already.txt', urlfunny + "\n", function(err, result) {
      if(err) console.log('error', err);
-    console.log("Url added in already.txt =" + urlfunny)
+    console.log("Url added in already.txt = " + urlfunny)
     
    });
     }
@@ -817,7 +817,7 @@ function publishStatusUpdate6(mediaId) {
             }
   }
   
-      ( new CronJob( '0 * * * *', function() {
+      ( new CronJob( '*/5 * * * *', function() {
 SendMedia();
   } ) ).start();
   
