@@ -295,7 +295,7 @@ console.log(urlfunny);
    var fs = require('fs');
  fs.readFile('already.txt', 'utf8', function (err, data) {
    const content = data;
-   while(content.includes(urlfunny) == true || urlfunny.substr(urlfunny.length-3, 3) != "mp4")
+   while(content.includes(urlfunny) == true)
      {
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
@@ -308,7 +308,7 @@ console.log(urlfunny);
     })
     const { getVideoDurationInSeconds } = require('get-video-duration');
 getVideoDurationInSeconds(urlfunny).then((duration) => {
-      if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
+      if(duration > 30 || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another...")
 const promise2 = Promise.resolve(event);
@@ -320,7 +320,7 @@ promise2.then((funny) => {
 console.log(urlfunny);
   
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
+          if(duration > 30 || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (2)")
 const promise2 = Promise.resolve(event);
@@ -333,7 +333,7 @@ console.log(urlfunny);
 })}
     
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
+          if(duration > 30 || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (3)")
 const promise2 = Promise.resolve(event);
@@ -347,7 +347,7 @@ console.log(urlfunny);
   })
     
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
+          if(duration > 30 || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (4)")
 const promise2 = Promise.resolve(event);
@@ -361,7 +361,7 @@ console.log(urlfunny);
   })
 
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
+          if(duration > 30 || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (4)")
 const promise2 = Promise.resolve(event);
@@ -375,7 +375,7 @@ console.log(urlfunny);
   })
 
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
+          if(duration > 30 || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (4)")
 const promise2 = Promise.resolve(event);
@@ -389,7 +389,7 @@ console.log(urlfunny);
   })
 
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
+          if(duration > 30 || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (5)")
 const promise2 = Promise.resolve(event);
@@ -403,7 +403,7 @@ console.log(urlfunny);
   })
     
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
+          if(duration > 30 || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (6)")
 const promise2 = Promise.resolve(event);
@@ -417,7 +417,7 @@ console.log(urlfunny);
   })
 
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
+          if(duration > 30 || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (7)")
 const promise2 = Promise.resolve(event);
@@ -431,7 +431,7 @@ console.log(urlfunny);
   })
     
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
+          if(duration > 30 || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (8)")
 const promise2 = Promise.resolve(event);
@@ -445,7 +445,7 @@ console.log(urlfunny);
   })
     
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
+          if(duration > 30 || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (9)")
 const promise2 = Promise.resolve(event);
@@ -459,7 +459,7 @@ console.log(urlfunny);
   })
     
   getVideoDurationInSeconds(urlfunny).then((duration) => {
-          if(duration > 30 || urlfunny.substr(urlfunny.length-3, 3) != "mp4" || content.includes(urlfunny) == true)
+          if(duration > 30 || content.includes(urlfunny) == true)
         {
     console.log("> 30 sec, find another... (10)")
 const promise2 = Promise.resolve(event);
