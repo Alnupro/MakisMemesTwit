@@ -245,7 +245,7 @@ const randomPuppy = require('random-puppy');
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
-const random_number = getRandomInt(4);
+const random_number = getRandomInt(7);
 save_random_number = random_number;
   if(random_number == 0)
     {
@@ -259,11 +259,27 @@ var event = randomPuppy('Unexpected')
     {
       var event = randomPuppy('ThereWasAnAttempt')
     }
-  else if(random_number == 3)
+      else if(random_number == 3)
+      {
+      var event = randomPuppy('dankvideos')
+      }
+      else if(random_number == 4)
+      {
+      var event = randomPuppy('shitposting')
+      }
+  else if(random_number == 5)
     {
       var event = randomPuppy('UnusualVideos')
     }
-  
+   else if(random_number == 6)
+    {
+      var event = randomPuppy('Whatcouldgowrong')
+    }
+  else
+  {
+      var event = randomPuppy('UnusualVideos')
+  }
+
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
 promise1.then((funny) => {
