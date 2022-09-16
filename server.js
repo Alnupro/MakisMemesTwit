@@ -242,7 +242,7 @@ const randomPuppy = require('random-puppy');
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
-const random_number = getRandomInt(8);
+const random_number = getRandomInt(9);
 save_random_number = random_number;
   if(random_number == 0)
     {
@@ -275,6 +275,10 @@ var event = randomPuppy('Unexpected')
    else if(random_number == 7)
     {
       var event = randomPuppy('funny')
+    }
+   else if(random_number == 8)
+    {
+      var event = randomPuppy('FunnyDogVideos')
     }
   else
   {
@@ -598,6 +602,20 @@ initializeMediaUpload()
   .then(finalizeUpload)
   .then(publishStatusUpdate6)
           }
+        else if(save_random_number == 7)
+          {
+initializeMediaUpload()
+  .then(appendFileChunk)
+  .then(finalizeUpload)
+  .then(publishStatusUpdate7)
+          }
+        else if(save_random_number == 8)
+          {
+initializeMediaUpload()
+  .then(appendFileChunk)
+  .then(finalizeUpload)
+  .then(publishStatusUpdate8)
+          }
         else
           {
             initializeMediaUpload()
@@ -659,7 +677,7 @@ function finalizeUpload(mediaId) {
 
 function publishStatusUpdate(mediaId) {
   return new Promise(function(resolve, reject) {
-    client.post("statuses/update", {
+    client.post("Video\n #memes", {
       status: "", //Message
       media_ids: mediaId
     }, function(error, data, response) {
@@ -678,7 +696,7 @@ function publishStatusUpdate(mediaId) {
 function publishStatusUpdate0(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: "😲 Unexpected video", //Message
+      status: "😲 Unexpected video\n #memes", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
@@ -696,7 +714,7 @@ function publishStatusUpdate0(mediaId) {
 function publishStatusUpdate1(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: "🤣 Funny video", //Message
+      status: "🤣 Funny video\n #memes", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
@@ -714,7 +732,7 @@ function publishStatusUpdate1(mediaId) {
 function publishStatusUpdate2(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: "🙄 There was an attempt", //Message
+      status: "🙄 There was an attempt\n #memes", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
@@ -732,7 +750,7 @@ function publishStatusUpdate2(mediaId) {
 function publishStatusUpdate3(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: "⚡ Dank Video", //Message
+      status: "⚡ Dank Video\n #memes", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
@@ -750,7 +768,7 @@ function publishStatusUpdate3(mediaId) {
 function publishStatusUpdate4(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: "💩 Shit Posting", //Message
+      status: "💩 Shit Posting\n #memes", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
@@ -769,7 +787,7 @@ function publishStatusUpdate4(mediaId) {
 function publishStatusUpdate5(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: "👽 Unusual video", //Message
+      status: "👽 Unusual video\n #memes", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
@@ -787,7 +805,7 @@ function publishStatusUpdate5(mediaId) {
 function publishStatusUpdate6(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: "🚫 What Could Go Wrong", //Message
+      status: "🚫 What Could Go Wrong\n #memes", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
@@ -801,6 +819,43 @@ function publishStatusUpdate6(mediaId) {
     })
   })
 }
+                
+function publishStatusUpdate7(mediaId) {
+  return new Promise(function(resolve, reject) {
+    client.post("statuses/update", {
+      status: "😆 Funny content\n #memes", //Message
+      media_ids: mediaId
+    }, function(error, data, response) {
+      if (error) {
+        console.log(error)
+        reject(error)
+      } else {
+        old_date = new Date();
+        console.log("Successfully uploaded media and tweeted!")
+        resolve(data)
+      }
+    })
+  })
+}
+                
+function publishStatusUpdate8(mediaId) {
+  return new Promise(function(resolve, reject) {
+    client.post("statuses/update", {
+      status: "🐶 Funny dog\n #memes", //Message
+      media_ids: mediaId
+    }, function(error, data, response) {
+      if (error) {
+        console.log(error)
+        reject(error)
+      } else {
+        old_date = new Date();
+        console.log("Successfully uploaded media and tweeted!")
+        resolve(data)
+      }
+    })
+  })
+}
+                
         wait(10000);
         FindMedia();
           }catch(error)
