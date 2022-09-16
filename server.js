@@ -139,7 +139,7 @@ T.get('trends/place', params, gotData);
           hash10 = '#' + tweets[0]['trends'][9]['name'];
         }
           
-    T.post( 'statuses/update', { status: "Hello world 👋 A new day begins !\n\nTop 10 # in the World today:\n" + hash1 + "\n" + hash2 + "\n" + hash3 + "\n" + hash4 + "\n" + hash5 + "\n" + hash6 + "\n" + hash7 + "\n" + hash8 + "\n" + hash9 + "\n" + hash10}, function( err, data, response ) {
+    T.post( 'statuses/update', { status: "Hello world 👋 A new day begins !\n\nTop 10 # in the World today:\n" + hash1.replace(/\s/g, "") + "\n" + hash2.replace(/\s/g, "") + "\n" + hash3.replace(/\s/g, "") + "\n" + hash4.replace(/\s/g, "") + "\n" + hash5.replace(/\s/g, "") + "\n" + hash6.replace(/\s/g, "") + "\n" + hash7.replace(/\s/g, "") + "\n" + hash8.replace(/\s/g, "") + "\n" + hash9.replace(/\s/g, "") + "\n" + hash10.replace(/\s/g, "")}, function( err, data, response ) {
       if ( err ){
         console.log( 'error!', err );
       }
@@ -148,10 +148,7 @@ T.get('trends/place', params, gotData);
       }
     } );
     }
-          fs.readFile('already.txt', 'utf8', function (err, data) {
-            console.log("New Day !\nalready.txt content :\n\n")
-            console.log(data);
-          })
+    console.log(already_vids); //Send already_vids content
   } ) ).start();
   
 
@@ -245,7 +242,7 @@ const randomPuppy = require('random-puppy');
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
-const random_number = getRandomInt(7);
+const random_number = getRandomInt(8);
 save_random_number = random_number;
   if(random_number == 0)
     {
@@ -274,6 +271,10 @@ var event = randomPuppy('Unexpected')
    else if(random_number == 6)
     {
       var event = randomPuppy('Whatcouldgowrong')
+    }
+   else if(random_number == 7)
+    {
+      var event = randomPuppy('funny')
     }
   else
   {
@@ -476,9 +477,9 @@ console.log(urlfunny);
        next_post_url = urlfunny;
      }
 
-  if(already_vids.includes(urlfunny) == false)
+  if(already_vids.includes(next_post_url) == false)
     {
-      already_vids.push(urlfunny);
+      already_vids.push(next_post_url);
     }
        
   
