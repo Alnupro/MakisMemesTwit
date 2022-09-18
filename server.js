@@ -295,9 +295,16 @@ promise1.then((funny) => {
 console.log(urlfunny);
   
   
-  
 //CHECK IF ALREADY IN already.txt
-   while(already_vids.includes(urlfunny) == true && next_post_url == undefined)
+      var goood = false;
+      if(urlfunny != undefined)
+      {
+        if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
+        {
+         goood = true;
+        }
+      }
+   while(already_vids.includes(urlfunny) == true || next_post_url == undefined || goood == false)
      {
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
@@ -479,6 +486,13 @@ console.log(urlfunny);
         }
 })
        next_post_url = urlfunny;
+      if(next_post_url != undefined)
+      {
+        if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
+        {
+         goood = true;
+        }
+      }
      }
 
   if(already_vids.includes(next_post_url) == false)
