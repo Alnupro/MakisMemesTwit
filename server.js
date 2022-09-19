@@ -299,7 +299,7 @@ console.log(urlfunny);
       var goood = false;
       if(urlfunny != undefined)
       {
-        if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
+        if(urlfunny.substr(-3) == "mp4")
         {
          goood = true;
         }
@@ -488,7 +488,7 @@ console.log(urlfunny);
        next_post_url = urlfunny;
       if(next_post_url != undefined)
       {
-        if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
+        if(next_post_url.substr(-3) == "mp4")
         {
          goood = true;
         }
