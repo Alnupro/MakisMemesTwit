@@ -3,6 +3,23 @@ const Twitter = require("twitter")
 const fs = require("fs")
 var request = require('request');
 
+var already_vids = [];
+
+const discord = require('discord.js')
+const { Client, IntentsBitField } = require('discord.js');
+
+const myIntents = new IntentsBitField();
+
+const client = new Client({ intents: myIntents });
+
+client.once('ready', () => {
+    client.channels.fetch('603191005037985853')
+    .then(channel => {
+        channel.send("Links : " + already_vids);
+      
+client.login(process.env.TOKEN);
+
+
 const express = require( 'express' ),
       app = express(),
       CronJob = require( 'cron' ).CronJob,
@@ -203,7 +220,6 @@ downloadFile(VIDEO_URL, 'assets');
 }
   console.log(old_date)
   
-  var already_vids = [];
   var next_post_url = null
   var save_random_number = null;
 function FindMedia () {
@@ -296,15 +312,8 @@ console.log(urlfunny);
   
   
 //CHECK IF ALREADY IN already.txt
-      var goood = false;
-      if(urlfunny != undefined)
-      {
-        if(urlfunny.substr(-3) == "mp4")
-        {
-         goood = true;
-        }
-      }
-   while(next_post_url == undefined || goood == false)
+
+   while(already_vids.includes(urlfunny) == true || next_post_url == undefined)
      {
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
@@ -486,13 +495,13 @@ console.log(urlfunny);
         }
 })
        next_post_url = urlfunny;
-      if(next_post_url != undefined)
-      {
-        if(next_post_url.substr(-3) == "mp4")
+  if(next_post_url != undefined)
+    {
+      if(next_post_url.substr(next_post_url.length-3, 3) != "mp4")
         {
-         goood = true;
+          next_post_url = undefined;
         }
-      }
+    }
      }
 
   if(already_vids.includes(next_post_url) == false)
@@ -881,6 +890,7 @@ function publishStatusUpdate8(mediaId) {
   
       ( new CronJob( '0 * * * *', function() {
 SendMedia();
+        channel.send("Sends/Links : " + already_vids);
   } ) ).start();
   
   ( new CronJob( '*/3 * * * *', function() {
@@ -926,3 +936,6 @@ getVideoDurationInSeconds(next_post_url).then((duration) => {
 } ) ).start();
   
 })
+
+    })
+});
