@@ -895,6 +895,7 @@ SendMedia();
         client.channels.fetch('603191005037985853')
     .then(channel => {
         channel.send("Links : " + already_vids);
+          channel.send(next_post_url);
     })
   } ) ).start();
   
