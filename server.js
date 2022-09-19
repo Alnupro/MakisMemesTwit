@@ -304,7 +304,7 @@ console.log(urlfunny);
          goood = true;
         }
       }
-   while(already_vids.includes(urlfunny) == true && next_post_url == undefined && goood == false)
+   while(next_post_url == undefined && goood == false)
      {
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
