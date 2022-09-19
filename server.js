@@ -11,13 +11,6 @@ const { Client, IntentsBitField } = require('discord.js');
 const myIntents = new IntentsBitField();
 
 const client = new Client({ intents: myIntents });
-
-client.once('ready', () => {
-    client.channels.fetch('603191005037985853')
-    .then(channel => {
-        channel.send("Links : " + already_vids);
-    })
-});
       
 client.login(process.env.TOKEN);
       
