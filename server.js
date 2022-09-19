@@ -16,10 +16,11 @@ client.once('ready', () => {
     client.channels.fetch('603191005037985853')
     .then(channel => {
         channel.send("Links : " + already_vids);
+    })
+});
       
 client.login(process.env.TOKEN);
-
-
+      
 const express = require( 'express' ),
       app = express(),
       CronJob = require( 'cron' ).CronJob,
@@ -222,6 +223,7 @@ downloadFile(VIDEO_URL, 'assets');
   
   var next_post_url = null
   var save_random_number = null;
+
 function FindMedia () {
   console.log("Wait before Finding")
   function wait(ms){
@@ -890,7 +892,10 @@ function publishStatusUpdate8(mediaId) {
   
       ( new CronJob( '0 * * * *', function() {
 SendMedia();
-        channel.send("Sends/Links : " + already_vids);
+        client.channels.fetch('603191005037985853')
+    .then(channel => {
+        channel.send("Links : " + already_vids);
+    })
   } ) ).start();
   
   ( new CronJob( '*/3 * * * *', function() {
@@ -935,7 +940,4 @@ getVideoDurationInSeconds(next_post_url).then((duration) => {
 
 } ) ).start();
   
-})
-
-    })
 });
