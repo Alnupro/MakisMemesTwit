@@ -32,8 +32,8 @@ const express = require( 'express' ),
       T = new Twit( config.twitter );
 var old_date = new Date();
 
-app.use(bodyParser.json({ limit: '10mb' }));
-app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+app.use(bodyParser.json({ limit: '100mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '100mb' }));
 //app.use( express.static( 'public' ) );
 
 let listener = app.listen( process.env.PORT, function(){
