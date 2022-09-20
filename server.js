@@ -32,9 +32,10 @@ const express = require( 'express' ),
       T = new Twit( config.twitter );
 var old_date = new Date();
 
-app.use(bodyParser.json({ limit: '100mb' }));
-app.use(bodyParser.urlencoded({ extended: true, limit: '100mb' }));
-//app.use( express.static( 'public' ) );
+app.use( express.static( 'public' ) );
+app.use(bodyParser.json({ limit: '300mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '300mb' }));
+
 
 let listener = app.listen( process.env.PORT, function(){
   console.log( 'Your bot is running on port ' + listener.address().port );
