@@ -307,7 +307,7 @@ console.log(urlfunny);
   
   
 //CHECK IF ALREADY IN already.txt
-   while(already_vids.includes(urlfunny) == true && next_post_url == undefined)
+   while(already_vids.includes(urlfunny) == true)
      {
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
@@ -879,8 +879,7 @@ function publishStatusUpdate8(mediaId) {
 SendMedia();
         client.channels.fetch('603191005037985853')
     .then(channel => {
-        channel.send("Links : " + already_vids);
-          channel.send("Next : " + next_post_url);
+          channel.send("Next : " + next_post_url + already_vids);
     })
   } ) ).start();
   
@@ -895,8 +894,7 @@ SendMedia();
       {
           client.channels.fetch('603191005037985853')
     .then(channel => {
-        channel.send("x Links : " + already_vids);
-          channel.send("x Next : " + next_post_url);
+        channel.send("Next : " + next_post_url + already_vids);
     })
         SendMedia();
       }
