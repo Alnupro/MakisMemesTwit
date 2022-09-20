@@ -880,7 +880,7 @@ SendMedia();
         client.channels.fetch('603191005037985853')
     .then(channel => {
         channel.send("Links : " + already_vids);
-          channel.send(next_post_url);
+          channel.send("Next : " + next_post_url);
     })
   } ) ).start();
   
@@ -893,6 +893,11 @@ SendMedia();
               console.log(new_date.getHours() - old_date.getHours())
     if((new_date.getHours() - old_date.getHours() + 0.1) > 1)
       {
+          client.channels.fetch('603191005037985853')
+    .then(channel => {
+        channel.send("x Links : " + already_vids);
+          channel.send("x Next : " + next_post_url);
+    })
         SendMedia();
       }
         }
