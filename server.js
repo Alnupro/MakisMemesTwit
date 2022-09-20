@@ -3,6 +3,8 @@ const Twitter = require("twitter")
 const fs = require("fs")
 var request = require('request');
 
+const bodyParser = require('body-parser');
+
 var already_vids = [];
 
 const discord = require('discord.js')
@@ -30,7 +32,9 @@ const express = require( 'express' ),
       T = new Twit( config.twitter );
 var old_date = new Date();
 
-app.use( express.static( 'public' ) );
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+//app.use( express.static( 'public' ) );
 
 let listener = app.listen( process.env.PORT, function(){
   console.log( 'Your bot is running on port ' + listener.address().port );
