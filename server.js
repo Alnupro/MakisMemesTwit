@@ -892,9 +892,12 @@ SendMedia();
   var new_date = new Date();
         if(old_date != null)
         {
+              console.log("-")
               console.log(new_date.getHours())
               console.log(old_date.getHours())
               console.log(new_date.getHours() - old_date.getHours())
+              console.log(next_post_url)
+              console.log("-")
     if((new_date.getHours() - old_date.getHours() + 0.1) > 1)
       {
           client.channels.fetch('603191005037985853')
