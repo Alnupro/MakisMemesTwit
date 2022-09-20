@@ -934,7 +934,11 @@ getVideoDurationInSeconds(next_post_url).then((duration) => {
         }
   })
           }
-
+    else
+      {
+        console.log("Media was null, finding one ! (3min func)")
+        FindMedia();
+      }
 } ) ).start();
   
 });
