@@ -216,7 +216,6 @@ downloadFile(VIDEO_URL, 'assets');
   
   var next_post_url = null
   var save_random_number = null;
-
 function FindMedia () {
   console.log("Wait before Finding")
   function wait(ms){
@@ -306,9 +305,9 @@ promise1.then((funny) => {
 console.log(urlfunny);
   
   
+  
 //CHECK IF ALREADY IN already.txt
-
-   while(already_vids.includes(urlfunny) == true || next_post_url == undefined)
+   while(already_vids.includes(urlfunny) == true && next_post_url == undefined)
      {
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
@@ -490,13 +489,6 @@ console.log(urlfunny);
         }
 })
        next_post_url = urlfunny;
-  if(next_post_url != undefined)
-    {
-      if(next_post_url.substr(next_post_url.length-3, 3) != "mp4")
-        {
-          next_post_url = undefined;
-        }
-    }
      }
 
   if(already_vids.includes(next_post_url) == false)
