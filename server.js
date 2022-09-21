@@ -3,11 +3,6 @@ const Twitter = require("twitter")
 const fs = require("fs")
 var request = require('request');
 
-//const bodyParser = require('body-parser');
-
-var already_vids = [];
-
-      
 const express = require( 'express' ),
       app = express(),
       CronJob = require( 'cron' ).CronJob,
@@ -25,9 +20,6 @@ const express = require( 'express' ),
 var old_date = new Date();
 
 app.use( express.static( 'public' ) );
-//app.use(bodyParser.json({ limit: '300mb' }));
-//app.use(bodyParser.urlencoded({ extended: true, limit: '300mb' }));
-
 
 let listener = app.listen( process.env.PORT, function(){
   console.log( 'Your bot is running on port ' + listener.address().port );
@@ -53,7 +45,6 @@ let listener = app.listen( process.env.PORT, function(){
       }
     } );
   } ) ).start();
-
  ( new CronJob( '0 19 * * *', function() { */
     
     /*Send cat*/
@@ -81,7 +72,6 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
 })
                                            
   } ) ).start();
-
 */
   
   
@@ -211,6 +201,7 @@ downloadFile(VIDEO_URL, 'assets');
 }
   console.log(old_date)
   
+  var already_vids = [];
   var next_post_url = null
   var save_random_number = null;
 function FindMedia () {
@@ -304,7 +295,7 @@ console.log(urlfunny);
   
   
 //CHECK IF ALREADY IN already.txt
-   while(already_vids.includes(urlfunny) == true)
+   while(already_vids.includes(urlfunny) == true && next_post_url == undefined)
      {
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
@@ -880,12 +871,9 @@ SendMedia();
   var new_date = new Date();
         if(old_date != null)
         {
-              console.log("-")
               console.log(new_date.getHours())
               console.log(old_date.getHours())
               console.log(new_date.getHours() - old_date.getHours())
-              console.log(next_post_url)
-              console.log("-")
     if((new_date.getHours() - old_date.getHours() + 0.1) > 1)
       {
         SendMedia();
@@ -918,11 +906,7 @@ getVideoDurationInSeconds(next_post_url).then((duration) => {
         }
   })
           }
-    else
-      {
-        console.log("Media was null, finding one ! (3min func)")
-        FindMedia();
-      }
+
 } ) ).start();
   
-});
+})
