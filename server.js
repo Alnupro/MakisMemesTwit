@@ -7,14 +7,6 @@ const bodyParser = require('body-parser');
 
 var already_vids = [];
 
-const discord = require('discord.js')
-const { Client, IntentsBitField } = require('discord.js');
-
-const myIntents = new IntentsBitField();
-
-const client = new Client({ intents: myIntents });
-      
-client.login(process.env.TOKEN);
       
 const express = require( 'express' ),
       app = express(),
@@ -882,10 +874,6 @@ function publishStatusUpdate8(mediaId) {
   
       ( new CronJob( '0 * * * *', function() {
 SendMedia();
-        client.channels.fetch('603191005037985853')
-    .then(channel => {
-          channel.send("Next : " + next_post_url + already_vids);
-    })
   } ) ).start();
   
   ( new CronJob( '*/3 * * * *', function() {
@@ -900,10 +888,6 @@ SendMedia();
               console.log("-")
     if((new_date.getHours() - old_date.getHours() + 0.1) > 1)
       {
-          client.channels.fetch('603191005037985853')
-    .then(channel => {
-        channel.send("Next : " + next_post_url + already_vids);
-    })
         SendMedia();
       }
         }
