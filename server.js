@@ -92,7 +92,6 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
 */
   
   
-  
         ( new CronJob( '0 12 * * *', function() {
 var params = {
     id: '1'
