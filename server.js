@@ -883,7 +883,7 @@ function publishStatusUpdate8(mediaId) {
 SendMedia();
         client.channels.fetch('603191005037985853')
     .then(channel => {
-          channel.send("Next : " + next_post_url + already_vids);
+          channel.send("Next : " + next_post_url + "\nAlready: " + already_vids);
     })
   } ) ).start();
   
