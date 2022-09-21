@@ -3,7 +3,7 @@ const Twitter = require("twitter")
 const fs = require("fs")
 var request = require('request');
 
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 
 var already_vids = [];
 
@@ -25,8 +25,8 @@ const express = require( 'express' ),
 var old_date = new Date();
 
 app.use( express.static( 'public' ) );
-app.use(bodyParser.json({ limit: '300mb' }));
-app.use(bodyParser.urlencoded({ extended: true, limit: '300mb' }));
+//app.use(bodyParser.json({ limit: '300mb' }));
+//app.use(bodyParser.urlencoded({ extended: true, limit: '300mb' }));
 
 
 let listener = app.listen( process.env.PORT, function(){
