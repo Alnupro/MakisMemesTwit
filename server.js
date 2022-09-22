@@ -1,5 +1,4 @@
 /* Setting things up. */
-export NODE_OPTIONS="--max-old-space-size=5120"
 const Twitter = require("twitter")
 const fs = require("fs")
 var request = require('request');
@@ -15,7 +14,7 @@ const client = new Client({ intents: myIntents });
       
 client.login(process.env.TOKEN);
 
-//const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const express = require( 'express' ),
       app = express(),
       CronJob = require( 'cron' ).CronJob,
@@ -32,8 +31,8 @@ const express = require( 'express' ),
       T = new Twit( config.twitter );
 var old_date = new Date();
 
-//app.use(bodyParser.json({ limit: '400mb' }));
-//app.use(bodyParser.urlencoded({ extended: true, limit: '400mb' }));
+app.use(bodyParser.json({ limit: '400mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '400mb' }));
 
 app.use( express.static( 'public' ) );
 
