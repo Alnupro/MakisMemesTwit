@@ -1,5 +1,4 @@
 /* Setting things up. */
-export NODE_OPTIONS="--max-old-space-size=5120"
 const Twitter = require("twitter")
 const fs = require("fs")
 var request = require('request');
