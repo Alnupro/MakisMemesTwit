@@ -1,5 +1,5 @@
 /* Setting things up. */
-export NODE_OPTIONS="--max-old-space-size=5120"
+
 const Twitter = require("twitter")
 const fs = require("fs")
 var request = require('request');
@@ -15,7 +15,7 @@ const client = new Client({ intents: myIntents });
       
 client.login(process.env.TOKEN);
 
-//const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const express = require( 'express' ),
       app = express(),
       CronJob = require( 'cron' ).CronJob,
