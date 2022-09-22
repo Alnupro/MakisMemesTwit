@@ -15,7 +15,6 @@ const client = new Client({ intents: myIntents });
       
 client.login(process.env.TOKEN);
 
-const bodyParser = require('body-parser');
 const express = require( 'express' ),
       app = express(),
       CronJob = require( 'cron' ).CronJob,
@@ -39,7 +38,6 @@ app.use( express.static( 'public' ) );
 
 let listener = app.listen( process.env.PORT, function(){
   console.log( 'Your bot is running on port ' + listener.address().port );
-
   /*
     Set up a new cron job to start tweeting automatically.
     Check out https://www.npmjs.com/package/cron#available-cron-patterns to learn more about cron scheduling patterns.
