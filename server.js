@@ -1,4 +1,5 @@
 /* Setting things up. */
+
 const Twitter = require("twitter")
 const fs = require("fs")
 var request = require('request');
@@ -31,8 +32,8 @@ const express = require( 'express' ),
       T = new Twit( config.twitter );
 var old_date = new Date();
 
-app.use(bodyParser.json({ limit: '400mb' }));
-app.use(bodyParser.urlencoded({ extended: true, limit: '400mb' }));
+//app.use(bodyParser.json({ limit: '400mb' }));
+//app.use(bodyParser.urlencoded({ extended: true, limit: '400mb' }));
 
 app.use( express.static( 'public' ) );
 
