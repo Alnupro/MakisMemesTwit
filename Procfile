@@ -1,2 +1,1 @@
-worker: node server.js
-more: export NODE_OPTIONS="--max-old-space-size=5120"
+worker: node --max-old-space-size=8192 server.js
