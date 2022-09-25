@@ -33,7 +33,7 @@
     "twit": "^2.2.11",
     "twitter": "^1.7.1",
     "twitter-api-client": "^1.6.1",
-    "twitter-api-v2": "^1.12.5",
+    "twitter-api-v2": "^1.12.7",
     "twitter-trends-scraper": "^1.0.0",
     "twitter-video": "^2.0.0",
     "twittertrendsapi.js": "^1.0.0",
