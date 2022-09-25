@@ -1,19 +1,7 @@
 /* Setting things up. */
-
 const Twitter = require("twitter")
 const fs = require("fs")
 var request = require('request');
-
-var already_vids = [];
-
-const discord = require('discord.js')
-const { Client, IntentsBitField } = require('discord.js');
-
-const myIntents = new IntentsBitField();
-
-const client = new Client({ intents: myIntents });
-      
-client.login(process.env.TOKEN);
 
 const express = require( 'express' ),
       app = express(),
@@ -31,13 +19,11 @@ const express = require( 'express' ),
       T = new Twit( config.twitter );
 var old_date = new Date();
 
-//app.use(bodyParser.json({ limit: '400mb' }));
-//app.use(bodyParser.urlencoded({ extended: true, limit: '400mb' }));
-
 app.use( express.static( 'public' ) );
 
 let listener = app.listen( process.env.PORT, function(){
   console.log( 'Your bot is running on port ' + listener.address().port );
+
   /*
     Set up a new cron job to start tweeting automatically.
     Check out https://www.npmjs.com/package/cron#available-cron-patterns to learn more about cron scheduling patterns.
@@ -89,6 +75,7 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
   } ) ).start();
 
 */
+  
   
   
         ( new CronJob( '0 12 * * *', function() {
@@ -216,6 +203,7 @@ downloadFile(VIDEO_URL, 'assets');
 }
   console.log(old_date)
   
+  var already_vids = [];
   var next_post_url = null
   var save_random_number = null;
 function FindMedia () {
@@ -309,7 +297,7 @@ console.log(urlfunny);
   
   
 //CHECK IF ALREADY IN already.txt
-   while(already_vids.includes(urlfunny) == true)
+   while(already_vids.includes(urlfunny) == true && next_post_url == undefined)
      {
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
@@ -879,10 +867,6 @@ function publishStatusUpdate8(mediaId) {
   
       ( new CronJob( '0 * * * *', function() {
 SendMedia();
-        client.channels.fetch('603191005037985853')
-    .then(channel => {
-          channel.send("Next : " + next_post_url + "\nAlready: " + already_vids);
-    })
   } ) ).start();
   
   ( new CronJob( '*/3 * * * *', function() {
@@ -894,10 +878,6 @@ SendMedia();
               console.log(new_date.getHours() - old_date.getHours())
     if((new_date.getHours() - old_date.getHours() + 0.1) > 1)
       {
-          client.channels.fetch('603191005037985853')
-    .then(channel => {
-        channel.send("Next : " + next_post_url + already_vids);
-    })
         SendMedia();
       }
         }
@@ -928,12 +908,7 @@ getVideoDurationInSeconds(next_post_url).then((duration) => {
         }
   })
           }
-    else
-      {
-        console.log("Media was null, finding one ! (3min func)")
-        FindMedia();
-      }
 
 } ) ).start();
   
-});
+})
