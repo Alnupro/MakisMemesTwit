@@ -307,7 +307,9 @@ promise1.then((funny) => {
   urlfunny = funny;
   console.log("urlfunny found : ");
 console.log(urlfunny);
-    })
+    }).catch(function () {
+     console.log("Promise Rejected");
+});
     const { getVideoDurationInSeconds } = require('get-video-duration');
 getVideoDurationInSeconds(urlfunny).then((duration) => {
       if(duration > 30)
@@ -320,11 +322,14 @@ promise2.then((funny) => {
   urlfunny = funny;
   console.log("urlfunny found : ");
 console.log(urlfunny);
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
   
   getVideoDurationInSeconds(urlfunny).then((duration) => {
           if(duration > 30)
         {
-    console.log("> 30 sec, find another... (2)")
+    console.log("> 30 sec, find another... (3)")
 const promise2 = Promise.resolve(event);
 promise2.then((funny) => {
   //console.log(funny)
@@ -332,7 +337,13 @@ promise2.then((funny) => {
   urlfunny = funny;
   console.log("urlfunny found : ");
 console.log(urlfunny);
-})}
+}).catch(function () {
+     console.log("Promise Rejected");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
     
   getVideoDurationInSeconds(urlfunny).then((duration) => {
           if(duration > 30)
@@ -345,8 +356,13 @@ promise2.then((funny) => {
   urlfunny = funny;
   console.log("urlfunny found : ");
 console.log(urlfunny);
-})}
-  })
+}).catch(function () {
+     console.log("Promise Rejected");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
     
   getVideoDurationInSeconds(urlfunny).then((duration) => {
           if(duration > 30)
@@ -359,8 +375,13 @@ promise2.then((funny) => {
   urlfunny = funny;
   console.log("urlfunny found : ");
 console.log(urlfunny);
-})}
-  })
+}).catch(function () {
+     console.log("Promise Rejected");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
 
   getVideoDurationInSeconds(urlfunny).then((duration) => {
           if(duration > 30)
@@ -373,8 +394,13 @@ promise2.then((funny) => {
   urlfunny = funny;
   console.log("urlfunny found : ");
 console.log(urlfunny);
-})}
-  })
+}).catch(function () {
+     console.log("Promise Rejected");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
 
   getVideoDurationInSeconds(urlfunny).then((duration) => {
           if(duration > 30)
@@ -387,8 +413,13 @@ promise2.then((funny) => {
   urlfunny = funny;
   console.log("urlfunny found : ");
 console.log(urlfunny);
-})}
-  })
+}).catch(function () {
+     console.log("Promise Rejected");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
 
   getVideoDurationInSeconds(urlfunny).then((duration) => {
           if(duration > 30)
@@ -401,8 +432,13 @@ promise2.then((funny) => {
   urlfunny = funny;
   console.log("urlfunny found : ");
 console.log(urlfunny);
-})}
-  })
+}).catch(function () {
+     console.log("Promise Rejected");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
     
   getVideoDurationInSeconds(urlfunny).then((duration) => {
           if(duration > 30)
@@ -415,8 +451,13 @@ promise2.then((funny) => {
   urlfunny = funny;
   console.log("urlfunny found : ");
 console.log(urlfunny);
-})}
-  })
+}).catch(function () {
+     console.log("Promise Rejected");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
 
   getVideoDurationInSeconds(urlfunny).then((duration) => {
           if(duration > 30)
@@ -429,8 +470,13 @@ promise2.then((funny) => {
   urlfunny = funny;
   console.log("urlfunny found : ");
 console.log(urlfunny);
-})}
-  })
+}).catch(function () {
+     console.log("Promise Rejected");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
     
   getVideoDurationInSeconds(urlfunny).then((duration) => {
           if(duration > 30)
@@ -443,8 +489,13 @@ promise2.then((funny) => {
   urlfunny = funny;
   console.log("urlfunny found : ");
 console.log(urlfunny);
-})}
-  })
+}).catch(function () {
+     console.log("Promise Rejected");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
     
   getVideoDurationInSeconds(urlfunny).then((duration) => {
           if(duration > 30)
@@ -457,8 +508,13 @@ promise2.then((funny) => {
   urlfunny = funny;
   console.log("urlfunny found : ");
 console.log(urlfunny);
-})}
-  })
+}).catch(function () {
+     console.log("Promise Rejected");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
     
   getVideoDurationInSeconds(urlfunny).then((duration) => {
           if(duration > 30)
@@ -471,11 +527,14 @@ promise2.then((funny) => {
   urlfunny = funny;
   console.log("urlfunny found : ");
 console.log(urlfunny);
-})}
-  })
+}).catch(function () {
+     console.log("Promise Rejected");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
     
-  })
-})
         }
 })
        next_post_url = urlfunny;
@@ -638,7 +697,9 @@ function initializeMediaUpload() {
         resolve(data.media_id_string)
       }
     })
-  })
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
 }
 
 function appendFileChunk(mediaId) {
@@ -656,7 +717,9 @@ function appendFileChunk(mediaId) {
         resolve(mediaId)
       }
     })
-  })
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
 }
 
 function finalizeUpload(mediaId) {
@@ -672,7 +735,9 @@ function finalizeUpload(mediaId) {
         resolve(mediaId)
       }
     })
-  })
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
 }
 
 function publishStatusUpdate(mediaId) {
@@ -708,7 +773,9 @@ function publishStatusUpdate0(mediaId) {
         resolve(data)
       }
     })
-  })
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
 }
 
 function publishStatusUpdate1(mediaId) {
@@ -726,7 +793,9 @@ function publishStatusUpdate1(mediaId) {
         resolve(data)
       }
     })
-  })
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
 }
 
 function publishStatusUpdate2(mediaId) {
@@ -744,7 +813,9 @@ function publishStatusUpdate2(mediaId) {
         resolve(data)
       }
     })
-  })
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
 }
 
 function publishStatusUpdate3(mediaId) {
@@ -762,7 +833,9 @@ function publishStatusUpdate3(mediaId) {
         resolve(data)
       }
     })
-  })
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
 }
                 
 function publishStatusUpdate4(mediaId) {
@@ -780,7 +853,9 @@ function publishStatusUpdate4(mediaId) {
         resolve(data)
       }
     })
-  })
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
 }
                 
 
@@ -799,7 +874,9 @@ function publishStatusUpdate5(mediaId) {
         resolve(data)
       }
     })
-  })
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
 }
                 
 function publishStatusUpdate6(mediaId) {
@@ -835,7 +912,9 @@ function publishStatusUpdate7(mediaId) {
         resolve(data)
       }
     })
-  })
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
 }
                 
 function publishStatusUpdate8(mediaId) {
@@ -853,7 +932,9 @@ function publishStatusUpdate8(mediaId) {
         resolve(data)
       }
     })
-  })
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
 }
                 
         wait(10000);
@@ -906,7 +987,9 @@ getVideoDurationInSeconds(next_post_url).then((duration) => {
         console.log(next_post_url)
         console.log(next_post_time)
         }
-  })
+  }).catch(function () {
+     console.log("Promise Rejected");
+});
           }
 
 } ) ).start();
