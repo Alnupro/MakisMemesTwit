@@ -612,6 +612,10 @@ const mediaType = "video/mp4"
 const mediaData = fs.readFileSync(pathToFile)
 const mediaSize = fs.statSync(pathToFile).size
 
+if(next_post_url != undefined)
+  {
+    if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
+      {
 if(save_random_number == 0)
   {
 initializeMediaUpload()
@@ -682,7 +686,12 @@ initializeMediaUpload()
   .then(finalizeUpload)
   .then(publishStatusUpdate5)
           }
-
+  }
+          }
+            else
+              {
+                FindMedia();
+              }
 function initializeMediaUpload() {
   return new Promise(function(resolve, reject) {
     client.post("media/upload", {
