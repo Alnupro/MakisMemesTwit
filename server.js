@@ -963,6 +963,7 @@ function publishStatusUpdate8(mediaId) {
   
       ( new CronJob( '0 * * * *', function() {
 SendMedia();
+        console.log("already_vids: " + already_vids);
   } ) ).start();
   
   ( new CronJob( '*/3 * * * *', function() {
