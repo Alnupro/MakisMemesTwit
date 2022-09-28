@@ -1001,7 +1001,7 @@ T.post('favorites/create', { id: retweetId })
   ( new CronJob( '*/3 * * * *', function() {
   const pathToFile = __dirname + '/assets/video.mp4'
   const mediaSize = fs.statSync(pathToFile).size
-  console.log(mediaSize);
+  console.log("Size :" + mediaSize);
   var new_date = new Date();
         if(old_date != null)
         {
@@ -1023,9 +1023,7 @@ var ok = false;
     if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
            {
              
-const { getVideoDurationInSeconds } = require('get-video-duration');
-getVideoDurationInSeconds(next_post_url).then((duration) => {
-      if(duration < 30 && duration >= 1)
+      if(mediaSize < 3000000)
         {
              ok = true;
              console.log("Its ok !");
@@ -1038,9 +1036,7 @@ getVideoDurationInSeconds(next_post_url).then((duration) => {
             console.log("Wasnt good, find another media")
             FindMedia();
         }
-               })/*.catch(function () {
-     console.log("Promise Rejected (code: 512)");
-});*/
+
            }
     }
     else
