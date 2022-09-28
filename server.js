@@ -1035,10 +1035,14 @@ getVideoDurationInSeconds(next_post_url).then((duration) => {
             console.log("Wasnt good, find another media")
             FindMedia();
         }
-               }).catch(function () {
+               })/*.catch(function () {
      console.log("Promise Rejected (code: 512)");
-});
+});*/
            }
+    }
+    else
+    {
+        FindMedia();
     }
 
 } ) ).start();
