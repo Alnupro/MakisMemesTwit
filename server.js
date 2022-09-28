@@ -1015,7 +1015,7 @@ T.post('favorites/create', { id: retweetId })
         }
 var ok = false;
 //var next_post_time;
-  if(next_post_url != undefined)
+  if(next_post_url != null)
     {
     if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
            {
@@ -1032,6 +1032,7 @@ getVideoDurationInSeconds(next_post_url).then((duration) => {
      console.log("Promise Rejected (code: 512)");
 });
            }
+    }
     if(ok == false)
       {
         console.log("Wasnt good, find another media")
@@ -1043,7 +1044,6 @@ getVideoDurationInSeconds(next_post_url).then((duration) => {
         console.log(next_post_url)
         //console.log(next_post_time)
         }
-          }
 
 } ) ).start();
   
