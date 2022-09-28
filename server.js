@@ -300,7 +300,6 @@ console.log(urlfunny);
    while(already_vids.includes(urlfunny) == true && next_post_url == undefined)
      {
 const promise1 = Promise.resolve(event);
-        var urlfunny = null;
 promise1.then((funny) => {
   //console.log(funny)
   console.log("Got url");
