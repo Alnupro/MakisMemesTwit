@@ -1018,16 +1018,21 @@ var ok = false;
 //var next_post_time;
   if(next_post_url != undefined)
     {
+    if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
+           {
+             
 const { getVideoDurationInSeconds } = require('get-video-duration');
 getVideoDurationInSeconds(next_post_url).then((duration) => {
       if(duration < 30 && duration >= 1)
         {
-         if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
-           {
              ok = true;
              console.log("Its ok !");
-           }
+        
         }
+               }).catch(function () {
+     console.log("Promise Rejected (code: 512)");
+});
+           }
     if(ok == false)
       {
         console.log("Wasnt good, find another media")
@@ -1039,9 +1044,6 @@ getVideoDurationInSeconds(next_post_url).then((duration) => {
         console.log(next_post_url)
         //console.log(next_post_time)
         }
-  }).catch(function () {
-     console.log("Promise Rejected (code: 512)");
-});
           }
 
 } ) ).start();
