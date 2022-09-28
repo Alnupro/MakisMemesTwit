@@ -999,6 +999,9 @@ T.post('favorites/create', { id: retweetId })
 */
   
   ( new CronJob( '*/3 * * * *', function() {
+  const pathToFile = __dirname + '/assets/video.mp4'
+  const mediaSize = fs.statSync(pathToFile).size
+  console.log(mediaSize);
   var new_date = new Date();
         if(old_date != null)
         {
