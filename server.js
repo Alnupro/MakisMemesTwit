@@ -297,10 +297,9 @@ console.log(urlfunny);
   
   
 //CHECK IF ALREADY IN already.txt
-   while(already_vids.includes(urlfunny) == true || next_post_url == undefined)
+   while(already_vids.includes(urlfunny) == true && next_post_url == undefined)
      {
 const promise1 = Promise.resolve(event);
-        var urlfunny = null;
 promise1.then((funny) => {
   //console.log(funny)
   console.log("Got url");
@@ -966,47 +965,81 @@ SendMedia();
         console.log("already_vids: " + already_vids);
   } ) ).start();
   
+  //Auto Like (1H)
+/*
+      ( new CronJob( '0 * * * *', function() {
+        console.log("Like (start)");
+        const mediaArtsSearch = { q: "#memes", count: 100, result_type: "recent" };
+
+// This function finds the latest tweet with the MeetMaye hashtag and retweets.
+  try {
+       T.get("search/tweets", mediaArtsSearch, (error, data) => {
+    // If our search request to the server had no errors...
+    if (error) {
+      // However, if our original search request had an error, we want to print it out here...
+      console.log(error.message);
+    } else {
+      // Grab the ID of the tweet we want to retweetwit...
+      const retweetId = data.statuses[0].id_str;
+      // Tell Twitter we want to retweet it...
+T.post('favorites/create', { id: retweetId })
+    .then(result => {
+
+    console.log('Liked tweet successfully!');
+}).catch(console.error);
+    }
+  });
+  } catch(error) {
+     // Handle errors...
+    console.log(error)
+  }
+
+        
+  } ) ).start();
+*/
+  
   ( new CronJob( '*/3 * * * *', function() {
   var new_date = new Date();
         if(old_date != null)
         {
+              console.log("---")
               console.log(new_date.getHours())
               console.log(old_date.getHours())
               console.log(new_date.getHours() - old_date.getHours())
+              console.log("Next : " + next_post_url)
+              console.log("---")
     if((new_date.getHours() - old_date.getHours() + 0.1) > 1)
       {
         SendMedia();
       }
         }
 var ok = false;
-var next_post_time;
-  if(next_post_url != undefined)
+//var next_post_time;
+  if(next_post_url != null)
     {
+    if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
+           {
+             
 const { getVideoDurationInSeconds } = require('get-video-duration');
 getVideoDurationInSeconds(next_post_url).then((duration) => {
       if(duration < 30 && duration >= 1)
         {
-         if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
-           {
              ok = true;
              console.log("Its ok !");
-           }
+             console.log("Seems good, next post will be :")
+             console.log(next_post_url)
+        
         }
-    if(ok == false)
-      {
-        console.log("Wasnt good, find another media")
-        FindMedia();
-      }
       else
         {
-        console.log("Seems good, next post will be :")
-        console.log(next_post_url)
-        console.log(next_post_time)
+            console.log("Wasnt good, find another media")
+            FindMedia();
         }
-  }).catch(function () {
+               }).catch(function () {
      console.log("Promise Rejected (code: 512)");
 });
-          }
+           }
+    }
 
 } ) ).start();
   
