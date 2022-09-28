@@ -297,7 +297,7 @@ console.log(urlfunny);
   
   
 //CHECK IF ALREADY IN already.txt
-   while(already_vids.includes(urlfunny) == true || next_post_url == undefined)
+   while(already_vids.includes(urlfunny) == true && next_post_url == undefined)
      {
 const promise1 = Promise.resolve(event);
         var urlfunny = null;
