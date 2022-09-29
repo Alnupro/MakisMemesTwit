@@ -950,7 +950,7 @@ function publishStatusUpdate8(mediaId) {
      console.log("Promise Rejected (code: 231)");
 });
 }
-                
+        console.log("already_vids : " + already_vids);        
         wait(10000);
         FindMedia();
           }catch(error)
@@ -1023,7 +1023,7 @@ var ok = false;
     if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
            {
              
-      if(mediaSize < 3000000)
+      if(mediaSize < 2500000)
         {
              ok = true;
              console.log("Its ok !");
