@@ -950,7 +950,7 @@ function publishStatusUpdate8(mediaId) {
      console.log("Promise Rejected (code: 231)");
 });
 }
-                
+        console.log("already_vids : " + already_vids);        
         wait(10000);
         FindMedia();
           }catch(error)
@@ -999,6 +999,9 @@ T.post('favorites/create', { id: retweetId })
 */
   
   ( new CronJob( '*/3 * * * *', function() {
+  const pathToFile = __dirname + '/assets/video.mp4'
+  const mediaSize = fs.statSync(pathToFile).size
+  console.log("Size :" + mediaSize);
   var new_date = new Date();
         if(old_date != null)
         {
@@ -1020,9 +1023,7 @@ var ok = false;
     if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
            {
              
-const { getVideoDurationInSeconds } = require('get-video-duration');
-getVideoDurationInSeconds(next_post_url).then((duration) => {
-      if(duration < 30 && duration >= 1)
+      if(mediaSize < 2500000)
         {
              ok = true;
              console.log("Its ok !");
@@ -1035,10 +1036,12 @@ getVideoDurationInSeconds(next_post_url).then((duration) => {
             console.log("Wasnt good, find another media")
             FindMedia();
         }
-               }).catch(function () {
-     console.log("Promise Rejected (code: 512)");
-});
+
            }
+    else
+      {
+          FindMedia();
+      }
     }
     else
     {
