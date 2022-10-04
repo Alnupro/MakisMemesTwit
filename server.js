@@ -573,7 +573,7 @@ const downloadFile = async (fileUrl, downloadFolder) => {
       enddl = 1;
     });
   } catch (err) { 
-    FindMedia();
+    //FindMedia();
   }
 }; 
  const VIDEO_URL = urlfunny;
@@ -582,7 +582,7 @@ downloadFile(VIDEO_URL, 'assets');
   })
   
 } catch(error){
-  FindMedia();
+  //FindMedia();
 }
     }
   
@@ -1007,12 +1007,12 @@ T.post('favorites/create', { id: retweetId })
               console.log("---")
               try {
                 if (fs.existsSync(pathToFile)) {
-                const mediaSize = fs.statSync(pathToFile).size
+                var mediaSize = fs.statSync(pathToFile).size
                 console.log("Size :" + mediaSize);
                 }
               } catch(err) {
+                var mediaSize = 10000000;
                 console.error(err)
-                const mediaSize = 10000000;
               }
               console.log("New :" + new_date.getHours())
               console.log("Old :" + old_date.getHours())
