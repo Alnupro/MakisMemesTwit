@@ -1000,14 +1000,21 @@ T.post('favorites/create', { id: retweetId })
   
   ( new CronJob( '*/3 * * * *', function() {
   const pathToFile = __dirname + '/assets/video.mp4'
-  const mediaSize = fs.statSync(pathToFile).size
-  console.log("Size :" + mediaSize);
+
   var new_date = new Date();
         if(old_date != null)
         {
               console.log("---")
-              console.log(new_date.getHours())
-              console.log(old_date.getHours())
+              try {
+                if (fs.existsSync(pathToFile)) {
+                const mediaSize = fs.statSync(pathToFile).size
+                console.log("Size :" + mediaSize);
+                }
+              } catch(err) {
+                console.error(err)
+              }
+              console.log("New :" + new_date.getHours())
+              console.log("Old :" + old_date.getHours())
               console.log(new_date.getHours() - old_date.getHours())
               console.log("Next : " + next_post_url)
               console.log("---")
