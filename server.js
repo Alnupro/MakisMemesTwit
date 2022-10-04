@@ -1012,6 +1012,7 @@ T.post('favorites/create', { id: retweetId })
                 }
               } catch(err) {
                 console.error(err)
+                const mediaSize = 10000000;
               }
               console.log("New :" + new_date.getHours())
               console.log("Old :" + old_date.getHours())
