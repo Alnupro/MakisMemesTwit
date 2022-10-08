@@ -203,7 +203,7 @@ downloadFile(VIDEO_URL, 'assets');
 }
   console.log(old_date)
   
-  var already_vids = [];
+  var already_vids = ["http://imgur.com/k61GBhn.jpg", "http://imgur.com/kQdEDcd.mp4", "http://imgur.com/WJJ9fDB.mp4", "http://imgur.com/CyFD7Wr.mp4", "http://imgur.com/fCdcIoA.mp4", "http://imgur.com/9qOxEv4.mp4", "http://imgur.com/UiWRQfH.mp4", "http://imgur.com/IQmPLmw.mp4", "http://imgur.com/4uIfQWW.mp4", "http://imgur.com/cjO7QQe.mp4", "http://imgur.com/tbv8Coz.jpg", "http://imgur.com/tqj47lV.jpg", "http://imgur.com/Jq8GuWO.mp4", "http://imgur.com/m5gVGip.jpg", "http://imgur.com/ejQ66nT.mp4", "http://imgur.com/oIfMOFa.jpg", "http://imgur.com/pZ4UQ7M.mp4", "http://imgur.com/gb8MAVQ.mp4", "http://imgur.com/NHVsr8n.mp4", "http://imgur.com/nixCyN8.mp4", "http://imgur.com/Vg6i7Eg.mp4", "http://imgur.com/bPCgoPD.jpg", "http://imgur.com/EmJWIYH.mp4", "http://imgur.com/DoNnYzS.mp4", "http://imgur.com/OMfc11A.mp4", "http://imgur.com/kMgc8ax.mp4", "http://imgur.com/f8qShqX.mp4", "http://imgur.com/xeHoOp3.jpg", "http://imgur.com/F2efAIb.png", "http://imgur.com/qgvk2Qb.mp4", "http://imgur.com/l6mvcQ7.mp4", "http://imgur.com/RWWe5rj.mp4", "http://imgur.com/33T5XM3.jpg", "http://imgur.com/6KDwi0I.mp4", "http://imgur.com/Hrw5vkj.mp4", "http://imgur.com/NaP7FwR.png", "http://imgur.com/BsyGNDz.mp4", "http://imgur.com/9UplhVb.mp4", "http://imgur.com/5HTcqTI.mp4", "http://imgur.com/fVGfeeX.jpg", "http://imgur.com/bw3ULIg.jpg", "http://imgur.com/OBEopvm.mp4", "http://imgur.com/xnb1QWd.mp4", "http://imgur.com/irgqc1s.jpg", "", "http://imgur.com/b9NGQtb.mp4", "http://imgur.com/yt3yXRR.jpg", "http://imgur.com/F2efAIb.png", "http://imgur.com/OMfc11A.mp4", "http://imgur.com/lRjYX9C.mp4", "http://imgur.com/HWKLYDX.mp4", "http://imgur.com/tYCySml.mp4", "http://imgur.com/psl2LsJ.jpg", "http://imgur.com/tbv8Coz.jpg", "http://imgur.com/pGjY7Sn.mp4", "http://imgur.com/Vg6i7Eg.mp4", "http://imgur.com/ilIZZk1.mp4"];
   var next_post_url = null
   var save_random_number = null;
 function FindMedia () {
@@ -1031,7 +1031,7 @@ var ok = false;
     if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
            {
              
-      if(mediaSize < 2500000)
+      if(mediaSize < 3000000)
         {
              ok = true;
              console.log("Its ok !");
