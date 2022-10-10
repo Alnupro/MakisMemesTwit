@@ -309,10 +309,6 @@ redditFetch({
         media_title = post.title;
         //console.table(post);
       }
-  else
-    {
-     FindMedia();
-    }
 
 
 
@@ -326,6 +322,8 @@ redditFetch({
   
 /////////////////////////////
 
+  console.log("Wait 10 sec");
+  wait(10000);
   var enddl = 0;
 const path = require('path');
 const axios = require('axios').default;
@@ -739,7 +737,7 @@ function publishStatusUpdate8(mediaId) {
   }
   
       ( new CronJob( '0 * * * *', function() {
-SendMedia();
+//SendMedia();
         console.log("already_vids: " + already_vids);
   } ) ).start();
   
@@ -809,12 +807,16 @@ var ok = false;
     if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
            {
              
-      if(mediaSize < 3000000)
+      if(mediaSize < 2500000)
         {
              ok = true;
+             console.log("-")
              console.log("Its ok !");
-             console.log("Seems good, next post will be :")
-             console.log(next_post_url)
+             console.log("Seems good, next post will be :");
+             console.log(next_post_url);
+             console.log(media_title);
+             console.log(save_random_number);
+             console.log("-")
         
         }
       else
