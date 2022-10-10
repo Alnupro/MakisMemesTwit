@@ -308,6 +308,16 @@ redditFetch({
         console.log("Found !")
         media_title = post.title;
         //console.table(post);
+var fs = require('fs'),
+  request = require('request');
+
+request
+  .get(post.url + "/DASH_audio.mp4")
+  .on('error', function(err) {
+    // handle error
+  })
+  .pipe(fs.createWriteStream('./assets/video.mp3'));
+        console.log("Downloaded mp3 !")
       }
 
 
@@ -360,6 +370,11 @@ downloadFile(VIDEO_URL, 'assets');
 } catch(error){
   //FindMedia();
 }
+  var ffmpeg = require('ffmpeg');
+  new ffmpeg()
+    .addInput("./assets/video.mp4")
+    .addInput("./assets/video.mp3")
+    .saveToFile("./assets/", "fullvideo.mp4");
     }
   
   function SendMedia()
@@ -381,7 +396,7 @@ const client = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 })
 
-const pathToFile = __dirname + '/assets/video.mp4'
+const pathToFile = __dirname + '/assets/fullvideo.mp4'
 const mediaType = "video/mp4"
 
 const mediaData = fs.readFileSync(pathToFile)
@@ -775,7 +790,7 @@ T.post('favorites/create', { id: retweetId })
 */
   
   ( new CronJob( '*/3 * * * *', function() {
-  const pathToFile = __dirname + '/assets/video.mp4'
+  const pathToFile = __dirname + '/assets/fullvideo.mp4'
 
   var new_date = new Date();
         if(old_date != null)
