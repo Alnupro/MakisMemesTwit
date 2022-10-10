@@ -2,7 +2,6 @@
 const Twitter = require("twitter")
 const fs = require("fs")
 var request = require('request');
-const justreddit = require("justreddit");
 
 const express = require( 'express' ),
       app = express(),
@@ -76,6 +75,8 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
   } ) ).start();
 
 */
+  
+  
   
         ( new CronJob( '0 12 * * *', function() {
 var params = {
@@ -151,6 +152,9 @@ T.get('trends/place', params, gotData);
   } ) ).start();
   
 
+  
+  
+  
 //SEND https://www.reddit.com/r/FunnyAnimals/ memes __dirname + '/assets/example.mp4'
 
 /*const fs = require('fs');
@@ -199,8 +203,7 @@ downloadFile(VIDEO_URL, 'assets');
 }
   console.log(old_date)
   
-  var already_vids = [];
-  var media_title = null;
+  var already_vids = ["http://imgur.com/k61GBhn.jpg", "http://imgur.com/kQdEDcd.mp4", "http://imgur.com/WJJ9fDB.mp4", "http://imgur.com/CyFD7Wr.mp4", "http://imgur.com/fCdcIoA.mp4", "http://imgur.com/9qOxEv4.mp4", "http://imgur.com/UiWRQfH.mp4", "http://imgur.com/IQmPLmw.mp4", "http://imgur.com/4uIfQWW.mp4", "http://imgur.com/cjO7QQe.mp4", "http://imgur.com/tbv8Coz.jpg", "http://imgur.com/tqj47lV.jpg", "http://imgur.com/Jq8GuWO.mp4", "http://imgur.com/m5gVGip.jpg", "http://imgur.com/ejQ66nT.mp4", "http://imgur.com/oIfMOFa.jpg", "http://imgur.com/pZ4UQ7M.mp4", "http://imgur.com/gb8MAVQ.mp4", "http://imgur.com/NHVsr8n.mp4", "http://imgur.com/nixCyN8.mp4", "http://imgur.com/Vg6i7Eg.mp4", "http://imgur.com/bPCgoPD.jpg", "http://imgur.com/EmJWIYH.mp4", "http://imgur.com/DoNnYzS.mp4", "http://imgur.com/OMfc11A.mp4", "http://imgur.com/kMgc8ax.mp4", "http://imgur.com/f8qShqX.mp4", "http://imgur.com/xeHoOp3.jpg", "http://imgur.com/F2efAIb.png", "http://imgur.com/qgvk2Qb.mp4", "http://imgur.com/l6mvcQ7.mp4", "http://imgur.com/RWWe5rj.mp4", "http://imgur.com/33T5XM3.jpg", "http://imgur.com/6KDwi0I.mp4", "http://imgur.com/Hrw5vkj.mp4", "http://imgur.com/NaP7FwR.png", "http://imgur.com/BsyGNDz.mp4", "http://imgur.com/9UplhVb.mp4", "http://imgur.com/5HTcqTI.mp4", "http://imgur.com/fVGfeeX.jpg", "http://imgur.com/bw3ULIg.jpg", "http://imgur.com/OBEopvm.mp4", "http://imgur.com/xnb1QWd.mp4", "http://imgur.com/irgqc1s.jpg", "", "http://imgur.com/b9NGQtb.mp4", "http://imgur.com/yt3yXRR.jpg", "http://imgur.com/F2efAIb.png", "http://imgur.com/OMfc11A.mp4", "http://imgur.com/lRjYX9C.mp4", "http://imgur.com/HWKLYDX.mp4", "http://imgur.com/tYCySml.mp4", "http://imgur.com/psl2LsJ.jpg", "http://imgur.com/tbv8Coz.jpg", "http://imgur.com/pGjY7Sn.mp4", "http://imgur.com/Vg6i7Eg.mp4", "http://imgur.com/ilIZZk1.mp4"];
   var next_post_url = null
   var save_random_number = null;
 function FindMedia () {
@@ -243,86 +246,298 @@ const random_number = getRandomInt(9);
 save_random_number = random_number;
   if(random_number == 0)
     {
-var event = 'Unexpected'
+var event = randomPuppy('Unexpected')
 }
   else if(random_number == 1)
     {
-      var event = 'ContagiousLaughter'
+      var event = randomPuppy('ContagiousLaughter')
     }
   else if(random_number == 2)
     {
-      var event = 'ThereWasAnAttempt'
+      var event = randomPuppy('ThereWasAnAttempt')
     }
       else if(random_number == 3)
       {
-      var event = 'dankvideos'
+      var event = randomPuppy('dankvideos')
       }
       else if(random_number == 4)
       {
-      var event = 'shitposting'
+      var event = randomPuppy('shitposting')
       }
   else if(random_number == 5)
     {
-      var event = 'UnusualVideos'
+      var event = randomPuppy('UnusualVideos')
     }
    else if(random_number == 6)
     {
-      var event = 'Whatcouldgowrong'
+      var event = randomPuppy('Whatcouldgowrong')
     }
    else if(random_number == 7)
     {
-      var event = 'funny'
+      var event = randomPuppy('funny')
     }
    else if(random_number == 8)
     {
-      var event = 'FunnyDogVideos'
+      var event = randomPuppy('FunnyDogVideos')
     }
   else
   {
-      var event = 'UnusualVideos'
+      var event = randomPuppy('UnusualVideos')
   }
 
+const promise1 = Promise.resolve(event);
         var urlfunny = null;
-
+promise1.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
   
   
   
 //CHECK IF ALREADY IN already.txt
+   while(already_vids.includes(urlfunny) == true && next_post_url == undefined)
+     {
+const promise1 = Promise.resolve(event);
+promise1.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : (code: 159)");
+console.log(urlfunny);
+    }).catch(function () {
+     console.log("Promise Rejected (code: 351)");
+});
+    const { getVideoDurationInSeconds } = require('get-video-duration');
+getVideoDurationInSeconds(urlfunny).then((duration) => {
+      if(duration > 30)
+        {
+    console.log("> 30 sec, find another...")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : (code: 839)");
+console.log(urlfunny);
+  }).catch(function () {
+     console.log("Promise Rejected (code: 531)");
+});
+  
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (3)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+}).catch(function () {
+     console.log("Promise Rejected (code: 215)");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected (code: 638)");
+});
+    
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (3)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+}).catch(function () {
+     console.log("Promise Rejected (code: 564)");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected (code: 645)");
+});
+    
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (4)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+}).catch(function () {
+     console.log("Promise Rejected (code: 351)");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected (code: 472)");
+});
 
-       console.log("Fetching !")
-const redditFetch = require('reddit-fetch');
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (4)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+}).catch(function () {
+     console.log("Promise Rejected (code: 724)");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected (code: 132)");
+});
 
-redditFetch({
-    subreddit: event,
-    sort: 'hot',
-    allowNSFW: false,
-    allowModPost: false,
-    allowCrossPost: false,
-    allowVideo: true
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (4)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+}).catch(function () {
+     console.log("Promise Rejected (code: 141)");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected (code: 514)");
+});
 
-}).then(post => {
-    if(post.post_hint == 'hosted:video')
-      {
-        urlfunny = post.url + "/DASH_240.mp4";
-        next_post_url = post.url + "/DASH_240.mp4";
-        console.log("Found !")
-        media_title = post.title;
-        //console.table(post);
-var fs = require('fs'),
-  request = require('request');
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (5)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+}).catch(function () {
+     console.log("Promise Rejected (code: 315)");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected (code: 415)");
+});
+    
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (6)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+}).catch(function () {
+     console.log("Promise Rejected (code: 125)");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected (code: 621)");
+});
 
-request
-  .get(post.url + "/DASH_audio.mp4")
-  .on('error', function(err) {
-    // handle error
-  })
-  .pipe(fs.createWriteStream('./assets/video.mp3'));
-        console.log("Downloaded mp3 !")
-      }
-
-
-
-  console.log("Found url : " + next_post_url)
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (7)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+}).catch(function () {
+     console.log("Promise Rejected (code: 162)");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected (code: 853)");
+});
+    
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (8)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+}).catch(function () {
+     console.log("Promise Rejected (code: 752)");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected (code: 726)");
+});
+    
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (9)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+}).catch(function () {
+     console.log("Promise Rejected (code: 341)");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected (code: 752)");
+});
+    
+  getVideoDurationInSeconds(urlfunny).then((duration) => {
+          if(duration > 30)
+        {
+    console.log("> 30 sec, find another... (10)")
+const promise2 = Promise.resolve(event);
+promise2.then((funny) => {
+  //console.log(funny)
+  console.log("Got url");
+  urlfunny = funny;
+  console.log("urlfunny found : ");
+console.log(urlfunny);
+}).catch(function () {
+     console.log("Promise Rejected (code: 856)");
+});
+}
+  }).catch(function () {
+     console.log("Promise Rejected (code: 421)");
+});
+    
+        }
+})
+       next_post_url = urlfunny;
+     }
 
   if(already_vids.includes(next_post_url) == false)
     {
@@ -332,13 +547,11 @@ request
   
 /////////////////////////////
 
-  console.log("Wait 10 sec");
-  wait(10000);
   var enddl = 0;
 const path = require('path');
 const axios = require('axios').default;
 
-    const fileUrl = next_post_url;
+    const fileUrl = urlfunny;
     const downloadFolder = __dirname + '/assets/';
 // fileUrl: the absolute url of the image or video you want to download
 // downloadFolder: the path of the downloaded file on your machine
@@ -366,15 +579,11 @@ const downloadFile = async (fileUrl, downloadFolder) => {
  const VIDEO_URL = urlfunny;
   next_post_url = urlfunny;
 downloadFile(VIDEO_URL, 'assets');
-  });
+  })
+  
 } catch(error){
   //FindMedia();
 }
-  var ffmpeg = require('ffmpeg');
-  new ffmpeg()
-    .addInput("./assets/video.mp4")
-    .addInput("./assets/video.mp3")
-    .saveToFile("./assets/", "fullvideo.mp4");
     }
   
   function SendMedia()
@@ -396,7 +605,7 @@ const client = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 })
 
-const pathToFile = __dirname + '/assets/fullvideo.mp4'
+const pathToFile = __dirname + '/assets/video.mp4'
 const mediaType = "video/mp4"
 
 const mediaData = fs.readFileSync(pathToFile)
@@ -546,7 +755,7 @@ function finalizeUpload(mediaId) {
 function publishStatusUpdate(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: `#memes\n${media_title}`, //Message
+      status: "", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
@@ -564,7 +773,7 @@ function publishStatusUpdate(mediaId) {
 function publishStatusUpdate0(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: `😲 Unexpected video #memes\n${media_title}`, //Message
+      status: "😲 Unexpected video\n #memes", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
@@ -584,7 +793,7 @@ function publishStatusUpdate0(mediaId) {
 function publishStatusUpdate1(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: `🤣 Funny video #memes\n${media_title}`, //Message
+      status: "🤣 Funny video\n #memes", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
@@ -604,7 +813,7 @@ function publishStatusUpdate1(mediaId) {
 function publishStatusUpdate2(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: `🙄 There was an attempt #memes\n${media_title}`, //Message
+      status: "🙄 There was an attempt\n #memes", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
@@ -624,7 +833,7 @@ function publishStatusUpdate2(mediaId) {
 function publishStatusUpdate3(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: `⚡ Dank Video #memes\n${media_title}`, //Message
+      status: "⚡ Dank Video\n #memes", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
@@ -644,7 +853,7 @@ function publishStatusUpdate3(mediaId) {
 function publishStatusUpdate4(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: `💩 Shit Posting #memes\n${media_title}`, //Message
+      status: "💩 Shit Posting\n #memes", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
@@ -665,7 +874,7 @@ function publishStatusUpdate4(mediaId) {
 function publishStatusUpdate5(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: `👽 Unusual video #memes\n${media_title}`, //Message
+      status: "👽 Unusual video\n #memes", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
@@ -685,7 +894,7 @@ function publishStatusUpdate5(mediaId) {
 function publishStatusUpdate6(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: `🚫 What Could Go Wrong #memes\n${media_title}`, //Message
+      status: "🚫 What Could Go Wrong\n #memes", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
@@ -705,7 +914,7 @@ function publishStatusUpdate6(mediaId) {
 function publishStatusUpdate7(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: `😆 Funny content #memes\n${media_title}`, //Message
+      status: "😆 Funny content\n #memes", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
@@ -725,7 +934,7 @@ function publishStatusUpdate7(mediaId) {
 function publishStatusUpdate8(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: `🐶 Funny dog #memes\n${media_title}`, //Message
+      status: "🐶 Funny dog\n #memes", //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
@@ -752,7 +961,7 @@ function publishStatusUpdate8(mediaId) {
   }
   
       ( new CronJob( '0 * * * *', function() {
-//SendMedia();
+SendMedia();
         console.log("already_vids: " + already_vids);
   } ) ).start();
   
@@ -790,7 +999,7 @@ T.post('favorites/create', { id: retweetId })
 */
   
   ( new CronJob( '*/3 * * * *', function() {
-  const pathToFile = __dirname + '/assets/fullvideo.mp4'
+  const pathToFile = __dirname + '/assets/video.mp4'
 
   var new_date = new Date();
         if(old_date != null)
@@ -822,16 +1031,12 @@ var ok = false;
     if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
            {
              
-      if(mediaSize < 2500000)
+      if(mediaSize < 3000000)
         {
              ok = true;
-             console.log("-")
              console.log("Its ok !");
-             console.log("Seems good, next post will be :");
-             console.log(next_post_url);
-             console.log(media_title);
-             console.log(save_random_number);
-             console.log("-")
+             console.log("Seems good, next post will be :")
+             console.log(next_post_url)
         
         }
       else
