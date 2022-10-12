@@ -403,7 +403,7 @@ exec("ffmpeg -i assets/video.mp4 -i assets/audio.mp3 -map 0:0 -map 1:0 -c copy a
     if (error) {
         console.log("ERROR FULL VIDEO !!")
         console.log(`error: ${error.message}`);
-        return;
+        return FindMedia();
     }
     if (stderr) {
         console.log("STDERR FULL VIDEO !!")
@@ -423,7 +423,7 @@ exec("ffmpeg -i assets/video.mp4 -i assets/audio.mp3 -map 0:0 -map 1:0 -c copy a
   });
 
 } catch(error){
-  //FindMedia();
+  FindMedia();
 }
   const pathToFile = __dirname + '/assets/video.mp4'
               try {
@@ -433,6 +433,7 @@ exec("ffmpeg -i assets/video.mp4 -i assets/audio.mp3 -map 0:0 -map 1:0 -c copy a
                 }
               } catch(err) {
                 console.error(err)
+                FindMedia();
               }
     }
   
@@ -617,6 +618,7 @@ function publishStatusUpdate(mediaId) {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
+        FindMedia();
       }
     })
   })
@@ -635,6 +637,7 @@ function publishStatusUpdate0(mediaId) {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
+        FindMedia();
       }
     })
   }).catch(function () {
@@ -655,6 +658,7 @@ function publishStatusUpdate1(mediaId) {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
+        FindMedia();
       }
     })
   }).catch(function () {
@@ -675,6 +679,7 @@ function publishStatusUpdate2(mediaId) {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
+        FindMedia();
       }
     })
   }).catch(function () {
@@ -695,6 +700,7 @@ function publishStatusUpdate3(mediaId) {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
+        FindMedia();
       }
     })
   }).catch(function () {
@@ -715,6 +721,7 @@ function publishStatusUpdate4(mediaId) {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
+        FindMedia();
       }
     })
   }).catch(function () {
@@ -736,6 +743,7 @@ function publishStatusUpdate5(mediaId) {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
+        FindMedia();
       }
     })
   }).catch(function () {
@@ -756,6 +764,7 @@ function publishStatusUpdate6(mediaId) {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
+        FindMedia();
       }
     })
   }).catch(function () {
@@ -776,6 +785,7 @@ function publishStatusUpdate7(mediaId) {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
+        FindMedia();
       }
     })
   }).catch(function () {
@@ -796,6 +806,7 @@ function publishStatusUpdate8(mediaId) {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
+        FindMedia();
       }
     })
   }).catch(function () {
@@ -857,6 +868,7 @@ T.post('favorites/create', { id: retweetId })
   
   ( new CronJob( '*/2 * * * *', function() {
   const pathToFile = __dirname + '/assets/video.mp4'
+  const pathToFullFile = __dirname + '/assets/fullvideo.mp4'
 
   var new_date = new Date();
         if(old_date != null)
@@ -865,10 +877,21 @@ T.post('favorites/create', { id: retweetId })
               try {
                 if (fs.existsSync(pathToFile)) {
                 var mediaSize = fs.statSync(pathToFile).size
-                console.log("Size :" + mediaSize);
+                console.log("Size video.mp4 :" + mediaSize);
                 }
               } catch(err) {
                 var mediaSize = 10000000;
+                console.log("No video.mp4")
+                console.error(err)
+              }
+              try {
+                if (fs.existsSync(pathToFullFile)) {
+                var mediaFullSize = fs.statSync(pathToFullFile).size
+                console.log("Full Size :" + mediaFullSize);
+                }
+              } catch(err) {
+                var mediaFullSize = 10000000;
+                console.log("No fullvideo.mp4")
                 console.error(err)
               }
               console.log("New :" + new_date.getHours())
@@ -889,7 +912,7 @@ var ok = false;
 
     if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
            {
-      if(mediaSize < 800000)
+      if(mediaFullSize < 800000)
         {
              ok = true;
              console.log("Its ok !");
