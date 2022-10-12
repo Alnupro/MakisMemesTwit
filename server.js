@@ -425,6 +425,7 @@ exec("ffmpeg -fflags +discardcorrupt -i assets/video.mp4 -i assets/audio.mp3 -ma
 } catch(error){
   FindMedia();
 }
+
   const pathToFile = __dirname + '/assets/video.mp4'
               try {
                 if (fs.existsSync(pathToFile)) {
@@ -914,9 +915,11 @@ var ok = false;
     if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
            {
       const { getVideoDurationInSeconds } = require('get-video-duration')
+const fs = require('fs')
+const stream = fs.createReadStream('assets/fullvideo.mp4')
 
 // From a local path...
-getVideoDurationInSeconds('assets/fullvideo.mp4').then((duration) => {
+getVideoDurationInSeconds(stream).then((duration) => {
   console.log("Duration fullvideo.mp4 :" + duration)
   var video_duration = duration;
       if(video_duration < 30)
