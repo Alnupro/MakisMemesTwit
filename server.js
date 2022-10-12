@@ -889,7 +889,7 @@ var ok = false;
 
     if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
            {
-      if(mediaSize < 1500000)
+      if(mediaSize < 800000)
         {
              ok = true;
              console.log("Its ok !");
