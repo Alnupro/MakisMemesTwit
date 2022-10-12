@@ -870,28 +870,31 @@ T.post('favorites/create', { id: retweetId })
   ( new CronJob( '*/2 * * * *', function() {
   const pathToFile = __dirname + '/assets/video.mp4'
   const pathToFullFile = __dirname + '/assets/fullvideo.mp4'
-
+  
+  var video_duration = 100;
+  var mediaSize = 10000000;
+  var mediaFullSize = 10000000;
   var new_date = new Date();
         if(old_date != null)
         {
               console.log("---")
               try {
                 if (fs.existsSync(pathToFile)) {
-                var mediaSize = fs.statSync(pathToFile).size
+                mediaSize = fs.statSync(pathToFile).size
                 console.log("Size video.mp4 :" + mediaSize);
                 }
               } catch(err) {
-                var mediaSize = 10000000;
+                mediaSize = 10000000;
                 console.log("No video.mp4")
                 console.error(err)
               }
               try {
                 if (fs.existsSync(pathToFullFile)) {
-                var mediaFullSize = fs.statSync(pathToFullFile).size
+                mediaFullSize = fs.statSync(pathToFullFile).size
                 console.log("Full Size :" + mediaFullSize);
                 }
               } catch(err) {
-                var mediaFullSize = 10000000;
+                mediaFullSize = 10000000;
                 console.log("No fullvideo.mp4")
                 console.error(err)
               }
@@ -915,13 +918,11 @@ var ok = false;
     if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
            {
       var { getVideoDurationInSeconds } = require('get-video-duration')
-const fs = require('fs')
-var stream = fs.createReadStream('assets/fullvideo.mp4')
 
 // From a local path...
-getVideoDurationInSeconds(stream).then((duration) => {
+getVideoDurationInSeconds('assets/fullvideo.mp4').then((duration) => {
   console.log("Duration fullvideo.mp4 :" + duration)
-  var video_duration = duration;
+  video_duration = duration;
       if(video_duration < 30)
         {
           if(mediaFullSize < 1200000)
