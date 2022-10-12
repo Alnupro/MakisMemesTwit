@@ -916,12 +916,10 @@ var ok = false;
       const { getVideoDurationInSeconds } = require('get-video-duration')
 
 // From a local path...
-getVideoDurationInSeconds(
-  `${next_post_url}`
-).then((duration) => {
+getVideoDurationInSeconds('assets/fullvideo.mp4').then((duration) => {
   console.log("Duration fullvideo.mp4 :" + duration)
-
-      if(duration < 30)
+  var video_duration = duration;
+      if(video_duration < 30)
         {
              ok = true;
              console.log("Its ok !");
@@ -939,6 +937,7 @@ getVideoDurationInSeconds(
               } catch(err) {
                 console.error(err)
               }
+        
         }
       else
         {
