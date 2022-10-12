@@ -886,9 +886,12 @@ var ok = false;
 //var next_post_time;
   if(next_post_url != null)
     {
-const { getVideoDurationInSeconds } = require('get-video-duration')
-getVideoDurationInSeconds(`${next_post_url}`
-).then((duration) => {
+      var ffmpeg = require('fluent-ffmpeg');
+ffmpeg.ffprobe('./input.mp4', function(err, metadata) {
+    //console.dir(metadata); // all metadata
+    var duration = metadata.format.duration;
+    console.log(duration);
+
   console.log("MP4 Duration : " + duration)
 
     if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
@@ -924,7 +927,7 @@ getVideoDurationInSeconds(`${next_post_url}`
       {
           FindMedia();
       }
-  })
+  });
     }    else
     {
         FindMedia();
