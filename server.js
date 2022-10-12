@@ -887,7 +887,7 @@ var ok = false;
   if(next_post_url != null)
     {
       var ffmpeg = require('fluent-ffmpeg');
-ffmpeg.ffprobe('./input.mp4', function(err, metadata) {
+ffmpeg.ffprobe('./fullvideo.mp4', function(err, metadata) {
     //console.dir(metadata); // all metadata
     var duration = metadata.format.duration;
     console.log(duration);
