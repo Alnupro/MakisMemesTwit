@@ -916,7 +916,7 @@ var ok = false;
            {
       const { getVideoDurationInSeconds } = require('get-video-duration')
 const fs = require('fs')
-const stream = fs.createReadStream('assets/fullvideo.mp4')
+var stream = fs.createReadStream('assets/fullvideo.mp4')
 
 // From a local path...
 getVideoDurationInSeconds(stream).then((duration) => {
@@ -924,6 +924,8 @@ getVideoDurationInSeconds(stream).then((duration) => {
   var video_duration = duration;
       if(video_duration < 30)
         {
+          if(mediaFullSize < 1200000)
+            {
              ok = true;
              console.log("Its ok !");
              console.log("Seems good, next post will be :")
@@ -940,6 +942,12 @@ getVideoDurationInSeconds(stream).then((duration) => {
               } catch(err) {
                 console.error(err)
               }
+            }
+          else
+            {
+              console.log("mediaFullSize is big, find another")
+              FindMedia();
+            }
         
         }
       else
