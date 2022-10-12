@@ -914,7 +914,7 @@ var ok = false;
 
     if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
            {
-      const { getVideoDurationInSeconds } = require('get-video-duration')
+      var { getVideoDurationInSeconds } = require('get-video-duration')
 const fs = require('fs')
 var stream = fs.createReadStream('assets/fullvideo.mp4')
 
