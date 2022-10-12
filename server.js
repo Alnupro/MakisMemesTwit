@@ -412,16 +412,10 @@ exec("ffmpeg -i assets/video.mp4 -i assets/audio.mp3 -map 0:0 -map 1:0 -c copy a
     }
     console.log("DOWNLOADED FULL VIDEO !!")
     //console.log(`stdout: ${stdout}`);
-}).catch(function () {
-     console.log("Error Merging (code: 391)");
-});
+})
   console.log("end ffmpeg")
-      }).catch(function () {
-     console.log("Error (code: 596)");
-});
-}).catch(function () {
-     console.log("Error (code: 197)");
-});
+      })
+})
         console.log("Wait 10s, DL !")
         wait(10000)
         }
