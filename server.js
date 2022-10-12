@@ -909,7 +909,7 @@ T.post('favorites/create', { id: retweetId })
 var ok = false;
 
 //var next_post_time;
-  if(next_post_url != null)
+  if((next_post_url != null) && (mediaFullSize != 10000000))
     {
 
     if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
