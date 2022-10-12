@@ -399,7 +399,7 @@ downloadFile(VIDEO_URL, 'assets');
 
 const { exec } = require("child_process");
     
-exec("ffmpeg -i assets/video.mp4 -i assets/audio.mp3 -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4", (error, stdout, stderr) => {
+exec("ffmpeg -fflags +discardcorrupt -i assets/video.mp4 -i assets/audio.mp3 -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4", (error, stdout, stderr) => {
     if (error) {
         console.log("ERROR FULL VIDEO !!")
         console.log(`error: ${error.message}`);
@@ -906,13 +906,20 @@ T.post('favorites/create', { id: retweetId })
       }
         }
 var ok = false;
+
 //var next_post_time;
   if(next_post_url != null)
     {
 
     if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
            {
-      if(mediaFullSize < 800000)
+      const { getVideoDurationInSeconds } = require('get-video-duration')
+
+// From a local path...
+getVideoDurationInSeconds('assets/fullvideo.mp4').then((duration) => {
+  console.log("Duration fullvideo.mp4 :" + duration)
+
+      if(duration < 30)
         {
              ok = true;
              console.log("Its ok !");
@@ -937,16 +944,19 @@ var ok = false;
             console.log("Wasnt good, find another media")
             FindMedia();
         }
-
+})
            }
+      
     else
       {
           FindMedia();
       }
+      
     }    else
     {
         FindMedia();
     }
+    
 } ) ).start();
   
 })
