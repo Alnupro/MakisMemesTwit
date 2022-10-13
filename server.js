@@ -326,8 +326,8 @@ redditFetch({
       {
         var duration_url = post.url + "/DASH_240.mp4"
         const { getVideoDurationInSeconds } = require('get-video-duration')
-        getVideoDurationInSeconds(post.url + "/DASH_240.mp4"
-).then((duration) => {`${duration_url}`
+        getVideoDurationInSeconds(`${duration_url}`
+).then((duration) => {
   console.log("FIND DURATION : " + duration)
           if(duration < 30 && duration > 0.5)
             {
