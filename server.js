@@ -324,10 +324,11 @@ redditFetch({
 }).then(post => {
     if(post.post_hint == 'hosted:video')
       {
+        var duration_url = post.url + "/DASH_240.mp4"
         const { getVideoDurationInSeconds } = require('get-video-duration')
         getVideoDurationInSeconds(post.url + "/DASH_240.mp4"
-).then((duration) => {
-  console.log(duration)
+).then((duration) => {`${duration_url}`
+  console.log("FIND DURATION : " + duration)
           if(duration < 30 && duration > 0.5)
             {
 
@@ -424,6 +425,11 @@ exec("ffmpeg -fflags +discardcorrupt -i assets/video.mp4 -i assets/audio.mp3 -ma
       })
 })
             }
+                      else
+                        {
+                          console.log("Find Duration isn't good")
+                          return FindMedia;
+                        }
           })
           
         console.log("Wait 10s, DL !")
