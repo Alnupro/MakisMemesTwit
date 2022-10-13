@@ -399,18 +399,16 @@ downloadFile(VIDEO_URL, 'assets');
 
 const { exec } = require("child_process");
     
-exec("ffmpeg -fflags +discardcorrupt -i assets/video.mp4 -i assets/audio.mp3 -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4", (error, stdout, stderr) => {
+exec("ffmpeg -fflags +discardcorrupt -i assets/video.mp4 -i assets/audio.mp3 -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4", (error, stdout) => {
     if (error) {
         console.log("ERROR FULL VIDEO !!")
         console.log(`error: ${error.message}`);
         return FindMedia();
     }
-    if (stderr) {
-        console.log("STDERR FULL VIDEO !!")
-        console.log(`stderr: ${stderr}`);
-        return;
-    }
-    console.log("DOWNLOADED FULL VIDEO !!")
+    else
+      {
+        console.log("DOWNLOADED FULL VIDEO !!")
+      }
     //console.log(`stdout: ${stdout}`);
 })
   console.log("end ffmpeg")
@@ -925,8 +923,6 @@ getVideoDurationInSeconds('assets/fullvideo.mp4').then((duration) => {
   video_duration = duration;
       if(video_duration < 30)
         {
-          if(mediaFullSize < 1200000)
-            {
              ok = true;
              console.log("Its ok !");
              console.log("Seems good, next post will be :")
@@ -943,12 +939,6 @@ getVideoDurationInSeconds('assets/fullvideo.mp4').then((duration) => {
               } catch(err) {
                 console.error(err)
               }
-            }
-          else
-            {
-              console.log("mediaFullSize is big, find another")
-              FindMedia();
-            }
         
         }
       else
@@ -956,7 +946,10 @@ getVideoDurationInSeconds('assets/fullvideo.mp4').then((duration) => {
             console.log("Wasnt good, find another media")
             FindMedia();
         }
-})
+}).catch(function () {
+     console.log("ERROR WITH DURATION CHECK ??");
+     FindMedia();
+});
            }
       
     else
