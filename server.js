@@ -618,6 +618,20 @@ function publishStatusUpdate(mediaId) {
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
         FindMedia();
+const { exec } = require("child_process");
+    
+exec("refresh", (error, stdout) => {
+    if (error) {
+        console.log("CAN'T REFRESH !!")
+        console.log(`error: ${error.message}`);
+        return FindMedia();
+    }
+    else
+      {
+        console.log("REFRESHED/ING !!")
+      }
+    //console.log(`stdout: ${stdout}`);
+})
       }
     })
   })
@@ -637,6 +651,20 @@ function publishStatusUpdate0(mediaId) {
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
         FindMedia();
+const { exec } = require("child_process");
+    
+exec("refresh", (error, stdout) => {
+    if (error) {
+        console.log("CAN'T REFRESH !!")
+        console.log(`error: ${error.message}`);
+        return FindMedia();
+    }
+    else
+      {
+        console.log("REFRESHED/ING !!")
+      }
+    //console.log(`stdout: ${stdout}`);
+})
       }
     })
   }).catch(function () {
@@ -658,6 +686,20 @@ function publishStatusUpdate1(mediaId) {
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
         FindMedia();
+const { exec } = require("child_process");
+    
+exec("refresh", (error, stdout) => {
+    if (error) {
+        console.log("CAN'T REFRESH !!")
+        console.log(`error: ${error.message}`);
+        return FindMedia();
+    }
+    else
+      {
+        console.log("REFRESHED/ING !!")
+      }
+    //console.log(`stdout: ${stdout}`);
+})
       }
     })
   }).catch(function () {
@@ -679,6 +721,20 @@ function publishStatusUpdate2(mediaId) {
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
         FindMedia();
+const { exec } = require("child_process");
+    
+exec("refresh", (error, stdout) => {
+    if (error) {
+        console.log("CAN'T REFRESH !!")
+        console.log(`error: ${error.message}`);
+        return FindMedia();
+    }
+    else
+      {
+        console.log("REFRESHED/ING !!")
+      }
+    //console.log(`stdout: ${stdout}`);
+})
       }
     })
   }).catch(function () {
@@ -700,6 +756,20 @@ function publishStatusUpdate3(mediaId) {
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
         FindMedia();
+const { exec } = require("child_process");
+    
+exec("refresh", (error, stdout) => {
+    if (error) {
+        console.log("CAN'T REFRESH !!")
+        console.log(`error: ${error.message}`);
+        return FindMedia();
+    }
+    else
+      {
+        console.log("REFRESHED/ING !!")
+      }
+    //console.log(`stdout: ${stdout}`);
+})
       }
     })
   }).catch(function () {
@@ -721,6 +791,20 @@ function publishStatusUpdate4(mediaId) {
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
         FindMedia();
+const { exec } = require("child_process");
+    
+exec("refresh", (error, stdout) => {
+    if (error) {
+        console.log("CAN'T REFRESH !!")
+        console.log(`error: ${error.message}`);
+        return FindMedia();
+    }
+    else
+      {
+        console.log("REFRESHED/ING !!")
+      }
+    //console.log(`stdout: ${stdout}`);
+})
       }
     })
   }).catch(function () {
@@ -743,6 +827,20 @@ function publishStatusUpdate5(mediaId) {
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
         FindMedia();
+const { exec } = require("child_process");
+    
+exec("refresh", (error, stdout) => {
+    if (error) {
+        console.log("CAN'T REFRESH !!")
+        console.log(`error: ${error.message}`);
+        return FindMedia();
+    }
+    else
+      {
+        console.log("REFRESHED/ING !!")
+      }
+    //console.log(`stdout: ${stdout}`);
+})
       }
     })
   }).catch(function () {
@@ -764,6 +862,20 @@ function publishStatusUpdate6(mediaId) {
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
         FindMedia();
+const { exec } = require("child_process");
+    
+exec("refresh", (error, stdout) => {
+    if (error) {
+        console.log("CAN'T REFRESH !!")
+        console.log(`error: ${error.message}`);
+        return FindMedia();
+    }
+    else
+      {
+        console.log("REFRESHED/ING !!")
+      }
+    //console.log(`stdout: ${stdout}`);
+})
       }
     })
   }).catch(function () {
@@ -785,6 +897,20 @@ function publishStatusUpdate7(mediaId) {
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
         FindMedia();
+const { exec } = require("child_process");
+    
+exec("refresh", (error, stdout) => {
+    if (error) {
+        console.log("CAN'T REFRESH !!")
+        console.log(`error: ${error.message}`);
+        return FindMedia();
+    }
+    else
+      {
+        console.log("REFRESHED/ING !!")
+      }
+    //console.log(`stdout: ${stdout}`);
+})
       }
     })
   }).catch(function () {
@@ -806,6 +932,21 @@ function publishStatusUpdate8(mediaId) {
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
         FindMedia();
+const { exec } = require("child_process");
+    
+exec("refresh", (error, stdout) => {
+    if (error) {
+        console.log("CAN'T REFRESH !!")
+        console.log(`error: ${error.message}`);
+        return FindMedia();
+    }
+    else
+      {
+        console.log("REFRESHED/ING !!")
+      }
+    //console.log(`stdout: ${stdout}`);
+})
+        
       }
     })
   }).catch(function () {
