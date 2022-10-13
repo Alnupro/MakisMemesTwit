@@ -324,6 +324,13 @@ redditFetch({
 }).then(post => {
     if(post.post_hint == 'hosted:video')
       {
+        const { getVideoDurationInSeconds } = require('get-video-duration')
+        getVideoDurationInSeconds(post.url + "/DASH_240.mp4"
+).then((duration) => {
+  console.log(duration)
+          if(duration < 30 && duration > 0.5)
+            {
+
         urlfunny = post.url + "/DASH_240.mp4";
         next_post_url = post.url + "/DASH_240.mp4";
         console.log("Found !")
@@ -346,6 +353,7 @@ var fs = require('fs');
 
   var url = post.url + "/DASH_audio.mp4"
   next_post_url_mp3 = post.url + "/DASH_audio.mp4";
+          
 https.get(url,(res) => {
     // Image will be stored at this path
     const path = __dirname + "/assets/audio.mp3"; 
@@ -364,6 +372,7 @@ const axios = require('axios').default;
     const downloadFolder = __dirname + '/assets/';
 // fileUrl: the absolute url of the image or video you want to download
 // downloadFolder: the path of the downloaded file on your machine
+      
 const downloadFile = async (fileUrl, downloadFolder) => {
   // Get the file name
   const fileName = 'video.mp4'; //Save as video.mp4
@@ -414,6 +423,9 @@ exec("ffmpeg -fflags +discardcorrupt -i assets/video.mp4 -i assets/audio.mp3 -ma
   console.log("end ffmpeg")
       })
 })
+            }
+          })
+          
         console.log("Wait 10s, DL !")
         wait(10000)
         }
@@ -915,6 +927,7 @@ exec("refresh", (error, stdout) => {
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 421)");
+     FindMedia();
 });
 }
                 
@@ -1010,7 +1023,7 @@ T.post('favorites/create', { id: retweetId })
   const pathToFile = __dirname + '/assets/video.mp4'
   const pathToFullFile = __dirname + '/assets/fullvideo.mp4'
   
-  var video_duration = 100;
+
   var mediaSize = 10000000;
   var mediaFullSize = 10000000;
   var new_date = new Date();
@@ -1061,8 +1074,7 @@ var ok = false;
 // From a local path...
 getVideoDurationInSeconds('assets/fullvideo.mp4').then((duration) => {
   console.log("Duration fullvideo.mp4 :" + duration)
-  video_duration = duration;
-      if(video_duration < 30)
+      if(duration > 0.5 < 30 && duration > 0.5)
         {
              ok = true;
              console.log("Its ok !");
