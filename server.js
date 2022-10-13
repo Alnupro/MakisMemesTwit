@@ -325,6 +325,7 @@ redditFetch({
     if(post.post_hint == 'hosted:video')
       {
         var duration_url = post.url + "/DASH_240.mp4"
+
         const { getVideoDurationInSeconds } = require('get-video-duration')
         getVideoDurationInSeconds(`${duration_url}`
 ).then((duration) => {
@@ -1080,7 +1081,7 @@ var ok = false;
 // From a local path...
 getVideoDurationInSeconds('assets/fullvideo.mp4').then((duration) => {
   console.log("Duration fullvideo.mp4 :" + duration)
-      if(duration > 0.5 < 30 && duration > 0.5)
+      if(duration < 30 && duration > 0.5)
         {
              ok = true;
              console.log("Its ok !");
