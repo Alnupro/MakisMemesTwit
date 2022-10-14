@@ -938,19 +938,6 @@ function publishStatusUpdate8(mediaId) {
         resolve(data)
         FindMedia();
 const { exec } = require("child_process");
-    
-exec("refresh", (error, stdout) => {
-    if (error) {
-        console.log("CAN'T REFRESH !!")
-        console.log(`error: ${error.message}`);
-        return FindMedia();
-    }
-    else
-      {
-        console.log("REFRESHED/ING !!")
-      }
-    //console.log(`stdout: ${stdout}`);
-})
         
       }
     })
@@ -1047,7 +1034,7 @@ T.post('favorites/create', { id: retweetId })
               console.log(new_date.getHours() - old_date.getHours())
               console.log("Next : " + next_post_url)
               console.log("---")
-    if((new_date.getHours() - old_date.getHours() + 0.1) > 1)
+    if(((new_date.getHours() - old_date.getHours() + 0.1) > 1) || ((new_date.getHours() - old_date.getHours()) < 0))
       {
         console.log("START SENDMEDIA !!")
         SendMedia();
