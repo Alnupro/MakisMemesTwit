@@ -402,33 +402,7 @@ downloadFile(VIDEO_URL, 'assets');
 
 const { exec } = require("child_process");
 
-      /*
-exec("ffmpeg -i assets/video.mp4 -c copy assets/video.ts", (error, stdout) => {
-    if (error) {
-        console.log("ERROR VIDEO.MP4  !!")
-        console.log(`error: ${error.message}`);
-        return FindMedia();
-    }
-    else
-      {
-        console.log("DOWNLOADED FULL VIDEO !!")
-      }
-    //console.log(`stdout: ${stdout}`);
-})
       
-exec("ffmpeg -i assets/audio.mp3 -c copy assets/audio.ts", (error, stdout) => {
-    if (error) {
-        console.log("ERROR FULL VIDEO !!")
-        console.log(`error: ${error.message}`);
-        return FindMedia();
-    }
-    else
-      {
-        console.log("DOWNLOADED FULL VIDEO !!")
-      }
-    //console.log(`stdout: ${stdout}`);
-})
-     */ 
 exec("ffmpeg -fflags +discardcorrupt -i assets/video.mp4 -i assets/audio.mp4 -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4", (error, stdout) => {
     if (error) {
         console.log("ERROR FULL VIDEO !!")
@@ -984,7 +958,7 @@ var ok = false;
 // From a local path...
 getVideoDurationInSeconds('assets/fullvideo.mp4').then((duration) => {
   console.log("Duration fullvideo.mp4 :" + duration)
-      if(duration < 30 && duration > 0.5)
+      if(duration < 10 && duration > 0.5)
         {
              ok = true;
              console.log("Its ok !");
