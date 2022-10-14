@@ -561,6 +561,8 @@ function initializeMediaUpload() {
       if (error) {
         console.log(error)
         reject(error)
+        console.log("WRONG FORMAT ?? FINDING MEDIA AGAIN !!")
+        FindMedia();
       } else {
         resolve(data.media_id_string)
       }
@@ -582,13 +584,13 @@ function appendFileChunk(mediaId) {
       if (error) {
         console.log(error)
         reject(error)
+        FindMedia();
       } else {
         resolve(mediaId)
       }
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 864)");
-     FindMedia();
 });
 }
 
@@ -601,13 +603,13 @@ function finalizeUpload(mediaId) {
       if (error) {
         console.log(error)
         reject(error)
+        FindMedia();
       } else {
         resolve(mediaId)
       }
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 357)");
-     FindMedia();
 });
 }
 
@@ -620,11 +622,11 @@ function publishStatusUpdate(mediaId) {
       if (error) {
         console.log(error)
         reject(error)
+        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
-        FindMedia();
 
         /*
 const { exec } = require("child_process");
@@ -655,30 +657,16 @@ function publishStatusUpdate0(mediaId) {
       if (error) {
         console.log(error)
         reject(error)
+        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
         FindMedia();
-const { exec } = require("child_process");
-    
-exec("refresh", (error, stdout) => {
-    if (error) {
-        console.log("CAN'T REFRESH !!")
-        console.log(`error: ${error.message}`);
-        return FindMedia();
-    }
-    else
-      {
-        console.log("REFRESHED/ING !!")
-      }
-    //console.log(`stdout: ${stdout}`);
-})
       }
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 375)");
-     FindMedia();
 });
 }
 
@@ -691,30 +679,17 @@ function publishStatusUpdate1(mediaId) {
       if (error) {
         console.log(error)
         reject(error)
+        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
         FindMedia();
-const { exec } = require("child_process");
-    
-exec("refresh", (error, stdout) => {
-    if (error) {
-        console.log("CAN'T REFRESH !!")
-        console.log(`error: ${error.message}`);
-        return FindMedia();
-    }
-    else
-      {
-        console.log("REFRESHED/ING !!")
-      }
-    //console.log(`stdout: ${stdout}`);
-})
+
       }
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 196)");
-     FindMedia();
 });
 }
 
@@ -727,25 +702,12 @@ function publishStatusUpdate2(mediaId) {
       if (error) {
         console.log(error)
         reject(error)
+        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
         FindMedia();
-const { exec } = require("child_process");
-    
-exec("refresh", (error, stdout) => {
-    if (error) {
-        console.log("CAN'T REFRESH !!")
-        console.log(`error: ${error.message}`);
-        return FindMedia();
-    }
-    else
-      {
-        console.log("REFRESHED/ING !!")
-      }
-    //console.log(`stdout: ${stdout}`);
-})
       }
     })
   }).catch(function () {
@@ -763,30 +725,16 @@ function publishStatusUpdate3(mediaId) {
       if (error) {
         console.log(error)
         reject(error)
+        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
         FindMedia();
-const { exec } = require("child_process");
-    
-exec("refresh", (error, stdout) => {
-    if (error) {
-        console.log("CAN'T REFRESH !!")
-        console.log(`error: ${error.message}`);
-        return FindMedia();
-    }
-    else
-      {
-        console.log("REFRESHED/ING !!")
-      }
-    //console.log(`stdout: ${stdout}`);
-})
       }
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 233)");
-     FindMedia();
 });
 }
                 
@@ -799,25 +747,12 @@ function publishStatusUpdate4(mediaId) {
       if (error) {
         console.log(error)
         reject(error)
+        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
         FindMedia();
-const { exec } = require("child_process");
-    
-exec("refresh", (error, stdout) => {
-    if (error) {
-        console.log("CAN'T REFRESH !!")
-        console.log(`error: ${error.message}`);
-        return FindMedia();
-    }
-    else
-      {
-        console.log("REFRESHED/ING !!")
-      }
-    //console.log(`stdout: ${stdout}`);
-})
       }
     })
   }).catch(function () {
@@ -836,30 +771,16 @@ function publishStatusUpdate5(mediaId) {
       if (error) {
         console.log(error)
         reject(error)
+        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
         FindMedia();
-const { exec } = require("child_process");
-    
-exec("refresh", (error, stdout) => {
-    if (error) {
-        console.log("CAN'T REFRESH !!")
-        console.log(`error: ${error.message}`);
-        return FindMedia();
-    }
-    else
-      {
-        console.log("REFRESHED/ING !!")
-      }
-    //console.log(`stdout: ${stdout}`);
-})
       }
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 183)");
-     FindMedia();
 });
 }
                 
@@ -872,30 +793,16 @@ function publishStatusUpdate6(mediaId) {
       if (error) {
         console.log(error)
         reject(error)
+        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
         FindMedia();
-const { exec } = require("child_process");
-    
-exec("refresh", (error, stdout) => {
-    if (error) {
-        console.log("CAN'T REFRESH !!")
-        console.log(`error: ${error.message}`);
-        return FindMedia();
-    }
-    else
-      {
-        console.log("REFRESHED/ING !!")
-      }
-    //console.log(`stdout: ${stdout}`);
-})
       }
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 231)");
-     FindMedia();
 });
 }
                 
@@ -908,30 +815,16 @@ function publishStatusUpdate7(mediaId) {
       if (error) {
         console.log(error)
         reject(error)
+        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
-        FindMedia();
-const { exec } = require("child_process");
-    
-exec("refresh", (error, stdout) => {
-    if (error) {
-        console.log("CAN'T REFRESH !!")
-        console.log(`error: ${error.message}`);
-        return FindMedia();
-    }
-    else
-      {
-        console.log("REFRESHED/ING !!")
-      }
-    //console.log(`stdout: ${stdout}`);
-})
+        FindMedia(); 
       }
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 421)");
-     FindMedia();
 });
 }
                 
@@ -944,18 +837,16 @@ function publishStatusUpdate8(mediaId) {
       if (error) {
         console.log(error)
         reject(error)
+        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
-        FindMedia();
-const { exec } = require("child_process");
-        
+        FindMedia(); 
       }
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 231)");
-     FindMedia();
 });
 }
         console.log("already_vids : " + already_vids);
