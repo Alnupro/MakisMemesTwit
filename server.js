@@ -230,14 +230,14 @@ try {
   console.log("No file /assets/video.mp4 to delete");
 }
   
-  const pathMP3Delete = __dirname + '/assets/audio.mp3';
+  const pathMP3Delete = __dirname + '/assets/audio.mp4';
 
 try {
   fs.unlinkSync(pathMP3Delete)
-  console.log("audio.mp3 deleted");
+  console.log("audio.mp4 deleted");
   //file removed
 } catch(err) {
-  console.log("No file /assets/audio.mp3 to delete");
+  console.log("No file /assets/audio.mp4 to delete");
 }
   
   const pathFullDelete = __dirname + '/assets/fullvideo.mp4';
@@ -350,7 +350,7 @@ var fs = require('fs');
           
 https.get(url,(res) => {
     // Image will be stored at this path
-    const path = __dirname + "/assets/audio.mp3"; 
+    const path = __dirname + "/assets/audio.mp4"; 
     const filePath = fs.createWriteStream(path);
     res.pipe(filePath);
     filePath.on('finish',() => {
@@ -397,12 +397,39 @@ downloadFile(VIDEO_URL, 'assets');
   console.log("ffmpeg")
   var ffmpeg = require('fluent-ffmpeg');
   var videoInput = __dirname + "/assets/video.mp4";
-  var audioInput = __dirname + "/assets/audio.mp3"
+  var audioInput = __dirname + "/assets/audio.mp4"
   var outputInput = __dirname + "/assets/fullvideo.mp4"
 
 const { exec } = require("child_process");
-    
-exec("ffmpeg -fflags +discardcorrupt -i assets/video.mp4 -i assets/audio.mp3 -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4", (error, stdout) => {
+
+      /*
+exec("ffmpeg -i assets/video.mp4 -c copy assets/video.ts", (error, stdout) => {
+    if (error) {
+        console.log("ERROR VIDEO.MP4  !!")
+        console.log(`error: ${error.message}`);
+        return FindMedia();
+    }
+    else
+      {
+        console.log("DOWNLOADED FULL VIDEO !!")
+      }
+    //console.log(`stdout: ${stdout}`);
+})
+      
+exec("ffmpeg -i assets/audio.mp3 -c copy assets/audio.ts", (error, stdout) => {
+    if (error) {
+        console.log("ERROR FULL VIDEO !!")
+        console.log(`error: ${error.message}`);
+        return FindMedia();
+    }
+    else
+      {
+        console.log("DOWNLOADED FULL VIDEO !!")
+      }
+    //console.log(`stdout: ${stdout}`);
+})
+     */ 
+exec("ffmpeg -fflags +discardcorrupt -i assets/video.mp4 -i assets/audio.mp4 -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4", (error, stdout) => {
     if (error) {
         console.log("ERROR FULL VIDEO !!")
         console.log(`error: ${error.message}`);
