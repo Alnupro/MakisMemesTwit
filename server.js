@@ -230,14 +230,14 @@ try {
   console.log("No file /assets/video.mp4 to delete");
 }
   
-  const pathMP3Delete = __dirname + '/assets/audio.mp4';
+  const pathMP3Delete = __dirname + '/assets/audio.mp3';
 
 try {
   fs.unlinkSync(pathMP3Delete)
-  console.log("audio.mp4 deleted");
+  console.log("audio.mp3 deleted");
   //file removed
 } catch(err) {
-  console.log("No file /assets/audio.mp4 to delete");
+  console.log("No file /assets/audio.mp3 to delete");
 }
   
   const pathFullDelete = __dirname + '/assets/fullvideo.mp4';
@@ -350,7 +350,7 @@ var fs = require('fs');
           
 https.get(url,(res) => {
     // Image will be stored at this path
-    const path = __dirname + "/assets/audio.mp4"; 
+    const path = __dirname + "/assets/audio.mp3"; 
     const filePath = fs.createWriteStream(path);
     res.pipe(filePath);
     filePath.on('finish',() => {
@@ -397,13 +397,13 @@ downloadFile(VIDEO_URL, 'assets');
   console.log("ffmpeg")
   var ffmpeg = require('fluent-ffmpeg');
   var videoInput = __dirname + "/assets/video.mp4";
-  var audioInput = __dirname + "/assets/audio.mp4"
+  var audioInput = __dirname + "/assets/audio.mp3"
   var outputInput = __dirname + "/assets/fullvideo.mp4"
 
 const { exec } = require("child_process");
 
       
-exec("ffmpeg -fflags +discardcorrupt -i assets/video.mp4 -i assets/audio.mp4 -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4", (error, stdout) => {
+exec("ffmpeg -fflags +discardcorrupt -i assets/video.mp4 -i assets/audio.mp3 -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4", (error, stdout) => {
     if (error) {
         console.log("ERROR FULL VIDEO !!")
         console.log(`error: ${error.message}`);
@@ -958,7 +958,7 @@ var ok = false;
 // From a local path...
 getVideoDurationInSeconds('assets/fullvideo.mp4').then((duration) => {
   console.log("Duration fullvideo.mp4 :" + duration)
-      if(duration < 10 && duration > 0.5)
+      if((duration < 10) && (duration > 0.5))
         {
              ok = true;
              console.log("Its ok !");
