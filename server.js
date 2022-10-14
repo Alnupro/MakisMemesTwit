@@ -440,7 +440,7 @@ exec("ffmpeg -fflags +discardcorrupt -i assets/video.mp4 -i assets/audio.mp3 -ma
                 FindMedia();
               }
     }
-  
+
   function SendMedia()
   {
         try
@@ -465,6 +465,7 @@ const mediaType = "video/mp4"
 
 const mediaData = fs.readFileSync(pathToFile)
 const mediaSize = fs.statSync(pathToFile).size
+console.log("SIZE SIZE SIZE : " + mediaSize);
 
 if(next_post_url != undefined)
   {
@@ -583,9 +584,9 @@ function appendFileChunk(mediaId) {
       segment_index: 0
     }, function(error, data, response) {
       if (error) {
+        return FindMedia();
         console.log(error)
         reject(error)
-        FindMedia();
       } else {
         resolve(mediaId)
       }
@@ -602,9 +603,9 @@ function finalizeUpload(mediaId) {
       media_id: mediaId
     }, function(error, data, response) {
       if (error) {
+        return FindMedia();
         console.log(error)
         reject(error)
-        FindMedia();
       } else {
         resolve(mediaId)
       }
@@ -621,9 +622,9 @@ function publishStatusUpdate(mediaId) {
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
+        return FindMedia();
         console.log(error)
         reject(error)
-        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
@@ -656,9 +657,9 @@ function publishStatusUpdate0(mediaId) {
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
+        return FindMedia();
         console.log(error)
         reject(error)
-        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
@@ -678,9 +679,9 @@ function publishStatusUpdate1(mediaId) {
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
+        return FindMedia();
         console.log(error)
         reject(error)
-        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
@@ -701,9 +702,9 @@ function publishStatusUpdate2(mediaId) {
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
+        return FindMedia();
         console.log(error)
         reject(error)
-        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
@@ -713,7 +714,6 @@ function publishStatusUpdate2(mediaId) {
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 872)");
-     FindMedia();
 });
 }
 
@@ -724,9 +724,9 @@ function publishStatusUpdate3(mediaId) {
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
+        return FindMedia();
         console.log(error)
         reject(error)
-        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
@@ -736,6 +736,7 @@ function publishStatusUpdate3(mediaId) {
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 233)");
+     FindMedia(); 
 });
 }
                 
@@ -746,9 +747,9 @@ function publishStatusUpdate4(mediaId) {
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
+        return FindMedia();
         console.log(error)
         reject(error)
-        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
@@ -758,7 +759,6 @@ function publishStatusUpdate4(mediaId) {
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 931)");
-     FindMedia();
 });
 }
                 
@@ -770,9 +770,9 @@ function publishStatusUpdate5(mediaId) {
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
+        return FindMedia();
         console.log(error)
         reject(error)
-        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
@@ -792,9 +792,9 @@ function publishStatusUpdate6(mediaId) {
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
+        return FindMedia();
         console.log(error)
         reject(error)
-        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
@@ -814,9 +814,9 @@ function publishStatusUpdate7(mediaId) {
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
+        return FindMedia();
         console.log(error)
         reject(error)
-        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
@@ -836,9 +836,9 @@ function publishStatusUpdate8(mediaId) {
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
+        return FindMedia();
         console.log(error)
         reject(error)
-        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
