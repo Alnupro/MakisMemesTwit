@@ -385,7 +385,7 @@ const downloadFile = async (fileUrl, downloadFolder) => {
       enddl = 1;
     });
   } catch (err) { 
-    //FindMedia();
+    FindMedia();
   }
 
 }; 
@@ -567,6 +567,7 @@ function initializeMediaUpload() {
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 631)");
+     FindMedia();
 });
 }
 
@@ -587,6 +588,7 @@ function appendFileChunk(mediaId) {
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 864)");
+     FindMedia();
 });
 }
 
@@ -605,6 +607,7 @@ function finalizeUpload(mediaId) {
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 357)");
+     FindMedia();
 });
 }
 
@@ -622,6 +625,8 @@ function publishStatusUpdate(mediaId) {
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
         FindMedia();
+
+        /*
 const { exec } = require("child_process");
     
 exec("refresh", (error, stdout) => {
@@ -635,7 +640,7 @@ exec("refresh", (error, stdout) => {
         console.log("REFRESHED/ING !!")
       }
     //console.log(`stdout: ${stdout}`);
-})
+})*/
       }
     })
   })
@@ -673,6 +678,7 @@ exec("refresh", (error, stdout) => {
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 375)");
+     FindMedia();
 });
 }
 
@@ -708,6 +714,7 @@ exec("refresh", (error, stdout) => {
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 196)");
+     FindMedia();
 });
 }
 
@@ -743,6 +750,7 @@ exec("refresh", (error, stdout) => {
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 872)");
+     FindMedia();
 });
 }
 
@@ -778,6 +786,7 @@ exec("refresh", (error, stdout) => {
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 233)");
+     FindMedia();
 });
 }
                 
@@ -813,6 +822,7 @@ exec("refresh", (error, stdout) => {
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 931)");
+     FindMedia();
 });
 }
                 
@@ -849,6 +859,7 @@ exec("refresh", (error, stdout) => {
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 183)");
+     FindMedia();
 });
 }
                 
@@ -884,6 +895,7 @@ exec("refresh", (error, stdout) => {
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 231)");
+     FindMedia();
 });
 }
                 
@@ -943,6 +955,7 @@ const { exec } = require("child_process");
     })
   }).catch(function () {
      console.log("Promise Rejected (code: 231)");
+     FindMedia();
 });
 }
         console.log("already_vids : " + already_vids);
