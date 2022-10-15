@@ -232,14 +232,14 @@ try {
   console.log("No file /assets/video.mp4 to delete");
 }
   
-  const pathMP3Delete = __dirname + '/assets/audio.mp3';
+  const pathMP3Delete = __dirname + '/assets/audio.mp4';
 
 try {
   fs.unlinkSync(pathMP3Delete)
-  console.log("audio.mp3 deleted");
+  console.log("audio.mp4 deleted");
   //file removed
 } catch(err) {
-  console.log("No file /assets/audio.mp3 to delete");
+  console.log("No file /assets/audio.mp4 to delete");
 }
   
   const pathFullDelete = __dirname + '/assets/fullvideo.mp4';
@@ -376,7 +376,7 @@ var fs = require('fs');
           
 https.get(url,(res) => {
     // Image will be stored at this path
-    const path = __dirname + "/assets/audio.mp3"; 
+    const path = __dirname + "/assets/audio.mp4"; 
     const filePath = fs.createWriteStream(path);
     res.pipe(filePath);
     filePath.on('finish',() => {
@@ -423,7 +423,7 @@ downloadFile(VIDEO_URL, 'assets');
   console.log("ffmpeg")
   var ffmpeg = require('fluent-ffmpeg');
   var videoInput = __dirname + "/assets/video.mp4";
-  var audioInput = __dirname + "/assets/audio.mp3"
+  var audioInput = __dirname + "/assets/audio.mp4"
   var outputInput = __dirname + "/assets/fullvideo.mp4"
 
 const { exec } = require("child_process");
@@ -437,7 +437,7 @@ exec('ffmpeg -i assets/video.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts asset
             }     
         })
       
-exec('ffmpeg -i assets/audio.mp3 -c copy -bsf:v h264_mp4toannexb -f mpegts assets/audio.ts', {maxBuffer: 1024 * 100000},(error, stdout, stderr) => {
+exec('ffmpeg -i assets/audio.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts assets/audio.ts', {maxBuffer: 1024 * 100000},(error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
                 return;
