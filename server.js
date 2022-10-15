@@ -500,71 +500,8 @@ if(save_random_number == 0)
 initializeMediaUpload()
   .then(appendFileChunk)
   .then(finalizeUpload)
-  .then(publishStatusUpdate0)
+  .then(publishStatusUpdate)
   }
-        else if(save_random_number == 1)
-          {
-initializeMediaUpload()
-  .then(appendFileChunk)
-  .then(finalizeUpload)
-  .then(publishStatusUpdate1)
-          }
-        else if(save_random_number == 2)
-          {
-initializeMediaUpload()
-  .then(appendFileChunk)
-  .then(finalizeUpload)
-  .then(publishStatusUpdate2)
-          }
-        else if(save_random_number == 3)
-          {
-initializeMediaUpload()
-  .then(appendFileChunk)
-  .then(finalizeUpload)
-  .then(publishStatusUpdate3)
-          }
-        else if(save_random_number == 4)
-          {
-initializeMediaUpload()
-  .then(appendFileChunk)
-  .then(finalizeUpload)
-  .then(publishStatusUpdate4)
-          }
-        else if(save_random_number == 5)
-          {
-initializeMediaUpload()
-  .then(appendFileChunk)
-  .then(finalizeUpload)
-  .then(publishStatusUpdate5)
-          }
-        else if(save_random_number == 6)
-          {
-initializeMediaUpload()
-  .then(appendFileChunk)
-  .then(finalizeUpload)
-  .then(publishStatusUpdate6)
-          }
-        else if(save_random_number == 7)
-          {
-initializeMediaUpload()
-  .then(appendFileChunk)
-  .then(finalizeUpload)
-  .then(publishStatusUpdate7)
-          }
-        else if(save_random_number == 8)
-          {
-initializeMediaUpload()
-  .then(appendFileChunk)
-  .then(finalizeUpload)
-  .then(publishStatusUpdate8)
-          }
-        else
-          {
-            initializeMediaUpload()
-  .then(appendFileChunk)
-  .then(finalizeUpload)
-  .then(publishStatusUpdate5)
-          }
   }
   else
   {
@@ -642,7 +579,7 @@ function finalizeUpload(mediaId) {
 function publishStatusUpdate(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: `#memes\n${media_title}`, //Message
+      status: `${media_title}`, //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
@@ -673,207 +610,6 @@ exec("refresh", (error, stdout) => {
     })
   })
 }
-        
-function publishStatusUpdate0(mediaId) {
-  return new Promise(function(resolve, reject) {
-    client.post("statuses/update", {
-      status: `😲 Unexpected video #memes\n${media_title}`, //Message
-      media_ids: mediaId
-    }, function(error, data, response) {
-      if (error) {
-        return FindMedia();
-        console.log(error)
-        reject(error)
-      } else {
-        old_date = new Date();
-        console.log("Successfully uploaded media and tweeted!")
-        resolve(data)
-        FindMedia();
-      }
-    })
-  }).catch(function () {
-     console.log("Promise Rejected (code: 375)");
-});
-}
-
-function publishStatusUpdate1(mediaId) {
-  return new Promise(function(resolve, reject) {
-    client.post("statuses/update", {
-      status: `🤣 Funny video #memes\n${media_title}`, //Message
-      media_ids: mediaId
-    }, function(error, data, response) {
-      if (error) {
-        return FindMedia();
-        console.log(error)
-        reject(error)
-      } else {
-        old_date = new Date();
-        console.log("Successfully uploaded media and tweeted!")
-        resolve(data)
-        FindMedia();
-
-      }
-    })
-  }).catch(function () {
-     console.log("Promise Rejected (code: 196)");
-});
-}
-
-function publishStatusUpdate2(mediaId) {
-  return new Promise(function(resolve, reject) {
-    client.post("statuses/update", {
-      status: `🙄 There was an attempt #memes\n${media_title}`, //Message
-      media_ids: mediaId
-    }, function(error, data, response) {
-      if (error) {
-        return FindMedia();
-        console.log(error)
-        reject(error)
-      } else {
-        old_date = new Date();
-        console.log("Successfully uploaded media and tweeted!")
-        resolve(data)
-        FindMedia();
-      }
-    })
-  }).catch(function () {
-     console.log("Promise Rejected (code: 872)");
-});
-}
-
-function publishStatusUpdate3(mediaId) {
-  return new Promise(function(resolve, reject) {
-    client.post("statuses/update", {
-      status: `⚡ Dank Video #memes\n${media_title}`, //Message
-      media_ids: mediaId
-    }, function(error, data, response) {
-      if (error) {
-        return FindMedia();
-        console.log(error)
-        reject(error)
-      } else {
-        old_date = new Date();
-        console.log("Successfully uploaded media and tweeted!")
-        resolve(data)
-        FindMedia();
-      }
-    })
-  }).catch(function () {
-     console.log("Promise Rejected (code: 233)");
-     FindMedia(); 
-});
-}
-                
-function publishStatusUpdate4(mediaId) {
-  return new Promise(function(resolve, reject) {
-    client.post("statuses/update", {
-      status: `💩 Shit Posting #memes\n${media_title}`, //Message
-      media_ids: mediaId
-    }, function(error, data, response) {
-      if (error) {
-        return FindMedia();
-        console.log(error)
-        reject(error)
-      } else {
-        old_date = new Date();
-        console.log("Successfully uploaded media and tweeted!")
-        resolve(data)
-        FindMedia();
-      }
-    })
-  }).catch(function () {
-     console.log("Promise Rejected (code: 931)");
-});
-}
-                
-
-function publishStatusUpdate5(mediaId) {
-  return new Promise(function(resolve, reject) {
-    client.post("statuses/update", {
-      status: `👽 Unusual video #memes\n${media_title}`, //Message
-      media_ids: mediaId
-    }, function(error, data, response) {
-      if (error) {
-        return FindMedia();
-        console.log(error)
-        reject(error)
-      } else {
-        old_date = new Date();
-        console.log("Successfully uploaded media and tweeted!")
-        resolve(data)
-        FindMedia();
-      }
-    })
-  }).catch(function () {
-     console.log("Promise Rejected (code: 183)");
-});
-}
-                
-function publishStatusUpdate6(mediaId) {
-  return new Promise(function(resolve, reject) {
-    client.post("statuses/update", {
-      status: `🚫 What Could Go Wrong #memes\n${media_title}`, //Message
-      media_ids: mediaId
-    }, function(error, data, response) {
-      if (error) {
-        return FindMedia();
-        console.log(error)
-        reject(error)
-      } else {
-        old_date = new Date();
-        console.log("Successfully uploaded media and tweeted!")
-        resolve(data)
-        FindMedia();
-      }
-    })
-  }).catch(function () {
-     console.log("Promise Rejected (code: 231)");
-});
-}
-                
-function publishStatusUpdate7(mediaId) {
-  return new Promise(function(resolve, reject) {
-    client.post("statuses/update", {
-      status: `😆 Funny content #memes\n${media_title}`, //Message
-      media_ids: mediaId
-    }, function(error, data, response) {
-      if (error) {
-        return FindMedia();
-        console.log(error)
-        reject(error)
-      } else {
-        old_date = new Date();
-        console.log("Successfully uploaded media and tweeted!")
-        resolve(data)
-        FindMedia(); 
-      }
-    })
-  }).catch(function () {
-     console.log("Promise Rejected (code: 421)");
-});
-}
-                
-function publishStatusUpdate8(mediaId) {
-  return new Promise(function(resolve, reject) {
-    client.post("statuses/update", {
-      status: `🐶 Funny dog #memes\n${media_title}`, //Message
-      media_ids: mediaId
-    }, function(error, data, response) {
-      if (error) {
-        return FindMedia();
-        console.log(error)
-        reject(error)
-      } else {
-        old_date = new Date();
-        console.log("Successfully uploaded media and tweeted!")
-        resolve(data)
-        FindMedia(); 
-      }
-    })
-  }).catch(function () {
-     console.log("Promise Rejected (code: 231)");
-});
-}
         console.log("already_vids : " + already_vids);
             console.log("FINISHED POSTING")
         //console.log("Wait 60s befind Finding Again (End Sending)")     
@@ -888,6 +624,7 @@ function publishStatusUpdate8(mediaId) {
               FindMedia();
             }
   }
+  
   
       ( new CronJob( '0 * * * *', function() {
 //SendMedia();
