@@ -251,6 +251,7 @@ try {
 } catch(err) {
   console.log("No file /assets/fullvideo.mp4 to delete");
 }
+  
   const pathFullBlackDelete = __dirname + '/assets/blackfullvideo.mp4';
 try {
   fs.unlinkSync(pathFullDelete)
