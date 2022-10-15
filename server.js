@@ -251,13 +251,13 @@ try {
 } catch(err) {
   console.log("No file /assets/fullvideo.mp4 to delete");
 }
-  
+  const pathFullBlackDelete = __dirname + '/assets/blackfullvideo.mp4';
 try {
   fs.unlinkSync(pathFullDelete)
-  console.log("fullvideo.mp4 deleted");
+  console.log("blackfullvideo.mp4 deleted");
   //file removed
 } catch(err) {
-  console.log("No file /assets/fullvideo.mp4 to delete");
+  console.log("No file /assets/blackfullvideo.mp4 to delete");
 }
   
 try {
@@ -431,22 +431,16 @@ const { exec } = require("child_process");
 exec('ffmpeg -i assets/video.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts assets/video.ts', {maxBuffer: 1024 * 100000},(error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
-                return;
+                return FindMedia();
             } else {
                 console.log("Converted MP4")
-            }     
-        })
-      
-exec('ffmpeg -i assets/audio.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts assets/audio.ts', {maxBuffer: 1024 * 100000},(error, stdout, stderr) => {
+                exec('ffmpeg -i assets/audio.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts assets/audio.ts', {maxBuffer: 1024 * 100000},(error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
-                return;
+                return FindMedia();
             } else {
                 console.log("Converted MP4")
-            }     
-        })
-      
-exec("ffmpeg -fflags +discardcorrupt -i assets/video.ts -i assets/audio.ts -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4", (error, stdout) => {
+                exec("ffmpeg -fflags +discardcorrupt -i assets/video.ts -i assets/audio.ts -bsf:a aac_adtstoasc -map 0:0 -map 1:0 -c copy assets/blackfullvideo.mp4", (error, stdout) => {
     if (error) {
         console.log("ERROR FULL VIDEO !!")
         console.log(`error: ${error.message}`);
@@ -455,9 +449,31 @@ exec("ffmpeg -fflags +discardcorrupt -i assets/video.ts -i assets/audio.ts -map 
     else
       {
         console.log("DOWNLOADED FULL VIDEO !!")
+        console.log("Cropping...")
+        exec("ffmpeg -i assets/blackfullvideo.mp4 -vf crop=640:256:0:36 assets/fullvideo.mp4", (error, stdout) => {
+    if (error) {
+        console.log("ERROR FULL VIDEO !!")
+        console.log(`error: ${error.message}`);
+        return FindMedia();
+    }
+    else
+      {
+        console.log("DOWNLOADED FULL VIDEO CROPPED !!")
+
       }
     //console.log(`stdout: ${stdout}`);
 })
+      }
+    //console.log(`stdout: ${stdout}`);
+})
+            }     
+        })
+            }     
+        })
+      
+      
+
+      
   console.log("end ffmpeg")
       })
 })
