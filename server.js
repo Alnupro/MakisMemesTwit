@@ -446,7 +446,7 @@ exec('ffmpeg -i assets/audio.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts asset
             }     
         })
       
-exec("ffmpeg -fflags +discardcorrupt -i assets/video.ts -i assets/audio.ts -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4", (error, stdout) => {
+exec("ffmpeg -fflags +discardcorrupt -i assets/video.ts -i assets/audio.ts -vf crop=1280:720:0:0 -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4", (error, stdout) => {
     if (error) {
         console.log("ERROR FULL VIDEO !!")
         console.log(`error: ${error.message}`);
