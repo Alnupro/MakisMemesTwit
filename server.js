@@ -221,6 +221,8 @@ const fs = require("fs")
 dotenv.config()
   
   const pathDelete = __dirname + '/assets/video.mp4';
+  const pathVideoTS = __dirname + '/assets/video.ts';
+  const pathAudioTS = __dirname + '/assets/audio.ts';
 
 try {
   fs.unlinkSync(pathDelete)
@@ -248,6 +250,30 @@ try {
   //file removed
 } catch(err) {
   console.log("No file /assets/fullvideo.mp4 to delete");
+}
+  
+try {
+  fs.unlinkSync(pathFullDelete)
+  console.log("fullvideo.mp4 deleted");
+  //file removed
+} catch(err) {
+  console.log("No file /assets/fullvideo.mp4 to delete");
+}
+  
+try {
+  fs.unlinkSync(pathVideoTS)
+  console.log("video.ts deleted");
+  //file removed
+} catch(err) {
+  console.log("No file /assets/video.ts to delete");
+}
+  
+try {
+  fs.unlinkSync(pathAudioTS)
+  console.log("audio.ts deleted");
+  //file removed
+} catch(err) {
+  console.log("No file /assets/audio.ts to delete");
 }
         
 try{
@@ -402,8 +428,25 @@ downloadFile(VIDEO_URL, 'assets');
 
 const { exec } = require("child_process");
 
+exec('ffmpeg -i assets/video.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts assets/video.ts', {maxBuffer: 1024 * 100000},(error, stdout, stderr) => {
+            if (error) {
+                console.log(`error: ${error.message}`);
+                return;
+            } else {
+                console.log("Converted MP4")
+            }     
+        })
       
-exec("ffmpeg -fflags +discardcorrupt -i assets/video.mp4 -i assets/audio.mp3 -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4", (error, stdout) => {
+exec('ffmpeg -i assets/audio.mp3 -c copy -bsf:v h264_mp4toannexb -f mpegts assets/audio.ts', {maxBuffer: 1024 * 100000},(error, stdout, stderr) => {
+            if (error) {
+                console.log(`error: ${error.message}`);
+                return;
+            } else {
+                console.log("Converted MP4")
+            }     
+        })
+      
+exec("ffmpeg -fflags +discardcorrupt -i assets/video.ts -i assets/audio.ts -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4", (error, stdout) => {
     if (error) {
         console.log("ERROR FULL VIDEO !!")
         console.log(`error: ${error.message}`);
