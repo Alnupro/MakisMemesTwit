@@ -221,8 +221,6 @@ const fs = require("fs")
 dotenv.config()
   
   const pathDelete = __dirname + '/assets/video.mp4';
-  const pathVideoTS = __dirname + '/assets/video.ts';
-  const pathAudioTS = __dirname + '/assets/audio.ts';
 
 try {
   fs.unlinkSync(pathDelete)
@@ -232,14 +230,14 @@ try {
   console.log("No file /assets/video.mp4 to delete");
 }
   
-  const pathMP3Delete = __dirname + '/assets/audio.mp4';
+  const pathMP3Delete = __dirname + '/assets/audio.mp3';
 
 try {
   fs.unlinkSync(pathMP3Delete)
-  console.log("audio.mp4 deleted");
+  console.log("audio.mp3 deleted");
   //file removed
 } catch(err) {
-  console.log("No file /assets/audio.mp4 to delete");
+  console.log("No file /assets/audio.mp3 to delete");
 }
   
   const pathFullDelete = __dirname + '/assets/fullvideo.mp4';
@@ -250,31 +248,6 @@ try {
   //file removed
 } catch(err) {
   console.log("No file /assets/fullvideo.mp4 to delete");
-}
-  
-  const pathFullBlackDelete = __dirname + '/assets/blackfullvideo.mp4';
-try {
-  fs.unlinkSync(pathFullDelete)
-  console.log("blackfullvideo.mp4 deleted");
-  //file removed
-} catch(err) {
-  console.log("No file /assets/blackfullvideo.mp4 to delete");
-}
-  
-try {
-  fs.unlinkSync(pathVideoTS)
-  console.log("video.ts deleted");
-  //file removed
-} catch(err) {
-  console.log("No file /assets/video.ts to delete");
-}
-  
-try {
-  fs.unlinkSync(pathAudioTS)
-  console.log("audio.ts deleted");
-  //file removed
-} catch(err) {
-  console.log("No file /assets/audio.ts to delete");
 }
         
 try{
@@ -377,7 +350,7 @@ var fs = require('fs');
           
 https.get(url,(res) => {
     // Image will be stored at this path
-    const path = __dirname + "/assets/audio.mp4"; 
+    const path = __dirname + "/assets/audio.mp3"; 
     const filePath = fs.createWriteStream(path);
     res.pipe(filePath);
     filePath.on('finish',() => {
@@ -424,24 +397,37 @@ downloadFile(VIDEO_URL, 'assets');
   console.log("ffmpeg")
   var ffmpeg = require('fluent-ffmpeg');
   var videoInput = __dirname + "/assets/video.mp4";
-  var audioInput = __dirname + "/assets/audio.mp4"
+  var audioInput = __dirname + "/assets/audio.mp3"
   var outputInput = __dirname + "/assets/fullvideo.mp4"
 
 const { exec } = require("child_process");
-
 exec('ffmpeg -i assets/video.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts assets/video.ts', {maxBuffer: 1024 * 100000},(error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
                 return FindMedia();
             } else {
-                console.log("Converted MP4")
+                console.log("Converted VIDEO MP4")
                 exec('ffmpeg -i assets/audio.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts assets/audio.ts', {maxBuffer: 1024 * 100000},(error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
                 return FindMedia();
             } else {
-                console.log("Converted MP4")
-                exec("ffmpeg -fflags +discardcorrupt -i assets/video.ts -i assets/audio.ts -bsf:a aac_adtstoasc -map 0:0 -map 1:0 -c copy assets/blackfullvideo.mp4", (error, stdout) => {
+                console.log("Converted AUDIO MP4")
+                exec('ffmpeg -fflags +discardcorrupt -i assets/video.ts -i assets/audio.ts -bsf:a aac_adtstoasc -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4', {maxBuffer: 1024 * 100000},(error, stdout, stderr) => {
+            if (error) {
+                console.log(`error: ${error.message}`);
+                return FindMedia();
+            } else {
+                console.log("FULLVIDEO IS READY !!")
+            }
+  })
+            }
+  })
+                
+            }
+  })
+      
+exec("ffmpeg -fflags +discardcorrupt -i assets/video.mp4 -i assets/audio.mp3 -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4", (error, stdout) => {
     if (error) {
         console.log("ERROR FULL VIDEO !!")
         console.log(`error: ${error.message}`);
@@ -450,31 +436,9 @@ exec('ffmpeg -i assets/video.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts asset
     else
       {
         console.log("DOWNLOADED FULL VIDEO !!")
-        console.log("Cropping...")
-        exec("ffmpeg -i assets/blackfullvideo.mp4 -vf crop=640:256:0:36 assets/fullvideo.mp4", (error, stdout) => {
-    if (error) {
-        console.log("ERROR FULL VIDEO !!")
-        console.log(`error: ${error.message}`);
-        return FindMedia();
-    }
-    else
-      {
-        console.log("DOWNLOADED FULL VIDEO CROPPED !!")
-
       }
     //console.log(`stdout: ${stdout}`);
 })
-      }
-    //console.log(`stdout: ${stdout}`);
-})
-            }     
-        })
-            }     
-        })
-      
-      
-
-      
   console.log("end ffmpeg")
       })
 })
