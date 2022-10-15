@@ -76,7 +76,23 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
   } ) ).start();
 
 */
-  
+  function refresh()
+  {
+    const { exec } = require("child_process");
+    
+exec("refresh", (error, stdout) => {
+    if (error) {
+        console.log("CAN'T REFRESH !!")
+        console.log(`error: ${error.message}`);
+        return FindMedia();
+    }
+    else
+      {
+        console.log("REFRESHED/ING !!")
+      }
+    //console.log(`stdout: ${stdout}`);
+})
+  }
         ( new CronJob( '0 12 * * *', function() {
 var params = {
     id: '1'
@@ -230,14 +246,14 @@ try {
   console.log("No file /assets/video.mp4 to delete");
 }
   
-  const pathMP3Delete = __dirname + '/assets/audio.mp3';
+  const pathMP3Delete = __dirname + '/assets/audio.mp4';
 
 try {
   fs.unlinkSync(pathMP3Delete)
-  console.log("audio.mp3 deleted");
+  console.log("audio.mp4 deleted");
   //file removed
 } catch(err) {
-  console.log("No file /assets/audio.mp3 to delete");
+  console.log("No file /assets/audio.mp4 to delete");
 }
   
   const pathFullDelete = __dirname + '/assets/fullvideo.mp4';
@@ -248,6 +264,26 @@ try {
   //file removed
 } catch(err) {
   console.log("No file /assets/fullvideo.mp4 to delete");
+}
+  
+  const pathDeleteTS = __dirname + '/assets/video.ts';
+
+try {
+  fs.unlinkSync(pathDeleteTS)
+  console.log("video.ts deleted");
+  //file removed
+} catch(err) {
+  console.log("No file /assets/video.ts to delete");
+}
+  
+  const pathMP3DeleteTS = __dirname + '/assets/audio.ts';
+
+try {
+  fs.unlinkSync(pathMP3DeleteTS)
+  console.log("audio.ts deleted");
+  //file removed
+} catch(err) {
+  console.log("No file /assets/audio.ts to delete");
 }
         
 try{
@@ -426,19 +462,6 @@ exec('ffmpeg -i assets/video.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts asset
                 
             }
   })
-      
-exec("ffmpeg -fflags +discardcorrupt -i assets/video.mp4 -i assets/audio.mp3 -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4", (error, stdout) => {
-    if (error) {
-        console.log("ERROR FULL VIDEO !!")
-        console.log(`error: ${error.message}`);
-        return FindMedia();
-    }
-    else
-      {
-        console.log("DOWNLOADED FULL VIDEO !!")
-      }
-    //console.log(`stdout: ${stdout}`);
-})
   console.log("end ffmpeg")
       })
 })
@@ -591,21 +614,7 @@ function publishStatusUpdate(mediaId) {
         console.log("Successfully uploaded media and tweeted!")
         resolve(data)
 
-        /*
-const { exec } = require("child_process");
-    
-exec("refresh", (error, stdout) => {
-    if (error) {
-        console.log("CAN'T REFRESH !!")
-        console.log(`error: ${error.message}`);
-        return FindMedia();
-    }
-    else
-      {
-        console.log("REFRESHED/ING !!")
-      }
-    //console.log(`stdout: ${stdout}`);
-})*/
+
       }
     })
   })
