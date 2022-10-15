@@ -386,14 +386,13 @@ var fs = require('fs');
           
 https.get(url,(res) => {
     // Image will be stored at this path
-    const path = __dirname + "/assets/audio.mp3"; 
+    const path = __dirname + "/assets/audio.mp4"; 
     const filePath = fs.createWriteStream(path);
     res.pipe(filePath);
     filePath.on('finish',() => {
         filePath.close();
         console.log('Download Completed'); 
 
-  
   var enddl = 0;
 const path = require('path');
 const axios = require('axios').default;
@@ -433,7 +432,7 @@ downloadFile(VIDEO_URL, 'assets');
   console.log("ffmpeg")
   var ffmpeg = require('fluent-ffmpeg');
   var videoInput = __dirname + "/assets/video.mp4";
-  var audioInput = __dirname + "/assets/audio.mp3"
+  var audioInput = __dirname + "/assets/audio.mp4"
   var outputInput = __dirname + "/assets/fullvideo.mp4"
 
 const { exec } = require("child_process");
