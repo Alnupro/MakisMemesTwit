@@ -517,13 +517,10 @@ if(next_post_url != undefined)
   {
     if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
       {
-if(save_random_number == 0)
-  {
 initializeMediaUpload()
   .then(appendFileChunk)
   .then(finalizeUpload)
   .then(publishStatusUpdate)
-  }
   }
   else
   {
