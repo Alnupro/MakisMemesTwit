@@ -470,6 +470,7 @@ exec('ffmpeg -i assets/video.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts asset
   });
 
 } catch(error){
+  console.log("Error with DL & Convert ??")
   FindMedia();
 }
     }
@@ -652,7 +653,7 @@ T.post('favorites/create', { id: retweetId })
   } ) ).start();
 */
   
-  ( new CronJob( '*/2 * * * *', function() {
+  ( new CronJob( '*/3 * * * *', function() {
   const pathToFile = __dirname + '/assets/video.mp4'
   const pathToFullFile = __dirname + '/assets/fullvideo.mp4'
   
@@ -697,7 +698,7 @@ T.post('favorites/create', { id: retweetId })
 var ok = false;
 
 //var next_post_time;
-  if((next_post_url != null) && (mediaFullSize != 10000000))
+  if((next_post_url != null))
     {
 
     if(next_post_url.substr(next_post_url.length-3, 3) == "mp4")
@@ -707,7 +708,7 @@ var ok = false;
 // From a local path...
 getVideoDurationInSeconds('assets/fullvideo.mp4').then((duration) => {
   console.log("Duration fullvideo.mp4 :" + duration)
-      if((duration <= 20) && (duration > 0.5))
+      if((duration <= 10) && (duration > 0.5))
         {
              ok = true;
              console.log("Its ok !");
@@ -740,11 +741,13 @@ getVideoDurationInSeconds('assets/fullvideo.mp4').then((duration) => {
       
     else
       {
+          console.log("Link is not MP4 ??")
           FindMedia();
       }
       
     }    else
     {
+        console.log("Next post is null ! Finding...")
         FindMedia();
     }
     
