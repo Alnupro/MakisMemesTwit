@@ -558,7 +558,7 @@ function appendFileChunk(mediaId) {
       if (error) {
         console.log(error)
         reject(error)
-        FindMedia();
+        return FindMedia();
       } else {
         resolve(mediaId)
       }
@@ -577,7 +577,7 @@ function finalizeUpload(mediaId) {
       if (error) {
         console.log(error)
         reject(error)
-        FindMedia();
+        return FindMedia();
       } else {
         resolve(mediaId)
       }
@@ -596,7 +596,7 @@ function publishStatusUpdate(mediaId) {
       if (error) {
         console.log(error)
         reject(error)
-        FindMedia();
+        return FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
@@ -715,9 +715,11 @@ var ok = false;
       var { getVideoDurationInSeconds } = require('get-video-duration')
 
 // From a local path...
-getVideoDurationInSeconds('assets/fullvideo.mp4').then((duration) => {
-  console.log("Duration fullvideo.mp4 :" + duration)
-      if((duration <= 10) && (duration > 0.5))
+getVideoDurationInSeconds('assets/video.mp4').then((duration) => {
+  console.log("Duration video.mp4 :" + duration)
+  getVideoDurationInSeconds('assets/fullvideo.mp4').then((duration2) => {
+  console.log("Duration fullvideo.mp4 :" + duration2)
+      if((duration2 <= duration + 2) && (duration > 0.5) && (duration < 30))
         {
              ok = true;
              console.log("Its ok !");
@@ -742,6 +744,10 @@ getVideoDurationInSeconds('assets/fullvideo.mp4').then((duration) => {
             console.log("Wasnt good, find another media")
             FindMedia();
         }
+    }).catch(function () {
+     console.log("ERROR WITH DURATION2 CHECK ??");
+     FindMedia();
+});
 }).catch(function () {
      console.log("ERROR WITH DURATION CHECK ??");
      FindMedia();
