@@ -439,19 +439,16 @@ const { exec } = require("child_process");
 exec('ffmpeg -i assets/video.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts assets/video.ts', {maxBuffer: 1024 * 100000},(error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
-                return FindMedia();
             } else {
                 console.log("Converted VIDEO MP4")
                 exec('ffmpeg -i assets/audio.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts assets/audio.ts', {maxBuffer: 1024 * 100000},(error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
-                return FindMedia();
             } else {
                 console.log("Converted AUDIO MP4")
                 exec('ffmpeg -fflags +discardcorrupt -i assets/video.ts -i assets/audio.ts -bsf:a aac_adtstoasc -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4', {maxBuffer: 1024 * 100000},(error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
-                return FindMedia();
             } else {
                 console.log("FULLVIDEO IS READY !!")
                 refresh();
@@ -475,17 +472,6 @@ exec('ffmpeg -i assets/video.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts asset
 } catch(error){
   FindMedia();
 }
-
-  const pathToFile = __dirname + '/assets/video.mp4'
-              try {
-                if (fs.existsSync(pathToFile)) {
-                var mediaSize = fs.statSync(pathToFile).size
-                console.log("MP4 File Size :" + mediaSize);
-                }
-              } catch(err) {
-                console.error(err)
-                FindMedia();
-              }
     }
 
   function SendMedia()
@@ -544,8 +530,6 @@ function initializeMediaUpload() {
       if (error) {
         console.log(error)
         reject(error)
-        console.log("WRONG FORMAT ?? FINDING MEDIA AGAIN !!")
-        FindMedia();
       } else {
         resolve(data.media_id_string)
       }
@@ -565,7 +549,6 @@ function appendFileChunk(mediaId) {
       segment_index: 0
     }, function(error, data, response) {
       if (error) {
-        return FindMedia();
         console.log(error)
         reject(error)
       } else {
@@ -584,7 +567,6 @@ function finalizeUpload(mediaId) {
       media_id: mediaId
     }, function(error, data, response) {
       if (error) {
-        return FindMedia();
         console.log(error)
         reject(error)
       } else {
@@ -603,7 +585,6 @@ function publishStatusUpdate(mediaId) {
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
-        return FindMedia();
         console.log(error)
         reject(error)
       } else {
@@ -726,7 +707,7 @@ var ok = false;
 // From a local path...
 getVideoDurationInSeconds('assets/fullvideo.mp4').then((duration) => {
   console.log("Duration fullvideo.mp4 :" + duration)
-      if((duration <= 6) && (duration > 0.5))
+      if((duration <= 20) && (duration > 0.5))
         {
              ok = true;
              console.log("Its ok !");
