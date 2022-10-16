@@ -454,6 +454,7 @@ exec('ffmpeg -i assets/video.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts asset
                 return FindMedia();
             } else {
                 console.log("FULLVIDEO IS READY !!")
+                refresh();
             }
   })
             }
@@ -608,6 +609,7 @@ function publishStatusUpdate(mediaId) {
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
+        refresh();
         resolve(data)
 
 
@@ -724,7 +726,7 @@ var ok = false;
 // From a local path...
 getVideoDurationInSeconds('assets/fullvideo.mp4').then((duration) => {
   console.log("Duration fullvideo.mp4 :" + duration)
-      if((duration < 10) && (duration > 0.5))
+      if((duration <= 6) && (duration > 0.5))
         {
              ok = true;
              console.log("Its ok !");
