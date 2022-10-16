@@ -391,8 +391,10 @@ https.get(url,(res) => {
     res.pipe(filePath);
     filePath.on('finish',() => {
         filePath.close();
-        console.log('Download Completed'); 
-
+        console.log(' AUDIO Download Completed'); 
+      })
+  })
+        
   var enddl = 0;
 const path = require('path');
 const axios = require('axios').default;
@@ -418,18 +420,7 @@ const downloadFile = async (fileUrl, downloadFolder) => {
     w.on('finish', () => {
       console.log('Successfully downloaded file!');
       enddl = 1;
-    });
-  } catch (err) {
-    console.log("Error download : video.mp4")
-    FindMedia();
-  }
-
-}; 
       
- const VIDEO_URL = urlfunny;
-  next_post_url = urlfunny;
-downloadFile(VIDEO_URL, 'assets');
-      wait(10000);
       
   console.log("ffmpeg")
   var ffmpeg = require('fluent-ffmpeg');
@@ -473,13 +464,22 @@ exec('ffmpeg -i assets/video.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts asset
                 
             }
   })
-*/
+*/    });
+  } catch (err) {
+    console.log("Error download : video.mp4")
+    FindMedia();
+  }
+
+}; 
+         const VIDEO_URL = urlfunny;
+  next_post_url = urlfunny;
+downloadFile(VIDEO_URL, 'assets');
+      console.log("Wait 10s... Starting DL...")
+      wait(10000);
+      console.log("Wait 10s... DL...")
+      wait(10000)
   console.log("end ffmpeg")
-      })
-})
           
-        console.log("Wait 10s, DL !")
-        wait(10000)
         }
                 
   });
@@ -488,6 +488,7 @@ exec('ffmpeg -i assets/video.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts asset
   console.log("Error with DL & Convert ??")
   FindMedia();
 }
+  console.log("End Of FindMedia");
     }
 
   function SendMedia()
