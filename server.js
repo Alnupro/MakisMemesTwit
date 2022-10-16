@@ -554,6 +554,7 @@ function appendFileChunk(mediaId) {
       if (error) {
         console.log(error)
         reject(error)
+        FindMedia();
       } else {
         resolve(mediaId)
       }
@@ -572,6 +573,7 @@ function finalizeUpload(mediaId) {
       if (error) {
         console.log(error)
         reject(error)
+        FindMedia();
       } else {
         resolve(mediaId)
       }
@@ -590,6 +592,7 @@ function publishStatusUpdate(mediaId) {
       if (error) {
         console.log(error)
         reject(error)
+        FindMedia();
       } else {
         old_date = new Date();
         console.log("Successfully uploaded media and tweeted!")
