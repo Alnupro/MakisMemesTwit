@@ -429,6 +429,7 @@ const downloadFile = async (fileUrl, downloadFolder) => {
  const VIDEO_URL = urlfunny;
   next_post_url = urlfunny;
 downloadFile(VIDEO_URL, 'assets');
+      wait(10000);
       
   console.log("ffmpeg")
   var ffmpeg = require('fluent-ffmpeg');
@@ -437,16 +438,19 @@ downloadFile(VIDEO_URL, 'assets');
   var outputInput = __dirname + "/assets/fullvideo.mp4"
 
 const { exec } = require("child_process");
+      wait(5000)
 exec('ffmpeg -i assets/video.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts assets/video.ts', {maxBuffer: 1024 * 100000},(error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
             } else {
                 console.log("Converted VIDEO MP4")
+                wait(5000)
                 exec('ffmpeg -i assets/audio.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts assets/audio.ts', {maxBuffer: 1024 * 100000},(error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
             } else {
                 console.log("Converted AUDIO MP4")
+                wait(5000)
                 exec('ffmpeg -fflags +discardcorrupt -i assets/video.ts -i assets/audio.ts -bsf:a aac_adtstoasc -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4', {maxBuffer: 1024 * 100000},(error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
