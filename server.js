@@ -447,7 +447,7 @@ exec('ffmpeg -i assets/video.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts asset
                 console.log(`error: ${error.message}`);
             } else {
                 console.log("Converted AUDIO MP4")
-                exec('ffmpeg -fflags +discardcorrupt -i assets/video.ts -i assets/audio.ts -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4', {maxBuffer: 1024 * 100000},(error, stdout, stderr) => {
+                exec('ffmpeg -fflags +discardcorrupt -i assets/video.ts -i assets/audio.ts -bsf:a aac_adtstoasc -map 0:0 -map 1:0 -c copy assets/fullvideo.mp4', {maxBuffer: 1024 * 100000},(error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
             } else {
@@ -655,7 +655,7 @@ T.post('favorites/create', { id: retweetId })
   } ) ).start();
 */
   
-  ( new CronJob( '*/3 * * * *', function() {
+  ( new CronJob( '*/2 * * * *', function() {
   const pathToFile = __dirname + '/assets/video.mp4'
   const pathToFullFile = __dirname + '/assets/fullvideo.mp4'
   
