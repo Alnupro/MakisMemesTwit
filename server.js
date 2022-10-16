@@ -430,7 +430,7 @@ const downloadFile = async (fileUrl, downloadFolder) => {
 
 const { exec } = require("child_process");
       wait(5000)
-      exec('ffmpeg -i asets/video.mp4 -i asets/audio.mp4 -c:v copy -c:a aac asets/fullvideo.mp4',(error, stdout, stderr) => {
+      exec('ffmpeg -i assets/video.mp4 -i assets/audio.mp4 -c:v copy -c:a aac assets/fullvideo.mp4',(error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
             } else {
@@ -672,7 +672,7 @@ T.post('favorites/create', { id: retweetId })
   } ) ).start();
 */
   
-  ( new CronJob( '*/2 * * * *', function() {
+  ( new CronJob( '*/3 * * * *', function() {
   const pathToFile = __dirname + '/assets/video.mp4'
   const pathToFullFile = __dirname + '/assets/fullvideo.mp4'
   
