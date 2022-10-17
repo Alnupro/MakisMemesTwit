@@ -360,7 +360,7 @@ redditFetch({
 }).then(post => {
     if(post.post_hint == 'hosted:video')
       {
-
+        console.table(post);
         urlfunny = post.url + "/DASH_240.mp4";
         next_post_url = post.url + "/DASH_240.mp4";
         console.log("Found !")
@@ -473,7 +473,41 @@ exec('ffmpeg -i assets/video.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts asset
 }; 
          const VIDEO_URL = urlfunny;
   next_post_url = urlfunny;
-downloadFile(VIDEO_URL, 'assets');
+        
+//720p
+var url720 = post.url + "/DASH_720.mp4"
+//480p
+var url480 = post.url + "/DASH_480.mp4"
+//360p
+var url360 = post.url + "/DASH_360.mp4"
+//240p
+//var url240 = post.url + "/DASH_240.mp4"
+        try
+          {
+            downloadFile(url720, 'assets');
+          } catch (err) {
+    console.log("Error download : video.mp4 720P !!")
+          try
+          {
+            downloadFile(url480, 'assets');
+          } catch (err) {
+    console.log("Error download : video.mp4 480P !!")
+          try
+          {
+            downloadFile(url360, 'assets');
+          } catch (err) {
+    console.log("Error download : video.mp4 360P !!")
+          try
+          {
+            downloadFile(VIDEO_URL, 'assets');
+          } catch (err) {
+    console.log("Error download : video.mp4 240P !!")
+            FindMedia();
+  }
+  }
+  }
+  }
+//downloadFile(VIDEO_URL, 'assets');
       console.log("Wait 10s... Starting DL...")
       wait(10000);
       console.log("Wait 10s... DL...")
