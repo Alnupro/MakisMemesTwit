@@ -360,7 +360,6 @@ redditFetch({
 }).then(post => {
     if(post.post_hint == 'hosted:video')
       {
-        console.table(post);
         urlfunny = post.url + "/DASH_240.mp4";
         next_post_url = post.url + "/DASH_240.mp4";
         console.log("Found !")
