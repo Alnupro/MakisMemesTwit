@@ -472,41 +472,82 @@ exec('ffmpeg -i assets/video.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts asset
 }; 
          const VIDEO_URL = urlfunny;
   next_post_url = urlfunny;
-        
-//720p
-var url720 = post.url + "/DASH_720.mp4"
-//480p
-var url480 = post.url + "/DASH_480.mp4"
-//360p
-var url360 = post.url + "/DASH_360.mp4"
-//240p
-//var url240 = post.url + "/DASH_240.mp4"
-        try
+
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+let URL1080 = post.url + "/DASH_1080.mp4";
+let URL720 = post.url + "/DASH_720.mp4";
+let URL480 = post.url + "/DASH_480.mp4";
+let URL360 = post.url + "/DASH_360.mp4";
+let URL240 = post.url + "/DASH_240.mp4";
+// Make a function or variable to get the URL you want, in my case it's the episode URL.
+
+let xhr = new XMLHttpRequest();
+// Requests the headers that would be returned if the HEAD request's URL was instead requested with the HTTP GET method
+var FinalQuality = false;
+xhr.open('HEAD', URL1080, true);
+
+xhr.onload = function() {
+// In here I get the Content Type from the HEAD of the response
+    let contentType = xhr.getResponseHeader('Content-Type');
+    if (contentType == 'video/mp4'){
+        console.log(contentType);
+        console.log("This is mp4 video")
+        var FinalQuality = true;
+//Function to play mp4 file
+    }
+    else {
+        console.log("Quality don't exist (1080p)")
+// Function to play HLS m3u8 file
+    }
+
+};
+
+xhr.send();
+if(FinalQuality == false)
+{
+  xhr.open('HEAD', URL720, true);
+  xhr.send();
+  if(FinalQuality == false)
+  {
+    xhr.open('HEAD', URL480, true);
+    xhr.send();
+    if(FinalQuality == false)
+    {
+      xhr.open('HEAD', URL360, true);
+      xhr.send();
+      if(FinalQuality == false)
+      {
+        var FinalQuality = post.url + "/DASH_240.mp4";
+        console.log("QUALITY : " + FinalQuality);
+      }
+        var FinalQuality = post.url + "/DASH_360.mp4";
+        console.log("QUALITY : " + FinalQuality);
+    }
+    else
+      {
+        var FinalQuality = post.url + "/DASH_480.mp4";
+        console.log("QUALITY : " + FinalQuality);
+      }
+  }
+  else
+    {
+      var FinalQuality = post.url + "/DASH_720.mp4";
+      console.log("QUALITY : " + FinalQuality);
+    }
+}
+        else
+        {
+          var FinalQuality = post.url + "/DASH_1080.mp4";
+          console.log("QUALITY : " + FinalQuality);
+        }
+        if(FinalQuality != false)
           {
-            downloadFile(url720, 'assets');
-          } catch (err) {
-    console.log("Error download : video.mp4 720P !!")
-          try
-          {
-            downloadFile(url480, 'assets');
-          } catch (err) {
-    console.log("Error download : video.mp4 480P !!")
-          try
-          {
-            downloadFile(url360, 'assets');
-          } catch (err) {
-    console.log("Error download : video.mp4 360P !!")
-          try
+            downloadFile(FinalQuality, 'assets');
+          }
+        else
           {
             downloadFile(VIDEO_URL, 'assets');
-          } catch (err) {
-    console.log("Error download : video.mp4 240P !!")
-            FindMedia();
-  }
-  }
-  }
-  }
-//downloadFile(VIDEO_URL, 'assets');
+          }
       console.log("Wait 10s... Starting DL...")
       wait(10000);
       console.log("Wait 10s... DL...")
