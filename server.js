@@ -600,7 +600,7 @@ function finalizeUpload(mediaId) {
 function publishStatusUpdate(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: `${media_title}`, //Message
+      status: `${media_title}\n#memes #meme #funny`, //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
