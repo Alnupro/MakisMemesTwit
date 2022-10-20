@@ -93,6 +93,8 @@ exec("refresh", (error, stdout) => {
     //console.log(`stdout: ${stdout}`);
 })
   }
+  
+  /*
         ( new CronJob( '0 12 * * *', function() {
 var params = {
     id: '1'
@@ -165,6 +167,7 @@ T.get('trends/place', params, gotData);
     }
     console.log(already_vids); //Send already_vids content
   } ) ).start();
+  */
   
 
 //SEND https://www.reddit.com/r/FunnyAnimals/ memes __dirname + '/assets/example.mp4'
@@ -503,25 +506,31 @@ xhr.onload = function() {
 };
 
 xhr.send();
+        wait(3000);
 if(FinalQuality == false)
 {
   xhr.open('HEAD', URL720, true);
   xhr.send();
+  wait(3000);
   if(FinalQuality == false)
   {
     xhr.open('HEAD', URL480, true);
     xhr.send();
+    wait(3000);
     if(FinalQuality == false)
     {
       xhr.open('HEAD', URL360, true);
       xhr.send();
+      wait(3000);
       if(FinalQuality == false)
       {
         var FinalQuality = post.url + "/DASH_240.mp4";
         console.log("QUALITY : " + FinalQuality);
+        wait(3000);
       }
         var FinalQuality = post.url + "/DASH_360.mp4";
         console.log("QUALITY : " + FinalQuality);
+      wait(3000);
     }
     else
       {
@@ -674,7 +683,7 @@ function finalizeUpload(mediaId) {
 function publishStatusUpdate(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: `${media_title}\n#memes #meme #funny`, //Message
+      status: `${media_title}\n#memes #meme #funny #lol #humor #viral #dankmemes #fun #lmao`, //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
