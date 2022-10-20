@@ -683,7 +683,7 @@ function finalizeUpload(mediaId) {
 function publishStatusUpdate(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: `${media_title}\n#memes #meme #funny #lol #humor #viral #dankmemes #fun #lmao`, //Message
+      status: `${media_title}\n#memes #meme #funny #lol #humor #viral #follow #rt #dankmemes #fun #lmao`, //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
