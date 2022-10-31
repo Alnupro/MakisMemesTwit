@@ -363,8 +363,8 @@ redditFetch({
 }).then(post => {
     if(post.post_hint == 'hosted:video')
       {
-        urlfunny = post.url + "/DASH_240.mp4";
-        next_post_url = post.url + "/DASH_240.mp4";
+        urlfunny = post.url + "/DASH_480.mp4";
+        next_post_url = post.url + "/DASH_480.mp4";
         console.log("Found !")
         media_title = post.title;
         //console.table(post);//
@@ -524,7 +524,7 @@ if(FinalQuality == false)
       wait(3000);
       if(FinalQuality == false)
       {
-        var FinalQuality = post.url + "/DASH_240.mp4";
+        var FinalQuality = post.url + "/DASH_480.mp4";
         console.log("QUALITY : " + FinalQuality);
         wait(3000);
       }
@@ -814,6 +814,8 @@ getVideoDurationInSeconds('assets/video.mp4').then((duration) => {
   console.log("Duration fullvideo.mp4 :" + duration2)
       if((duration2 <= duration + 2) && (duration > 0.5) && (duration < 30))
         {
+          if(already_vids.includes(next_post_url) == false)
+            {
              ok = true;
              console.log("Its ok !");
              console.log("Seems good, next post will be :")
@@ -830,6 +832,7 @@ getVideoDurationInSeconds('assets/video.mp4').then((duration) => {
               } catch(err) {
                 console.error(err)
               }
+            }
         
         }
       else
