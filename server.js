@@ -363,8 +363,8 @@ redditFetch({
 }).then(post => {
     if(post.post_hint == 'hosted:video')
       {
-        urlfunny = post.url + "/DASH_480.mp4";
-        next_post_url = post.url + "/DASH_480.mp4";
+        urlfunny = post.url + "/DASH_360.mp4";
+        next_post_url = post.url + "/DASH_360.mp4";
         console.log("Found !")
         media_title = post.title;
         //console.table(post);//
@@ -524,7 +524,7 @@ if(FinalQuality == false)
       wait(3000);
       if(FinalQuality == false)
       {
-        var FinalQuality = post.url + "/DASH_480.mp4";
+        var FinalQuality = post.url + "/DASH_360.mp4";
         console.log("QUALITY : " + FinalQuality);
         wait(3000);
       }
@@ -683,7 +683,7 @@ function finalizeUpload(mediaId) {
 function publishStatusUpdate(mediaId) {
   return new Promise(function(resolve, reject) {
     client.post("statuses/update", {
-      status: `${media_title}\n`, //Message
+      status: `${media_title}\n#memes #meme #funny #lol #humor #viral #dankmemes #fun #lmao`, //Message
       media_ids: mediaId
     }, function(error, data, response) {
       if (error) {
